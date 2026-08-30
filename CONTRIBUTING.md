@@ -10,16 +10,20 @@ problem in service or system design work.
    `source_type` and `status` must use one of the allowed values.
 3. Always cite a primary source in `source_url`. Secondary summaries (news articles,
    blog posts) aren't sufficient — link directly to the publishing body's page.
-4. If a standard is out of date, superseded, or silent on something (as with the
+4. For `applies_to`, only add a population tag if the source itself confirms
+   applicability — quote or closely paraphrase the source's own language in `notes`.
+   If the source is silent on a population, leave `applies_to` empty rather than
+   guessing; an empty list is a legitimate, useful signal, not a placeholder to fill in.
+5. If a standard is out of date, superseded, or silent on something (as with the
    archived ONS mental health harmonisation review), say so plainly in `notes` rather
    than omitting the entry. Gaps in official guidance are exactly what this tracker
-   should surface.
-5. Run the validator locally before opening a PR:
+   should surface — use the `no-standard-gap` use-case tag for entries like this.
+6. Run the validator locally before opening a PR:
    ```
    pip install pyyaml
    python3 scripts/validate.py
    ```
-6. Add a line to `CHANGELOG.md` under `## Unreleased` describing what changed and why.
+7. Add a line to `CHANGELOG.md` under `## Unreleased` describing what changed and why.
 
 ## Adding a new domain
 

@@ -8,6 +8,9 @@ Checks:
 - last_reviewed / source_published (where not null) are valid dates
 - id values are unique within a file
 - source_url is a plausible http(s) URL
+- applies_to is a list drawn from the allowed population tags (may be empty —
+  an empty list means the source doesn't confirm applicability either way)
+- use_case is a non-empty list drawn from the allowed use-case tags
 """
 import sys
 import glob
@@ -17,9 +20,23 @@ import yaml
 REQUIRED_FIELDS = {
     "id", "label", "source", "source_type", "status",
     "last_reviewed", "source_published", "source_url", "notes",
+    "applies_to", "use_case",
 }
 VALID_SOURCE_TYPES = {"harmonised-standard", "clinical-dataset", "survey-instrument"}
 VALID_STATUSES = {"current", "under-review", "archived", "superseded"}
+VALID_POPULATION_TAGS = {"adults", "children-young-people"}
+VALID_USE_CASE_TAGS = {"demographic-survey", "clinical-record", "no-standard-gap"}
+
+
+def check_tag_list(value, field, allowed, entry_id, errors, allow_empty):
+    if not isinstance(value, list):
+        errors.append(f"{entry_id}: {field} must be a list, got {value!r}")
+        return
+    if not allow_empty and not value:
+        errors.append(f"{entry_id}: {field} must not be empty")
+    unknown = set(value) - allowed
+    if unknown:
+        errors.append(f"{entry_id}: {field} has unknown tag(s) {sorted(unknown)}")
 
 
 def check_date(value, field, entry_id, errors):
@@ -59,6 +76,15 @@ def validate_file(path):
 
         check_date(entry.get("last_reviewed"), "last_reviewed", entry_id, errors)
         check_date(entry.get("source_published"), "source_published", entry_id, errors)
+
+        check_tag_list(
+            entry.get("applies_to"), "applies_to", VALID_POPULATION_TAGS,
+            entry_id, errors, allow_empty=True,
+        )
+        check_tag_list(
+            entry.get("use_case"), "use_case", VALID_USE_CASE_TAGS,
+            entry_id, errors, allow_empty=False,
+        )
 
         url = entry.get("source_url", "")
         if not (isinstance(url, str) and url.startswith("http")):

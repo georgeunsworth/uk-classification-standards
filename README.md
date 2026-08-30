@@ -6,6 +6,8 @@
 
 Maintained by George Unsworth ([@georgeunsworth](https://github.com/georgeunsworth)) at [Mortar Works](https://mortar.works).
 
+**Browse it:** https://georgeunsworth.github.io/uk-classification-standards/
+
 
 ## The problem
 
@@ -49,8 +51,30 @@ Each domain file is a list of entries with this shape:
   last_reviewed: date          # date this repo last checked the source
   source_published: date       # date the source itself was last published/revised
   source_url: string
+  applies_to: [enum]           # populations the source *confirms* this covers — see below.
+                                # empty list means not confirmed either way, not "no"
+  use_case: [enum]              # design context(s) this entry fits — see below
   notes: string                # gaps, caveats, "no preferred standard exists" etc.
 ```
+
+### `applies_to` — population tags
+
+- `adults` — source confirms direct applicability to adults
+- `children-young-people` — source confirms applicability to children/young people
+  (directly or via a documented mechanism, e.g. proxy response)
+
+An entry can list both, one, or neither. **An empty list is a meaningful gap, not an
+oversight** — it means the source doesn't state either way, which is exactly the kind
+of ambiguity this tracker exists to surface rather than paper over. Don't infer or
+guess applicability to fill this in; cite what the source itself says (quote it in
+`notes` if it clarifies the tag), and leave it empty if the source is silent.
+
+### `use_case` — design-context tags
+
+- `demographic-survey` — population-level self-report category (census/survey style)
+- `clinical-record` — patient/service-user-level clinical or administrative dataset
+- `no-standard-gap` — flags that no usable standard currently exists for this scenario
+  (used instead of inventing one — see the archived mental health harmonisation entry)
 
 ## v1 scope: mental health
 
@@ -72,7 +96,8 @@ Government content referenced here is published under the [Open Government Licen
 ## Roadmap
 
 - [ ] Additional domains (disability, ethnicity, long-term health conditions)
-- [ ] Lightweight lookup/search interface
+- [x] Lightweight lookup/search interface — static page at the GitHub Pages link above,
+  filterable by status, population (`applies_to`), and use case
 - [ ] Automated change-detection against source publication pages
 - [ ] Structured diffing between standard revisions
 

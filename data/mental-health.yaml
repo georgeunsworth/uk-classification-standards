@@ -9,10 +9,16 @@
   last_reviewed: 2026-08-30
   source_published: 2011-01-01  # year only in source; day/month unconfirmed
   source_url: https://analysisfunction.civilservice.gov.uk/policy-store/long-lasting-health-conditions-and-illness/
+  applies_to: [adults, children-young-people]
+  use_case: [demographic-survey]
   notes: >
     Measures self-reported physical or mental health conditions/illnesses lasting or expected
     to last 12+ months. Used in the 2021 Census (England & Wales) alongside the activity
     restriction standard. Does not distinguish between physical and mental health conditions.
+    The source specifies the question is asked directly to respondents aged 16 and over; for
+    under-16s it allows a proxy response (e.g. from a parent/carer) rather than self-report —
+    verify the exact wording against source_url before relying on this for a young-person-specific
+    form.
 
 - id: ons-impairment-standard
   label: Impairment harmonised standard
@@ -22,11 +28,15 @@
   last_reviewed: 2026-08-30
   source_published: 2011-01-01  # year only in source; day/month unconfirmed
   source_url: https://analysisfunction.civilservice.gov.uk/policy-store/impairment/
+  applies_to: [adults, children-young-people]
+  use_case: [demographic-survey]
   notes: >
     Includes a "mental or cognitive impairments" category covering memory, mental health,
     learning/understanding/concentrating, and social/behavioural impact. Cannot be
     disaggregated by specific mental health condition. Under review as of 2023 phase-2
-    research (question design dates back to 2008).
+    research (question design dates back to 2008). Like the long-lasting health conditions
+    standard, the source specifies direct response for respondents aged 16+, with proxy
+    response permitted for under-16s.
 
 - id: ons-mental-health-harmonisation-review
   label: Mental health harmonisation guidance (no preferred standard)
@@ -36,12 +46,17 @@
   last_reviewed: 2026-08-30
   source_published: 2023-03-28
   source_url: https://analysisfunction.civilservice.gov.uk/policy-store/review-of-mental-health-harmonisation
+  applies_to: []  # no standard exists to confirm a population against
+  use_case: [no-standard-gap]
   notes: >
     IMPORTANT: this review was archived on 28 March 2023 without recommending a preferred
     classification standard for mental health specifically. Existing harmonised standards
-    (disability, impairment, wellbeing) provide only narrow/fragmented mental health data
-    and were not designed to collect it directly. Anyone building a service that needs to
-    classify mental health status should treat this as an open gap, not an oversight on
+    (disability, impairment, wellbeing) provide only narrow/fragmented mental health data and
+    were not designed to collect it directly. The review does not define an age scope for any
+    future standard, but explicitly names children and young people — alongside people in
+    institutional settings — as an under-represented group it found a need to capture better.
+    Anyone building a service that needs to classify mental health status, including
+    specifically for a young person, should treat this as an open gap, not an oversight on
     this repo's part.
 
 - id: nhs-mhsds-icd10
@@ -52,9 +67,13 @@
   last_reviewed: 2026-08-30
   source_published: null
   source_url: https://standards.nhs.uk/published-standards/mental-health-services-data-set
+  applies_to: [adults, children-young-people]
+  use_case: [clinical-record]
   notes: >
     Patient-level secondary uses dataset (SCCI0021, ICD-10 5th edition based). Designed for
     commissioning, service improvement and service design re-use — not a public-facing
     classification, but the closest thing to an authoritative coded value set for mental
-    health conditions in an NHS context. Confirm current edition/version before use, as
-    ICD-10 value sets are periodically updated.
+    health conditions in an NHS context. The dataset's own scope statement covers "children
+    and adults in contact with mental health and wellbeing services" — of the entries in this
+    domain, this is the one explicitly confirmed by its source to include young people.
+    Confirm current edition/version before use, as ICD-10 value sets are periodically updated.
