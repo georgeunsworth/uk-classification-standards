@@ -34,6 +34,13 @@
     - "Any other Black/African/Caribbean background"
     - "Arab"
     - "Any other ethnic group"
+  licence_status: ogl
+  licence_notes: >-
+    UK Open Government Licence v3.0 (government/publisher content) — see this repo's LICENSE
+    and README "Sources & licensing" section. Safe to reproduce with attribution.
+  items: null
+  response_scale: null
+  scoring: null
   notes: >
     18 England response categories, grouped in the source under White / Mixed-Multiple /
     Asian-Asian British / Black-African-Caribbean-Black British / Other ethnic group — this
@@ -64,6 +71,13 @@
   values:
     - "Yes, a lot"
     - "Yes, a little"
+  licence_status: ogl
+  licence_notes: >-
+    UK Open Government Licence v3.0 (government/publisher content) — see this repo's LICENSE
+    and README "Sources & licensing" section. Safe to reproduce with attribution.
+  items: null
+  response_scale: null
+  scoring: null
   notes: >
     This is the second half of the official Equality Act 2010 "disabled person" test — a
     respondent only qualifies as disabled under the Act if they answer affirmatively to BOTH this
@@ -88,6 +102,13 @@
   use_case: [no-standard-gap]
   question: null
   values: null
+  licence_status: ogl
+  licence_notes: >-
+    UK Open Government Licence v3.0 (government/publisher content) — see this repo's LICENSE
+    and README "Sources & licensing" section. Safe to reproduce with attribution.
+  items: null
+  response_scale: null
+  scoring: null
   notes: >
     IMPORTANT: the source states plainly "There is not currently a harmonised standard for
     collecting data on sex." Historical census categories ("Female"/"Male") are referenced on the
@@ -115,6 +136,13 @@
     - "Yes"
     - "No, enter gender identity"
     - "Prefer not to say"
+  licence_status: ogl
+  licence_notes: >-
+    UK Open Government Licence v3.0 (government/publisher content) — see this repo's LICENSE
+    and README "Sources & licensing" section. Safe to reproduce with attribution.
+  items: null
+  response_scale: null
+  scoring: null
   notes: >
     IMPORTANT: the source carries an explicit archival notice: "Following the publication of an
     updated GSS Harmonisation workplan in December 2024, this guidance is outdated and has been
@@ -142,6 +170,13 @@
     - "Bisexual"
     - "Other"
     - "Prefer not to say"
+  licence_status: ogl
+  licence_notes: >-
+    UK Open Government Licence v3.0 (government/publisher content) — see this repo's LICENSE
+    and README "Sources & licensing" section. Safe to reproduce with attribution.
+  items: null
+  response_scale: null
+  scoring: null
   notes: >
     This is the self-completion mode wording and option set; face-to-face and telephone interview
     modes differ and mark some categories (e.g. don't know/refusal) as spontaneous-only rather than
@@ -173,6 +208,13 @@
     - "Muslim"
     - "Sikh"
     - "Any other religion (please describe)"
+  licence_status: ogl
+  licence_notes: >-
+    UK Open Government Licence v3.0 (government/publisher content) — see this repo's LICENSE
+    and README "Sources & licensing" section. Safe to reproduce with attribution.
+  items: null
+  response_scale: null
+  scoring: null
   notes: >
     England response categories shown; Scotland lists specific Christian denominations separately
     (Church of Scotland, Roman Catholic, Other Christian) rather than grouping them, and Northern
@@ -200,6 +242,13 @@
     - "Scottish"
     - "Northern Irish"
     - "Other (please describe)"
+  licence_status: ogl
+  licence_notes: >-
+    UK Open Government Licence v3.0 (government/publisher content) — see this repo's LICENSE
+    and README "Sources & licensing" section. Safe to reproduce with attribution.
+  items: null
+  response_scale: null
+  scoring: null
   notes: >
     England response categories shown (multi-select). Distinct from ethnicity — this captures
     self-identified nationality/belonging, not ethnic background. Reviewed and updated 4 April 2022
@@ -224,6 +273,13 @@
     - "Rent it"
     - "Live here rent-free"
     - "Squatting"
+  licence_status: ogl
+  licence_notes: >-
+    UK Open Government Licence v3.0 (government/publisher content) — see this repo's LICENSE
+    and README "Sources & licensing" section. Safe to reproduce with attribution.
+  items: null
+  response_scale: null
+  scoring: null
   notes: >
     Version 5.6 (June 2017), ONS, Crown Copyright — confirmed directly from the underlying PDF
     linked at source_url. Asked of the whole household (of the "Household Reference Person"), not
@@ -247,6 +303,13 @@
   use_case: [no-standard-gap]
   question: null
   values: null
+  licence_status: ogl
+  licence_notes: >-
+    UK Open Government Licence v3.0 (government/publisher content) — see this repo's LICENSE
+    and README "Sources & licensing" section. Safe to reproduce with attribution.
+  items: null
+  response_scale: null
+  scoring: null
   notes: >
     IMPORTANT: this isn't a dedicated standard with its own page — it's a confirmed gap stated
     within the ethnicity harmonised standard's own page: "Language is another concept that is often

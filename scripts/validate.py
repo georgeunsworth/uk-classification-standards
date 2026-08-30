@@ -14,6 +14,12 @@ Checks:
 - question is a string or null
 - values is a list of strings or null (null means no compact value set is
   published by the source — see notes for where the real one lives)
+- licence_status is one of the allowed values; licence_notes is a string
+  citing the specific basis for that status (not just "trust me")
+- items (a multi-item instrument's individually addressable statements),
+  response_scale (its shared response options), and scoring (summing rule +
+  severity bands) are each either present together and well-formed, or all
+  null — an entry shouldn't have some but not others
 """
 import sys
 import glob
@@ -24,11 +30,15 @@ REQUIRED_FIELDS = {
     "id", "label", "source", "source_type", "status",
     "last_reviewed", "source_published", "source_url", "notes",
     "applies_to", "use_case", "question", "values",
+    "licence_status", "licence_notes", "items", "response_scale", "scoring",
 }
 VALID_SOURCE_TYPES = {"harmonised-standard", "clinical-dataset", "survey-instrument"}
 VALID_STATUSES = {"current", "under-review", "archived", "superseded"}
 VALID_POPULATION_TAGS = {"adults", "children-young-people"}
-VALID_USE_CASE_TAGS = {"demographic-survey", "clinical-record", "no-standard-gap"}
+VALID_USE_CASE_TAGS = {
+    "demographic-survey", "clinical-record", "no-standard-gap", "screening-instrument",
+}
+VALID_LICENCE_STATUSES = {"ogl", "public-domain", "restricted"}
 
 
 def check_tag_list(value, field, allowed, entry_id, errors, allow_empty):
@@ -52,6 +62,69 @@ def check_optional_string_list(value, field, entry_id, errors):
         return
     if not isinstance(value, list) or not all(isinstance(v, str) for v in value):
         errors.append(f"{entry_id}: {field} must be a list of strings or null, got {value!r}")
+
+
+def check_items(value, entry_id, errors):
+    if value is None:
+        return
+    if not isinstance(value, list) or not value:
+        errors.append(f"{entry_id}: items must be a non-empty list or null, got {value!r}")
+        return
+    seen = set()
+    for item in value:
+        if not isinstance(item, dict) or "id" not in item or "text" not in item:
+            errors.append(f"{entry_id}: each item needs id and text, got {item!r}")
+            continue
+        if item["id"] in seen:
+            errors.append(f"{entry_id}: duplicate item id {item['id']!r}")
+        seen.add(item["id"])
+        if not isinstance(item["text"], str) or not item["text"]:
+            errors.append(f"{entry_id}: item {item['id']!r} text must be a non-empty string")
+
+
+def check_response_scale(value, entry_id, errors):
+    if value is None:
+        return
+    if not isinstance(value, dict) or "instruction" not in value or "options" not in value:
+        errors.append(f"{entry_id}: response_scale needs instruction and options, got {value!r}")
+        return
+    options = value["options"]
+    if not isinstance(options, list) or not options:
+        errors.append(f"{entry_id}: response_scale.options must be a non-empty list")
+        return
+    for opt in options:
+        if not isinstance(opt, dict) or "label" not in opt or "score" not in opt:
+            errors.append(f"{entry_id}: each response_scale option needs label and score, got {opt!r}")
+        elif not isinstance(opt["score"], int):
+            errors.append(f"{entry_id}: response_scale option {opt.get('label')!r} score must be an integer")
+
+
+def check_scoring(value, entry_id, errors):
+    if value is None:
+        return
+    if not isinstance(value, dict) or "method" not in value or "bands" not in value:
+        errors.append(f"{entry_id}: scoring needs method and bands, got {value!r}")
+        return
+    bands = value["bands"]
+    if not isinstance(bands, list) or not bands:
+        errors.append(f"{entry_id}: scoring.bands must be a non-empty list")
+        return
+    for band in bands:
+        required = {"min", "max", "label"}
+        if not isinstance(band, dict) or not required.issubset(band.keys()):
+            errors.append(f"{entry_id}: each scoring band needs min, max, label, got {band!r}")
+        elif not isinstance(band["min"], int) or not isinstance(band["max"], int):
+            errors.append(f"{entry_id}: scoring band {band.get('label')!r} min/max must be integers")
+
+
+def check_instrument_shape(entry, entry_id, errors):
+    fields = ("items", "response_scale", "scoring")
+    present = [entry.get(f) is not None for f in fields]
+    if any(present) and not all(present):
+        errors.append(
+            f"{entry_id}: items/response_scale/scoring must all be present or all null, "
+            f"got {dict(zip(fields, present))}"
+        )
 
 
 def check_date(value, field, entry_id, errors):
@@ -103,6 +176,16 @@ def validate_file(path):
 
         check_optional_string(entry.get("question"), "question", entry_id, errors)
         check_optional_string_list(entry.get("values"), "values", entry_id, errors)
+
+        if entry.get("licence_status") not in VALID_LICENCE_STATUSES:
+            errors.append(f"{entry_id}: invalid licence_status {entry.get('licence_status')!r}")
+        if not isinstance(entry.get("licence_notes"), str) or not entry.get("licence_notes"):
+            errors.append(f"{entry_id}: licence_notes must be a non-empty string")
+
+        check_items(entry.get("items"), entry_id, errors)
+        check_response_scale(entry.get("response_scale"), entry_id, errors)
+        check_scoring(entry.get("scoring"), entry_id, errors)
+        check_instrument_shape(entry, entry_id, errors)
 
         url = entry.get("source_url", "")
         if not (isinstance(url, str) and url.startswith("http")):

@@ -17,6 +17,13 @@
   values:
     - "Yes"
     - "No"
+  licence_status: ogl
+  licence_notes: >-
+    UK Open Government Licence v3.0 (government/publisher content) — see this repo's LICENSE
+    and README "Sources & licensing" section. Safe to reproduce with attribution.
+  items: null
+  response_scale: null
+  scoring: null
   notes: >
     Measures self-reported physical or mental health conditions/illnesses lasting or expected
     to last 12+ months. Used in the 2021 Census (England & Wales) alongside the activity
@@ -52,6 +59,13 @@
     - "Socially or behaviourally (for example associated with autism spectrum disorder (ASD)
       which includes Asperger's, or attention deficit hyperactivity disorder (ADHD))"
     - "Other (please specify)"
+  licence_status: ogl
+  licence_notes: >-
+    UK Open Government Licence v3.0 (government/publisher content) — see this repo's LICENSE
+    and README "Sources & licensing" section. Safe to reproduce with attribution.
+  items: null
+  response_scale: null
+  scoring: null
   notes: >
     Includes a "mental or cognitive impairments" category covering memory, mental health,
     learning/understanding/concentrating, and social/behavioural impact. Cannot be
@@ -73,6 +87,13 @@
   use_case: [no-standard-gap]
   question: null  # no standard was adopted, so there is no question to quote
   values: null  # no standard exists
+  licence_status: ogl
+  licence_notes: >-
+    UK Open Government Licence v3.0 (government/publisher content) — see this repo's LICENSE
+    and README "Sources & licensing" section. Safe to reproduce with attribution.
+  items: null
+  response_scale: null
+  scoring: null
   notes: >
     IMPORTANT: this review was archived on 28 March 2023 without recommending a preferred
     classification standard for mental health specifically. Existing harmonised standards
@@ -96,6 +117,13 @@
   use_case: [clinical-record]
   question: null  # clinical/administrative dataset, not a single survey question
   values: null  # the standards.nhs.uk page itself doesn't publish a compact code list
+  licence_status: ogl
+  licence_notes: >-
+    UK Open Government Licence v3.0 (government/publisher content) — see this repo's LICENSE
+    and README "Sources & licensing" section. Safe to reproduce with attribution.
+  items: null
+  response_scale: null
+  scoring: null
   notes: >
     Patient-level secondary uses dataset (SCCI0021, ICD-10 5th edition based). Designed for
     commissioning, service improvement and service design re-use — not a public-facing

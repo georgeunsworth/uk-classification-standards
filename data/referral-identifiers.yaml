@@ -16,6 +16,13 @@
   use_case: [clinical-record]
   question: null  # an identifier field, not a survey question
   values: null  # free-form 10-digit identifier, not a categorical value set
+  licence_status: ogl
+  licence_notes: >-
+    UK Open Government Licence v3.0 (government/publisher content) — see this repo's LICENSE
+    and README "Sources & licensing" section. Safe to reproduce with attribution.
+  items: null
+  response_scale: null
+  scoring: null
   notes: >
     Source definition, quoted directly: "The NHS NUMBER, the primary identifier of a PERSON, is a
     unique identifier for a PATIENT within the NHS in England and Wales." Format: n10 (10 numeric
@@ -39,6 +46,13 @@
   use_case: [clinical-record]
   question: null
   values: null
+  licence_status: ogl
+  licence_notes: >-
+    UK Open Government Licence v3.0 (government/publisher content) — see this repo's LICENSE
+    and README "Sources & licensing" section. Safe to reproduce with attribution.
+  items: null
+  response_scale: null
+  scoring: null
   notes: >
     Source definition, quoted directly: "GENERAL MEDICAL PRACTICE (PATIENT REGISTRATION) is the
     ORGANISATION CODE of the GP Practice that the PATIENT is registered with," supplied by the NHS
@@ -62,6 +76,13 @@
   use_case: [clinical-record]
   question: null
   values: null  # a SNOMED CT coded concept, not a fixed short list
+  licence_status: ogl
+  licence_notes: >-
+    UK Open Government Licence v3.0 (government/publisher content) — see this repo's LICENSE
+    and README "Sources & licensing" section. Safe to reproduce with attribution.
+  items: null
+  response_scale: null
+  scoring: null
   notes: >
     Source definition, quoted directly: used "to identify an unresolved issue or concern regarding
     adult and child safeguarding that requires communication to another ORGANISATION or care
@@ -85,6 +106,13 @@
   values:
     - "Yes - Child Safeguarding vulnerability factors present"
     - "No - Child Safeguarding vulnerability factors not present"
+  licence_status: ogl
+  licence_notes: >-
+    UK Open Government Licence v3.0 (government/publisher content) — see this repo's LICENSE
+    and README "Sources & licensing" section. Safe to reproduce with attribution.
+  items: null
+  response_scale: null
+  scoring: null
   notes: >
     National codes quoted directly from source: Y = "Yes - Child Safeguarding vulnerability
     factors present", N = "No - Child Safeguarding vulnerability factors not present". Used within
@@ -104,6 +132,13 @@
   use_case: [no-standard-gap]
   question: null
   values: null
+  licence_status: ogl
+  licence_notes: >-
+    UK Open Government Licence v3.0 (government/publisher content) — see this repo's LICENSE
+    and README "Sources & licensing" section. Safe to reproduce with attribution.
+  items: null
+  response_scale: null
+  scoring: null
   notes: >
     IMPORTANT: there is no single official coded "consent to referral/treatment" data standard in
     the NHS Data Model and Dictionary — consent indicators exist only per specific dataset or
