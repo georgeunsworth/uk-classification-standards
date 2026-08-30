@@ -1,0 +1,60 @@
+# UK classification standards relevant to mental health, as used in service design and reporting.
+# See ../README.md for schema. This is a starter set — verify against source_url before relying on any entry.
+
+- id: ons-long-lasting-health-conditions
+  label: Long-lasting health conditions and illness harmonised standard
+  source: ONS / Government Statistical Service (GSS) Harmonisation Team
+  source_type: harmonised-standard
+  status: current
+  last_reviewed: 2026-08-30
+  source_published: 2011-01-01  # year only in source; day/month unconfirmed
+  source_url: https://analysisfunction.civilservice.gov.uk/policy-store/long-lasting-health-conditions-and-illness/
+  notes: >
+    Measures self-reported physical or mental health conditions/illnesses lasting or expected
+    to last 12+ months. Used in the 2021 Census (England & Wales) alongside the activity
+    restriction standard. Does not distinguish between physical and mental health conditions.
+
+- id: ons-impairment-standard
+  label: Impairment harmonised standard
+  source: ONS / GSS Harmonisation Team
+  source_type: harmonised-standard
+  status: current
+  last_reviewed: 2026-08-30
+  source_published: 2011-01-01  # year only in source; day/month unconfirmed
+  source_url: https://analysisfunction.civilservice.gov.uk/policy-store/impairment/
+  notes: >
+    Includes a "mental or cognitive impairments" category covering memory, mental health,
+    learning/understanding/concentrating, and social/behavioural impact. Cannot be
+    disaggregated by specific mental health condition. Under review as of 2023 phase-2
+    research (question design dates back to 2008).
+
+- id: ons-mental-health-harmonisation-review
+  label: Mental health harmonisation guidance (no preferred standard)
+  source: ONS / GSS Harmonisation Team
+  source_type: harmonised-standard
+  status: under-review
+  last_reviewed: 2026-08-30
+  source_published: 2023-03-28
+  source_url: https://analysisfunction.civilservice.gov.uk/policy-store/review-of-mental-health-harmonisation
+  notes: >
+    IMPORTANT: this review was archived on 28 March 2023 without recommending a preferred
+    classification standard for mental health specifically. Existing harmonised standards
+    (disability, impairment, wellbeing) provide only narrow/fragmented mental health data
+    and were not designed to collect it directly. Anyone building a service that needs to
+    classify mental health status should treat this as an open gap, not an oversight on
+    this repo's part.
+
+- id: nhs-mhsds-icd10
+  label: Mental Health Services Data Set (MHSDS) — ICD-10 coded value sets
+  source: NHS England / NHS Standards Directory
+  source_type: clinical-dataset
+  status: current
+  last_reviewed: 2026-08-30
+  source_published: null
+  source_url: https://standards.nhs.uk/published-standards/mental-health-services-data-set
+  notes: >
+    Patient-level secondary uses dataset (SCCI0021, ICD-10 5th edition based). Designed for
+    commissioning, service improvement and service design re-use — not a public-facing
+    classification, but the closest thing to an authoritative coded value set for mental
+    health conditions in an NHS context. Confirm current edition/version before use, as
+    ICD-10 value sets are periodically updated.
