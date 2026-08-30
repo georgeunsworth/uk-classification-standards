@@ -1,0 +1,160 @@
+# Validated clinical screening/outcome instruments commonly embedded in UK referral and
+# intake forms. Unlike the other three domains, these are NOT UK-government/OGL content —
+# they're third-party clinical instruments, so licence_status/licence_notes is what makes
+# each entry safe (or not) to reproduce; verify it before copying anything from here.
+#
+# Only PHQ-9 and GAD-7 are included. Other commonly-used tools (SDQ, ORS/SRS, WEMWBS,
+# RCADS) were researched but deliberately left out — each carries real copyright/licensing
+# restriction (paid licences, no-digital-reproduction clauses, or "free but check
+# permissions" caveats) that needs individual handling before anything is added. See
+# README.md roadmap.
+#
+# These entries use a different shape from the other domains: question/values are null,
+# and the actual content lives in `items` (individually addressable statements — each with
+# its own stable id, so a future form-builder can cite or reuse a single item), a shared
+# `response_scale`, and `scoring` (summing rule + severity bands + any clinical caveats).
+
+- id: phq-9
+  label: Patient Health Questionnaire-9 (PHQ-9)
+  source: Drs. Robert L. Spitzer, Janet B.W. Williams, Kurt Kroenke and colleagues, with an educational grant from Pfizer Inc.
+  source_type: survey-instrument
+  status: current
+  last_reviewed: 2026-08-30
+  source_published: 2001-01-01  # original validation publication; see notes for full citation
+  source_url: https://www.phqscreeners.com/images/sites/g/files/g10060481/f/201412/PHQ9_English%20for%20New%20Zealand.pdf
+  applies_to: [adults]
+  use_case: [screening-instrument]
+  licence_status: public-domain
+  licence_notes: >-
+    Quoted directly from the source document itself: "Developed by Drs. Robert L. Spitzer,
+    Janet B.W. Williams, Kurt Kroenke and colleagues, with an educational grant from Pfizer
+    Inc. No permission required to reproduce, translate, display or distribute." Confirmed
+    again in the official PHQ/GAD-7 instruction manual: "All of the measures included in
+    Table 1 are in the public domain. No permission is required to reproduce, translate,
+    display or distribute." Older circulating copies of the PHQ-9 (pre-dating the public
+    domain release) instead carry a restrictive "Copyright (c) 1999 Pfizer Inc. All rights
+    reserved. Reproduced with permission" notice — that notice no longer applies; use the
+    current phqscreeners.com version (this source_url) as the reference copy, not an older PDF.
+  question: null  # not a single question — see items/response_scale below
+  values: null
+  items:
+    - id: phq-9-item-1
+      text: "Little interest or pleasure in doing things"
+    - id: phq-9-item-2
+      text: "Feeling down, depressed, or hopeless"
+    - id: phq-9-item-3
+      text: "Trouble falling or staying asleep, or sleeping too much"
+    - id: phq-9-item-4
+      text: "Feeling tired or having little energy"
+    - id: phq-9-item-5
+      text: "Poor appetite or overeating"
+    - id: phq-9-item-6
+      text: "Feeling bad about yourself — or that you are a failure or have let yourself or your family down"
+    - id: phq-9-item-7
+      text: "Trouble concentrating on things, such as reading the newspaper or watching television"
+    - id: phq-9-item-8
+      text: "Moving or speaking so slowly that other people could have noticed? Or the opposite — being so fidgety or restless that you have been moving around a lot more than usual"
+    - id: phq-9-item-9
+      text: "Thoughts that you would be better off dead or of hurting yourself in some way"
+  response_scale:
+    instruction: "Over the past 2 weeks, how often have you been bothered by any of the following problems?"
+    options:
+      - {label: "Not at all", score: 0}
+      - {label: "Several days", score: 1}
+      - {label: "More than half the days", score: 2}
+      - {label: "Nearly every day", score: 3}
+  scoring:
+    method: Sum all 9 item scores (each 0-3). Total ranges 0-27.
+    bands:
+      - {min: 0, max: 4, label: "None-minimal"}
+      - {min: 5, max: 9, label: "Mild"}
+      - {min: 10, max: 14, label: "Moderate"}
+      - {min: 15, max: 19, label: "Moderately severe"}
+      - {min: 20, max: 27, label: "Severe"}
+    clinical_note: >-
+      Item 9 (thoughts of self-harm) should prompt clinical follow-up whenever endorsed at
+      all, regardless of the total score — the severity bands above don't capture this. Bands
+      and treatment-action guidance are from Kroenke K, Spitzer RL, "The PHQ-9: a new
+      depression diagnostic and severity measure," Psychiatric Annals 2002;32:509-521,
+      building on the original validation: Kroenke K, Spitzer RL, Williams JBW, "The PHQ-9:
+      Validity of a brief depression severity measure," J Gen Intern Med 2001;16:606-613. A
+      separate, non-scored functional-impairment question ("how difficult have these problems
+      made it for you to do your work, take care of things at home, or get along with other
+      people?", 4 options from "Not difficult at all" to "Extremely difficult") is part of the
+      standard form but isn't included in the total score.
+  notes: >
+    Validated in two large primary-care studies (~6,000 patients total: general internal
+    medicine/family practice and obstetrics-gynaecology clinics) — both adult populations.
+    A separately modified variant, PHQ-9 for Adolescents (PHQ-A), exists with its own
+    diagnostic scoring for use with under-18s (Johnson JG et al., J Adolescent Health
+    2002;30:196-204) but is not reproduced here — don't assume this standard PHQ-9 is
+    validated for that population; that's why applies_to only lists adults. This is the
+    first entry in this repo that isn't UK-government/OGL content — see licence_status
+    above for why it's still safe to reproduce.
+
+- id: gad-7
+  label: Generalized Anxiety Disorder 7-item scale (GAD-7)
+  source: Drs. Robert L. Spitzer, Kurt Kroenke, Janet B.W. Williams, Bernd Löwe, with an educational grant from Pfizer Inc.
+  source_type: survey-instrument
+  status: current
+  last_reviewed: 2026-08-30
+  source_published: 2006-01-01  # original validation publication; see notes for full citation
+  source_url: https://www.phqscreeners.com/select-screener
+  applies_to: [adults]
+  use_case: [screening-instrument]
+  licence_status: public-domain
+  licence_notes: >-
+    Confirmed via the official PHQ/GAD-7 instruction manual (developed by the same team,
+    published at phqscreeners.com): "All of the measures included in Table 1" — which
+    explicitly lists GAD-7 — "are in the public domain. No permission is required to
+    reproduce, translate, display or distribute." Item text and scoring for this entry were
+    verified against an AHRQ-hosted mirror of the same public-domain content, since a working
+    direct GAD-7 PDF link on phqscreeners.com itself wasn't found in this session — source_url
+    points to the publisher's screener index; re-check it directly if you need the canonical
+    copy.
+  question: null
+  values: null
+  items:
+    - id: gad-7-item-1
+      text: "Feeling nervous, anxious, or on edge"
+    - id: gad-7-item-2
+      text: "Not being able to stop or control worrying"
+    - id: gad-7-item-3
+      text: "Worrying too much about different things"
+    - id: gad-7-item-4
+      text: "Trouble relaxing"
+    - id: gad-7-item-5
+      text: "Being so restless that it's hard to sit still"
+    - id: gad-7-item-6
+      text: "Becoming easily annoyed or irritable"
+    - id: gad-7-item-7
+      text: "Feeling afraid as if something awful might happen"
+  response_scale:
+    instruction: "Over the last 2 weeks, how often have you been bothered by the following problems?"
+    options:
+      - {label: "Not at all", score: 0}
+      - {label: "Several days", score: 1}
+      - {label: "More than half the days", score: 2}
+      - {label: "Nearly every day", score: 3}
+  scoring:
+    method: Sum all 7 item scores (each 0-3). Total ranges 0-21.
+    bands:
+      - {min: 0, max: 4, label: "Minimal"}
+      - {min: 5, max: 9, label: "Mild"}
+      - {min: 10, max: 14, label: "Moderate"}
+      - {min: 15, max: 21, label: "Severe"}
+    clinical_note: >-
+      A cutpoint of 10 or greater is recommended as the threshold for further clinical
+      evaluation when screening for anxiety disorders generally, not just at the top band.
+      Bands and cutpoints are from the original validation: Spitzer RL, Kroenke K, Williams
+      JBW, Löwe B., "A brief measure for assessing generalized anxiety disorder: the GAD-7,"
+      Arch Intern Med 2006;166:1092-1097. The same paper and later work (Kroenke K et al.,
+      Ann Intern Med 2007;146:317-325) found GAD-7 also has reasonable operating
+      characteristics as a screener for panic disorder, social anxiety disorder, and PTSD —
+      not just generalized anxiety disorder specifically.
+  notes: >
+    Validated in 2,740 primary care patients (adult population). Uses the same 0-3 response
+    scale and shares its development team with PHQ-9. No adolescent-specific variant was
+    found in the sources checked for this entry (unlike PHQ-9, which has the separate PHQ-A) —
+    treat applies_to as adults-only until/unless that's confirmed, rather than assuming
+    parity with PHQ-9's situation.
