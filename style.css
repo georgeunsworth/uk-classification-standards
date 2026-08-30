@@ -186,6 +186,53 @@ a { color: var(--link); }
 .tag.unspecified {
   font-style: italic;
 }
+.tag.licence-public-domain {
+  color: var(--status-current-text);
+  background: var(--status-current-bg);
+  border-color: transparent;
+}
+.tag.licence-restricted {
+  color: var(--status-review-text);
+  background: var(--status-review-bg);
+  border-color: transparent;
+  font-weight: 600;
+}
+.scale-block,
+.scoring-block {
+  margin: 0 0 0.8rem;
+}
+.scale-block strong,
+.scoring-block strong {
+  font-size: 0.85rem;
+}
+.scale-list {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1rem;
+  margin: 0.35rem 0 0;
+  padding: 0;
+  font-size: 0.9rem;
+}
+.scale-list .score {
+  color: var(--text-muted);
+}
+.scoring-method {
+  margin: 0.35rem 0 0.5rem;
+}
+.bands-table {
+  border-collapse: collapse;
+  font-size: 0.9rem;
+  margin: 0 0 0.5rem;
+}
+.bands-table td {
+  padding: 0.15rem 0.7rem 0.15rem 0;
+}
+.clinical-note {
+  font-size: 0.85rem;
+  color: var(--status-review-text);
+  margin: 0.3rem 0 0;
+}
 .question {
   font-style: italic;
   color: var(--text-muted);

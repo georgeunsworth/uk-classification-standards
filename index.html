@@ -34,7 +34,14 @@
       <option value="">Any use case</option>
       <option value="demographic-survey">Demographic survey</option>
       <option value="clinical-record">Clinical record</option>
+      <option value="screening-instrument">Screening instrument</option>
       <option value="no-standard-gap">No standard exists (gap)</option>
+    </select>
+    <select id="licence-filter" aria-label="Filter by licence">
+      <option value="">Any licence</option>
+      <option value="ogl">OGL</option>
+      <option value="public-domain">Public domain</option>
+      <option value="restricted">Restricted — reference only</option>
     </select>
   </div>
 
@@ -56,6 +63,7 @@
   const statusEl = document.getElementById("status-filter");
   const populationEl = document.getElementById("population-filter");
   const useCaseEl = document.getElementById("use-case-filter");
+  const licenceEl = document.getElementById("licence-filter");
 
   let allEntries = [];
 
@@ -65,6 +73,7 @@
       status: statusEl.value,
       population: populationEl.value,
       useCase: useCaseEl.value,
+      licence: licenceEl.value,
     };
 
     const filtered = allEntries.filter((e) => matchesFilters(e, filters));
@@ -100,6 +109,7 @@
   statusEl.addEventListener("change", applyFilters);
   populationEl.addEventListener("change", applyFilters);
   useCaseEl.addEventListener("change", applyFilters);
+  licenceEl.addEventListener("change", applyFilters);
   loadAll();
 </script>
 </body>
