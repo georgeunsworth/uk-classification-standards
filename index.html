@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UK Classification Standards Tracker</title>
+<style>
+  :root {
+    --bg: #fafaf8;
+    --surface: #ffffff;
+    --border: #dcdad3;
+    --text: #1c1b19;
+    --text-muted: #5c594f;
+    --link: #1a56b0;
+    --accent: #1a56b0;
+    --status-current-bg: #dff2e1;
+    --status-current-text: #14622a;
+    --status-review-bg: #fbe9d0;
+    --status-review-text: #8a4b06;
+    --status-archived-bg: #eee;
+    --status-archived-text: #55524a;
+    --status-superseded-bg: #eee;
+    --status-superseded-text: #55524a;
+    --code-bg: #f0efe9;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #17171a;
+      --surface: #201f23;
+      --border: #38373d;
+      --text: #ecebe8;
+      --text-muted: #a9a7a0;
+      --link: #7fb0ff;
+      --accent: #7fb0ff;
+      --status-current-bg: #143d21;
+      --status-current-text: #7fe0a0;
+      --status-review-bg: #4a3208;
+      --status-review-text: #f0b862;
+      --status-archived-bg: #2c2b2f;
+      --status-archived-text: #b8b6b0;
+      --status-superseded-bg: #2c2b2f;
+      --status-superseded-text: #b8b6b0;
+      --code-bg: #26252a;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font: 16px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  main {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 2.5rem 1.25rem 4rem;
+  }
+  header h1 {
+    font-size: 1.6rem;
+    margin: 0 0 0.4rem;
+  }
+  header p {
+    color: var(--text-muted);
+    margin: 0 0 0.5rem;
+    max-width: 60ch;
+  }
+  header .repo-link {
+    font-size: 0.9rem;
+  }
+  a { color: var(--link); }
+  .controls {
+    display: flex;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+    margin: 1.75rem 0 1.25rem;
+  }
+  .controls input[type="search"],
+  .controls select {
+    font: inherit;
+    padding: 0.5rem 0.7rem;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: var(--surface);
+    color: var(--text);
+  }
+  .controls input[type="search"] {
+    flex: 1 1 220px;
+  }
+  .count {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    margin: 0 0 1rem;
+  }
+  .entry {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.1rem 1.25rem;
+    margin-bottom: 0.9rem;
+  }
+  .entry-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+  .entry-head h2 {
+    font-size: 1.05rem;
+    margin: 0;
+  }
+  .badge {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    padding: 0.2rem 0.55rem;
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+  .badge.current { background: var(--status-current-bg); color: var(--status-current-text); }
+  .badge.under-review { background: var(--status-review-bg); color: var(--status-review-text); }
+  .badge.archived { background: var(--status-archived-bg); color: var(--status-archived-text); }
+  .badge.superseded { background: var(--status-superseded-bg); color: var(--status-superseded-text); }
+  .meta {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    margin: 0.25rem 0 0.6rem;
+  }
+  .notes {
+    margin: 0.4rem 0 0.7rem;
+  }
+  .entry-foot {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+  }
+  .entry-foot code {
+    background: var(--code-bg);
+    padding: 0.1rem 0.4rem;
+    border-radius: 4px;
+    font-size: 0.8em;
+  }
+  .empty, .error {
+    color: var(--text-muted);
+    padding: 2rem 0;
+    text-align: center;
+  }
+  footer {
+    margin-top: 2.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border);
+    color: var(--text-muted);
+    font-size: 0.85rem;
+  }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>UK Classification Standards Tracker</h1>
+    <p>A browsable index of official UK classification standards used in service and system design. Always verify against the linked primary source before relying on an entry.</p>
+    <p class="repo-link"><a href="https://github.com/georgeunsworth/uk-classification-standards">View the source repo on GitHub</a></p>
+  </header>
+
+  <div class="controls">
+    <input type="search" id="search" placeholder="Search label, source, or notes…" aria-label="Search entries">
+    <select id="status-filter" aria-label="Filter by status">
+      <option value="">All statuses</option>
+      <option value="current">Current</option>
+      <option value="under-review">Under review</option>
+      <option value="archived">Archived</option>
+      <option value="superseded">Superseded</option>
+    </select>
+  </div>
+
+  <p class="count" id="count"></p>
+  <div id="entries"></div>
+
+  <footer>
+    Data sourced under the <a href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/">Open Government Licence</a>.
+    This is a practitioner-facing reference, not an official government product.
+  </footer>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
+<script>
+  const DOMAIN_FILES = ["data/mental-health.yaml"]; // add new domain files here as they're added
+
+  const STATUS_LABELS = {
+    current: "Current",
+    "under-review": "Under review",
+    archived: "Archived",
+    superseded: "Superseded",
+  };
+
+  const entriesEl = document.getElementById("entries");
+  const countEl = document.getElementById("count");
+  const searchEl = document.getElementById("search");
+  const statusEl = document.getElementById("status-filter");
+
+  let allEntries = [];
+
+  function escapeHtml(str) {
+    return String(str ?? "").replace(/[&<>"']/g, (c) => ({
+      "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;",
+    }[c]));
+  }
+
+  function renderEntry(entry) {
+    const status = entry.status || "";
+    const badgeLabel = STATUS_LABELS[status] || status;
+    const lastReviewed = entry.last_reviewed || "unknown";
+    const published = entry.source_published || "unknown";
+    return `
+      <article class="entry">
+        <div class="entry-head">
+          <h2>${escapeHtml(entry.label)}</h2>
+          <span class="badge ${escapeHtml(status)}">${escapeHtml(badgeLabel)}</span>
+        </div>
+        <p class="meta">${escapeHtml(entry.source)} · last reviewed ${escapeHtml(lastReviewed)} · source published ${escapeHtml(published)}</p>
+        <p class="notes">${escapeHtml(entry.notes)}</p>
+        <div class="entry-foot">
+          <code>${escapeHtml(entry.source_type)}</code>
+          <a href="${escapeHtml(entry.source_url)}" target="_blank" rel="noopener">View primary source →</a>
+        </div>
+      </article>
+    `;
+  }
+
+  function applyFilters() {
+    const q = searchEl.value.trim().toLowerCase();
+    const statusWanted = statusEl.value;
+
+    const filtered = allEntries.filter((e) => {
+      if (statusWanted && e.status !== statusWanted) return false;
+      if (!q) return true;
+      const haystack = `${e.label} ${e.source} ${e.notes}`.toLowerCase();
+      return haystack.includes(q);
+    });
+
+    countEl.textContent = `${filtered.length} of ${allEntries.length} entries`;
+
+    if (filtered.length === 0) {
+      entriesEl.innerHTML = '<p class="empty">No entries match your search.</p>';
+      return;
+    }
+    entriesEl.innerHTML = filtered.map(renderEntry).join("");
+  }
+
+  async function loadAll() {
+    try {
+      const results = await Promise.all(
+        DOMAIN_FILES.map(async (path) => {
+          const res = await fetch(path);
+          if (!res.ok) throw new Error(`Failed to load ${path}: ${res.status}`);
+          const text = await res.text();
+          return jsyaml.load(text) || [];
+        })
+      );
+      allEntries = results.flat();
+      applyFilters();
+    } catch (err) {
+      entriesEl.innerHTML = `<p class="error">Couldn't load the data files: ${escapeHtml(err.message)}</p>`;
+      countEl.textContent = "";
+    }
+  }
+
+  searchEl.addEventListener("input", applyFilters);
+  statusEl.addEventListener("change", applyFilters);
+  loadAll();
+</script>
+</body>
+</html>
