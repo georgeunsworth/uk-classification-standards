@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Questions — UK Classification Standards Tracker</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main>
+  <header>
+    <h1>Questions & known gaps</h1>
+    <p>The same tracked standards, organised as a service designer actually needs them: by the question you're trying to ask, grouped by domain, with source and currency shown for each. Only standards that publish an actual question appear here — administrative identifiers and coded flags (e.g. NHS Number) still live on the standards view. Entries with no usable standard are listed as known gaps rather than silently omitted.</p>
+    <p class="repo-link"><a href="https://github.com/georgeunsworth/uk-classification-standards">View the source repo on GitHub</a></p>
+    <nav class="view-nav"><a href="index.html">← Switch to the by-standard view</a></nav>
+  </header>
+
+  <div class="controls">
+    <input type="search" id="search" placeholder="Search question, label, source, or notes…" aria-label="Search entries">
+    <select id="status-filter" aria-label="Filter by status">
+      <option value="">All statuses</option>
+      <option value="current">Current</option>
+      <option value="under-review">Under review</option>
+      <option value="archived">Archived</option>
+      <option value="superseded">Superseded</option>
+    </select>
+    <select id="population-filter" aria-label="Filter by population">
+      <option value="">Who it's for: anyone</option>
+      <option value="adults">Confirmed for adults</option>
+      <option value="children-young-people">Confirmed for children/young people</option>
+      <option value="unspecified">Population not confirmed (gap)</option>
+    </select>
+    <select id="use-case-filter" aria-label="Filter by use case">
+      <option value="">Any use case</option>
+      <option value="demographic-survey">Demographic survey</option>
+      <option value="clinical-record">Clinical record</option>
+      <option value="no-standard-gap">No standard exists (gap)</option>
+    </select>
+  </div>
+
+  <p class="count" id="count"></p>
+  <div id="entries"></div>
+
+  <footer>
+    Data sourced under the <a href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/">Open Government Licence</a>.
+    This is a practitioner-facing reference, not an official government product.
+  </footer>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
+<script src="app.js"></script>
+<script>
+  const entriesEl = document.getElementById("entries");
+  const countEl = document.getElementById("count");
+  const searchEl = document.getElementById("search");
+  const statusEl = document.getElementById("status-filter");
+  const populationEl = document.getElementById("population-filter");
+  const useCaseEl = document.getElementById("use-case-filter");
+
+  let allEntries = [];
+
+  function renderDomainSection(meta, filteredEntries) {
+    const domainEntries = filteredEntries.filter((e) => e._domain === meta.domain);
+    const questions = domainEntries.filter((e) => e.question);
+    const gaps = domainEntries.filter((e) => (e.use_case || []).includes("no-standard-gap"));
+
+    if (questions.length === 0 && gaps.length === 0) return "";
+
+    const questionsHtml = questions.length
+      ? questions.map((e) => renderEntryCard(e, { heading: e.question, headingTag: "h3" })).join("")
+      : "";
+
+    const gapsHtml = gaps.length
+      ? `
+        <div class="domain-gaps">
+          <h3 class="gaps-heading">Known gaps</h3>
+          ${gaps.map((e) => renderEntryCard(e, { headingTag: "h3" })).join("")}
+        </div>
+      `
+      : "";
+
+    return `
+      <section class="domain-section">
+        <h2 class="domain-heading">${escapeHtml(meta.label)}</h2>
+        ${questionsHtml}
+        ${gapsHtml}
+      </section>
+    `;
+  }
+
+  function applyFilters() {
+    const filters = {
+      search: searchEl.value.trim().toLowerCase(),
+      status: statusEl.value,
+      population: populationEl.value,
+      useCase: useCaseEl.value,
+    };
+
+    const filtered = allEntries.filter((e) => matchesFilters(e, filters));
+
+    const eligible = filtered.filter((e) => e.question || (e.use_case || []).includes("no-standard-gap"));
+    countEl.textContent = `${eligible.length} of ${allEntries.filter((e) => e.question || (e.use_case || []).includes("no-standard-gap")).length} questions & gaps`;
+
+    const sections = DOMAIN_FILES.map((meta) => renderDomainSection(meta, filtered)).join("");
+    entriesEl.innerHTML = sections.trim()
+      ? sections
+      : '<p class="empty">No questions or known gaps match your filters.</p>';
+  }
+
+  async function loadAll() {
+    try {
+      allEntries = await loadAllEntries();
+      applyFilters();
+    } catch (err) {
+      entriesEl.innerHTML = `<p class="error">Couldn't load the data files: ${escapeHtml(err.message)}</p>`;
+      countEl.textContent = "";
+    }
+  }
+
+  wireCopyButtons(entriesEl, () => allEntries);
+
+  searchEl.addEventListener("input", applyFilters);
+  statusEl.addEventListener("change", applyFilters);
+  populationEl.addEventListener("change", applyFilters);
+  useCaseEl.addEventListener("change", applyFilters);
+  loadAll();
+</script>
+</body>
+</html>

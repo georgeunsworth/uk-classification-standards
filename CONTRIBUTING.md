@@ -9,7 +9,11 @@ problem in service or system design work.
 2. Follow the schema in the [README](README.md#structure) — every field is required,
    `source_type` and `status` must use one of the allowed values.
 3. Always cite a primary source in `source_url`. Secondary summaries (news articles,
-   blog posts) aren't sufficient — link directly to the publishing body's page.
+   blog posts) aren't sufficient — link directly to the publishing body's page. This
+   includes research done for you (by an AI agent, a colleague, or your own notes from
+   memory) — re-check the specific claim against the live page yourself before writing
+   it into an entry. One "being superseded" claim in this repo's own history came from
+   initial research and didn't hold up when the live page was checked directly.
 4. For `applies_to`, only add a population tag if the source itself confirms
    applicability — quote or closely paraphrase the source's own language in `notes`.
    If the source is silent on a population, leave `applies_to` empty rather than

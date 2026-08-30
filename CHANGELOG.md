@@ -25,3 +25,24 @@ dated by when the change was caught, not necessarily when the source changed.
   archived review (no standard exists) and the NHS MHSDS (the standards.nhs.uk page
   doesn't publish a compact ICD-10 code list itself — it points to a separate Technical
   Output Specification / NHS Data Model and Dictionary instead).
+- New `demographics.yaml` domain (9 entries): the sibling GSS Harmonised Standards commonly
+  needed on referral/intake forms — ethnicity, disability (Equality Act 2010), sexual
+  orientation, religion, national identity, and tenure (all `current`); sex and language
+  recorded as confirmed gaps (`no-standard-gap` — no GSS-wide standard currently exists for
+  either); gender identity recorded as `archived` (retired following the December 2024
+  GSS Harmonisation workplan, with nothing yet superseding it, so it's tagged as both a
+  demographic-survey question and a no-standard-gap). Every question/value/age-scope claim
+  re-verified directly against source (not taken from research summaries as-is) before writing.
+- New `referral-identifiers.yaml` domain (5 entries): NHS Number, GP practice registration,
+  two safeguarding data elements (SNOMED CT concern — adult and child; a narrower child-only
+  vulnerability indicator), and a recorded gap for consent (no single official coded consent
+  standard exists, only per-dataset indicators). One claim from initial research — that GP
+  practice registration was "being superseded" — didn't hold up under direct verification of
+  the live page, so it's recorded as `current` with the ambiguity noted instead.
+- `questions.html`: a second view of the same data, grouped by domain, organised by the
+  question you're trying to ask rather than by standard name — with a "Known gaps" section per
+  domain so entries with no usable standard (sex, language, consent, the mental-health review)
+  surface explicitly instead of just not appearing. Shared rendering/filtering logic extracted
+  from `index.html` into `app.js` and `style.css` so both pages stay in sync.
+- Screening/outcome tools (PHQ-9, GAD-7, SDQ, ORS/SRS, WEMWBS, RCADS) researched but
+  deliberately not added yet — see the Roadmap in `README.md` for the licensing findings.

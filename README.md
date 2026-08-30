@@ -6,7 +6,10 @@
 
 Maintained by George Unsworth ([@georgeunsworth](https://github.com/georgeunsworth)) at [Mortar Works](https://mortar.works).
 
-**Browse it:** https://georgeunsworth.github.io/uk-classification-standards/
+**Browse it:** https://georgeunsworth.github.io/uk-classification-standards/ (by standard) or
+https://georgeunsworth.github.io/uk-classification-standards/questions.html (by question, grouped
+by domain — administrative identifiers and coded flags without a survey question live only on the
+by-standard view)
 
 
 ## The problem
@@ -36,8 +39,11 @@ Service and system designers working to actually deliver services — not just t
 
 ```
 data/
-  mental-health.yaml    # v1 domain
-CHANGELOG.md             # dated log of source revisions we've caught
+  mental-health.yaml          # v1 domain
+  demographics.yaml            # GSS harmonised demographic standards
+  referral-identifiers.yaml     # NHS/safeguarding referral-data standards
+index.html / questions.html     # the two views, sharing app.js + style.css
+CHANGELOG.md                     # dated log of source revisions we've caught
 ```
 
 Each domain file is a list of entries with this shape:
@@ -82,14 +88,23 @@ guess applicability to fill this in; cite what the source itself says (quote it 
 - `no-standard-gap` — flags that no usable standard currently exists for this scenario
   (used instead of inventing one — see the archived mental health harmonisation entry)
 
-## v1 scope: mental health
+## Domains
 
-The first domain covers UK classification standards relevant to mental health as used in service design and reporting:
-
-- ONS GSS Harmonisation standards (long-lasting health conditions, impairment, mental health)
-- NHS Mental Health Services Data Set (MHSDS) coded value sets
-
-This domain was chosen deliberately because it's the messiest — the ONS mental-health-specific harmonisation review was archived without a preferred standard being adopted, which is exactly the kind of thing a static gov PDF won't surface but this tracker should.
+- **Mental health** (`data/mental-health.yaml`) — the first domain, chosen deliberately because
+  it's the messiest: the ONS mental-health-specific harmonisation review was archived without a
+  preferred standard being adopted, which is exactly the kind of thing a static gov PDF won't
+  surface but this tracker should. Covers ONS GSS Harmonisation standards (long-lasting health
+  conditions, impairment, mental health) and the NHS Mental Health Services Data Set (MHSDS).
+- **Demographics** (`data/demographics.yaml`) — the sibling GSS Harmonised Standards commonly
+  asked on referral/intake forms: ethnicity, disability (Equality Act 2010), sex, gender identity,
+  sexual orientation, religion, national identity, tenure, and language. Two of these (sex,
+  language) are recorded as confirmed gaps — no GSS-wide standard currently exists — and gender
+  identity is archived with nothing yet superseding it, so check `status` before relying on any of
+  the three.
+- **Referral & safeguarding identifiers** (`data/referral-identifiers.yaml`) — NHS
+  administrative/safeguarding data standards needed on a referral form rather than survey
+  questions: NHS Number, GP practice registration, two safeguarding data elements, and a recorded
+  gap for consent (no single official coded consent standard exists — only per-dataset indicators).
 
 ## Update cadence
 
@@ -101,9 +116,15 @@ Government content referenced here is published under the [Open Government Licen
 
 ## Roadmap
 
-- [ ] Additional domains (disability, ethnicity, long-term health conditions)
-- [x] Lightweight lookup/search interface — static page at the GitHub Pages link above,
-  filterable by status, population (`applies_to`), and use case
+- [x] Additional domains (disability, ethnicity, long-term health conditions) — added as the
+  `demographics` domain
+- [x] Lightweight lookup/search interface — two static pages at the GitHub Pages links above
+  (by standard, by question), both filterable by status, population (`applies_to`), and use case
+- [ ] Clinical screening/outcome tools (PHQ-9, GAD-7, SDQ, ORS/SRS, WEMWBS, RCADS) commonly
+  embedded in referral forms — deliberately deferred: only PHQ-9 and GAD-7 are confirmed freely
+  reproducible (public domain since 2010); the others carry real copyright/licensing restrictions
+  (paid licences, no-digital-reproduction clauses, or "free but check permissions" caveats) that
+  need more careful, individual handling before anything is added
 - [ ] Automated change-detection against source publication pages
 - [ ] Structured diffing between standard revisions
 
