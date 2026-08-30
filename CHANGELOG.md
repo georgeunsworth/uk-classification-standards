@@ -44,5 +44,23 @@ dated by when the change was caught, not necessarily when the source changed.
   domain so entries with no usable standard (sex, language, consent, the mental-health review)
   surface explicitly instead of just not appearing. Shared rendering/filtering logic extracted
   from `index.html` into `app.js` and `style.css` so both pages stay in sync.
-- Screening/outcome tools (PHQ-9, GAD-7, SDQ, ORS/SRS, WEMWBS, RCADS) researched but
-  deliberately not added yet — see the Roadmap in `README.md` for the licensing findings.
+- Removed the "Clinical record" filter option from `questions.html`: every clinical-record
+  entry lacks a `question` and isn't tagged `no-standard-gap`, so the filter could never
+  match anything on that page — it just looked like a real category while always returning
+  empty. Still offered on `index.html`, where it's meaningful.
+- `licence_status`/`licence_notes` fields added to every entry across every domain (not just
+  new ones) — this repo's content has been safely OGL up to now, but as soon as one domain
+  needed genuine copyright handling, "what am I allowed to reproduce" needed to be a
+  consistent, queryable field across the whole dataset, not a special case for one domain.
+  Backfilled `licence_status: ogl` on all 18 pre-existing entries.
+- `items`/`response_scale`/`scoring` fields added for multi-item instruments (a single
+  question + response list doesn't fit a scale like PHQ-9's 9 separate statements sharing
+  one response scale and a summed, banded score). `null` on every existing entry;
+  `scripts/validate.py` enforces the three fields being present together or not at all.
+- New `screening-tools.yaml` domain (2 entries): PHQ-9 and GAD-7, the two clinical screening
+  tools confirmed (directly against phqscreeners.com and the official PHQ/GAD-7 instruction
+  manual) to be public domain — "No permission required to reproduce, translate, display or
+  distribute." Full items, response scale, and severity-band scoring included, not just a
+  citation link, since that's what makes an entry actually usable for building a form. Other
+  commonly-used tools (SDQ, ORS/SRS, WEMWBS, RCADS) were researched but deliberately left
+  out — each carries real copyright/licensing restrictions; see README roadmap.

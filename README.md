@@ -22,6 +22,8 @@ This repo is that place. It doesn't invent new classifications — it tracks the
 
 Service and system designers working to actually deliver services — not just those producing statistics — are the people who feel this gap most directly. When a referral pathway, an intake form, or a directory schema has to reconcile categories across multiple organisations, the absence of a single current answer becomes a live delivery problem, not just a data quality footnote.
 
+**A design note on structure:** the schema is deliberately built to be *consumed*, not just browsed — every field a form-builder would need (the exact question, the response options, licensing/reproduction rights, population confirmed) is structured data, not prose buried in a paragraph. The two static pages here are one consumer of that data; the intent is that another project could read the same YAML directly to assemble a real form, citing provenance for every field it uses.
+
 ## What this is
 
 - A structured, versioned dataset of UK official classification standards, organised by domain
@@ -42,6 +44,7 @@ data/
   mental-health.yaml          # v1 domain
   demographics.yaml            # GSS harmonised demographic standards
   referral-identifiers.yaml     # NHS/safeguarding referral-data standards
+  screening-tools.yaml           # validated clinical screening instruments (not OGL — see below)
 index.html / questions.html     # the two views, sharing app.js + style.css
 CHANGELOG.md                     # dated log of source revisions we've caught
 ```
@@ -66,6 +69,15 @@ Each domain file is a list of entries with this shape:
   values: [string] | null       # the actual selectable response options, verbatim from
                                 # source. null if the source doesn't publish a compact,
                                 # embeddable list — see notes for where the real one lives
+  licence_status: enum          # ogl | public-domain | restricted — see below
+  licence_notes: string          # the specific basis for that status, cited, not asserted
+  items: [{id, text}] | null    # a multi-item instrument's individually addressable
+                                # statements (e.g. PHQ-9's 9 items). null for everything
+                                # except multi-item instruments — see below
+  response_scale: {instruction, options: [{label, score}]} | null   # the shared response
+                                # scale across all items. null unless items is set
+  scoring: {method, bands: [{min, max, label}], clinical_note} | null   # how to sum and
+                                # interpret an instrument's score. null unless items is set
   notes: string                # gaps, caveats, "no preferred standard exists" etc.
 ```
 
@@ -87,6 +99,46 @@ guess applicability to fill this in; cite what the source itself says (quote it 
 - `clinical-record` — patient/service-user-level clinical or administrative dataset
 - `no-standard-gap` — flags that no usable standard currently exists for this scenario
   (used instead of inventing one — see the archived mental health harmonisation entry)
+- `screening-instrument` — a validated clinical screening/outcome tool (e.g. PHQ-9)
+
+### `licence_status` — can this content actually be reproduced?
+
+Everything in this repo up to the `screening-tools` domain has been UK government/NHS
+content published under the OGL — safe to reproduce with attribution, which is why every
+entry (regardless of domain) carries this field rather than just the two OGL-sourced ones
+having it as an afterthought. A future consumer (a form-builder, say) should be able to ask
+"what am I actually allowed to put in front of a user" as one consistent query across the
+whole dataset:
+
+- `ogl` — UK Open Government Licence / Crown copyright government or NHS content
+- `public-domain` — explicitly released without copyright restriction by a non-government
+  rights holder (e.g. PHQ-9/GAD-7, released by Pfizer with "no permission required")
+- `restricted` — copyrighted with real reproduction restrictions (a paid licence, a
+  no-digital-reproduction clause, or an unclear "free but check permissions" status) — such
+  entries would only ever be added as reference-only (name + link, no reproduced content),
+  never with `items`/`values` populated
+
+`licence_notes` must cite the *specific* basis for the status (quote the source's own
+permission language), not just assert it — same discipline as `applies_to`.
+
+### `items` / `response_scale` / `scoring` — multi-item instruments
+
+Every entry so far has assumed one question with a list of response options. That doesn't
+fit a scale like PHQ-9, which is 9 separate statements all rated on one shared scale, summed
+into a score with clinical severity bands. For those entries, `question` and `values` are
+both `null`, and the real content lives here instead:
+
+- `items` — the individual statements, each with a stable per-item `id` (e.g.
+  `phq-9-item-1`) so they can be addressed independently, not just as part of the whole
+  instrument
+- `response_scale` — the shared instruction text and response options (each option carries
+  its numeric `score`, since that's what makes scoring possible at all)
+- `scoring` — the summing `method`, severity `bands` (each a `min`/`max`/`label`), and an
+  optional `clinical_note` for anything a band alone doesn't capture (e.g. PHQ-9 item 9's
+  self-harm follow-up requirement, which applies regardless of total score)
+
+These three fields are either all present together or all `null` — an entry doesn't have
+some but not others (`scripts/validate.py` enforces this).
 
 ## Domains
 
@@ -105,6 +157,11 @@ guess applicability to fill this in; cite what the source itself says (quote it 
   administrative/safeguarding data standards needed on a referral form rather than survey
   questions: NHS Number, GP practice registration, two safeguarding data elements, and a recorded
   gap for consent (no single official coded consent standard exists — only per-dataset indicators).
+- **Screening tools** (`data/screening-tools.yaml`) — validated clinical screening instruments
+  commonly embedded in referral/intake forms: PHQ-9 (depression) and GAD-7 (anxiety), both
+  confirmed public domain. The only non-OGL domain in this repo — see `licence_status` above.
+  Other commonly-used tools (SDQ, ORS/SRS, WEMWBS, RCADS) were researched but deliberately not
+  added; see Roadmap.
 
 ## Update cadence
 
@@ -112,7 +169,7 @@ v1: manually reviewed against source publications on an ad hoc basis, logged in 
 
 ## Sources & licensing
 
-Government content referenced here is published under the [Open Government Licence](https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/). Each entry links back to its primary source — always verify against that source before use in a live service. This repo's own structure, schema, and code are [MIT licensed](LICENSE).
+Government content referenced here is published under the [Open Government Licence](https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/). The `screening-tools` domain is the one exception — third-party clinical content, confirmed public domain rather than OGL (see each entry's `licence_status`/`licence_notes`). Each entry links back to its primary source — always verify against that source before use in a live service. This repo's own structure, schema, and code are [MIT licensed](LICENSE).
 
 ## Roadmap
 
@@ -120,11 +177,13 @@ Government content referenced here is published under the [Open Government Licen
   `demographics` domain
 - [x] Lightweight lookup/search interface — two static pages at the GitHub Pages links above
   (by standard, by question), both filterable by status, population (`applies_to`), and use case
-- [ ] Clinical screening/outcome tools (PHQ-9, GAD-7, SDQ, ORS/SRS, WEMWBS, RCADS) commonly
-  embedded in referral forms — deliberately deferred: only PHQ-9 and GAD-7 are confirmed freely
-  reproducible (public domain since 2010); the others carry real copyright/licensing restrictions
-  (paid licences, no-digital-reproduction clauses, or "free but check permissions" caveats) that
-  need more careful, individual handling before anything is added
+- [x] Clinical screening/outcome tools — PHQ-9 and GAD-7 added as the `screening-tools`
+  domain (both confirmed public domain, with full items/scoring/severity bands, not just a
+  citation link). Other commonly-used tools (SDQ, ORS/SRS, WEMWBS, RCADS) were researched but
+  deliberately left out: each carries real copyright/licensing restrictions (a paid licence, a
+  no-digital-reproduction clause, or an unclear "free but check permissions" status) that need
+  individual handling — see `licence_status: restricted` in the schema, which anticipates
+  adding these later as reference-only (name + link, no reproduced content)
 - [ ] Automated change-detection against source publication pages
 - [ ] Structured diffing between standard revisions
 

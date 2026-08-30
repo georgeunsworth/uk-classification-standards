@@ -29,12 +29,26 @@ problem in service or system design work.
    archived ONS mental health harmonisation review), say so plainly in `notes` rather
    than omitting the entry. Gaps in official guidance are exactly what this tracker
    should surface — use the `no-standard-gap` use-case tag for entries like this.
-7. Run the validator locally before opening a PR:
+7. Every entry needs `licence_status` and `licence_notes`, not just non-OGL ones. For
+   OGL/government content this is mechanical; for anything else, find and quote the
+   rights holder's own permission statement before setting `licence_status` to
+   `public-domain` — don't infer it from the fact that a tool is "commonly used" or
+   "free to download" (a free download can still be copyrighted with real restrictions
+   on reproduction). If you can't confirm free reproduction, use `restricted` and add
+   the entry as reference-only (name + `source_url` link) with `items`/`values` left
+   `null`, rather than reproducing content you're not sure you're allowed to.
+8. If an entry is a multi-item instrument (several statements sharing one response
+   scale, like PHQ-9) rather than a single question, use `items`/`response_scale`/
+   `scoring` instead of `question`/`values` (both of which stay `null`) — see the
+   README's schema section. Verify the scoring bands against the same primary source as
+   the items themselves; don't assume a commonly-cited cutoff is correct without
+   checking it against the original validation paper or an official scoring guide.
+9. Run the validator locally before opening a PR:
    ```
    pip install pyyaml
    python3 scripts/validate.py
    ```
-8. Add a line to `CHANGELOG.md` under `## Unreleased` describing what changed and why.
+10. Add a line to `CHANGELOG.md` under `## Unreleased` describing what changed and why.
 
 ## Adding a new domain
 
@@ -49,3 +63,6 @@ UK data taxonomy that exists.
   doesn't propose alternatives)
 - Anything that duplicates ONS/CDDO's Taxonomy Oversight Group's role — this repo
   is a practitioner-facing mirror of official standards, not a governance body
+- Reproduced content (`items`/`values`) for anything without a confirmed, cited
+  `public-domain` or `ogl` licence — if reproduction rights aren't confirmed, it goes
+  in as `restricted` and reference-only (name + link), not as an assumption
