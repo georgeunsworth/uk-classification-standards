@@ -14,16 +14,23 @@ problem in service or system design work.
    applicability — quote or closely paraphrase the source's own language in `notes`.
    If the source is silent on a population, leave `applies_to` empty rather than
    guessing; an empty list is a legitimate, useful signal, not a placeholder to fill in.
-5. If a standard is out of date, superseded, or silent on something (as with the
+5. For `values`, quote the source's response options verbatim, and only include options
+   meant to actually appear on a form — if the source marks some as "spontaneous only"
+   (recorded if volunteered, not offered as a choice), leave those out of `values` and
+   explain the distinction in `notes` instead, so nobody copies a spontaneous-only option
+   straight into a live form. If the source doesn't publish a compact list at all (e.g. a
+   clinical dataset that points to a separate code list document), set `values` to `null`
+   and say in `notes` where the real one lives — don't invent or partially reconstruct one.
+6. If a standard is out of date, superseded, or silent on something (as with the
    archived ONS mental health harmonisation review), say so plainly in `notes` rather
    than omitting the entry. Gaps in official guidance are exactly what this tracker
    should surface — use the `no-standard-gap` use-case tag for entries like this.
-6. Run the validator locally before opening a PR:
+7. Run the validator locally before opening a PR:
    ```
    pip install pyyaml
    python3 scripts/validate.py
    ```
-7. Add a line to `CHANGELOG.md` under `## Unreleased` describing what changed and why.
+8. Add a line to `CHANGELOG.md` under `## Unreleased` describing what changed and why.
 
 ## Adding a new domain
 

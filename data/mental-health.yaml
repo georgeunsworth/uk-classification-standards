@@ -11,6 +11,12 @@
   source_url: https://analysisfunction.civilservice.gov.uk/policy-store/long-lasting-health-conditions-and-illness/
   applies_to: [adults, children-young-people]
   use_case: [demographic-survey]
+  question: >-
+    Do you have any physical or mental health conditions or illnesses lasting or
+    expected to last for 12 months or more?
+  values:
+    - "Yes"
+    - "No"
   notes: >
     Measures self-reported physical or mental health conditions/illnesses lasting or expected
     to last 12+ months. Used in the 2021 Census (England & Wales) alongside the activity
@@ -18,7 +24,8 @@
     The source specifies the question is asked directly to respondents aged 16 and over; for
     under-16s it allows a proxy response (e.g. from a parent/carer) rather than self-report —
     verify the exact wording against source_url before relying on this for a young-person-specific
-    form.
+    form. "Don't know" and "Refusal" may be recorded if a respondent volunteers them, but the
+    source says these should not be presented as selectable options on the form itself.
 
 - id: ons-impairment-standard
   label: Impairment harmonised standard
@@ -30,13 +37,29 @@
   source_url: https://analysisfunction.civilservice.gov.uk/policy-store/impairment/
   applies_to: [adults, children-young-people]
   use_case: [demographic-survey]
+  question: >-
+    Do you have any health conditions or illnesses which affect you in any of the
+    following areas? (select all that apply)
+  values:
+    - "Vision (for example blindness or partial sight)"
+    - "Hearing (for example deafness or partial hearing)"
+    - "Mobility (for example walking short distances or climbing stairs)"
+    - "Dexterity (for example lifting and carrying objects, using a keyboard)"
+    - "Learning or understanding or concentrating"
+    - "Memory"
+    - "Mental health"
+    - "Stamina or breathing or fatigue"
+    - "Socially or behaviourally (for example associated with autism spectrum disorder (ASD)
+      which includes Asperger's, or attention deficit hyperactivity disorder (ADHD))"
+    - "Other (please specify)"
   notes: >
     Includes a "mental or cognitive impairments" category covering memory, mental health,
     learning/understanding/concentrating, and social/behavioural impact. Cannot be
     disaggregated by specific mental health condition. Under review as of 2023 phase-2
     research (question design dates back to 2008). Like the long-lasting health conditions
     standard, the source specifies direct response for respondents aged 16+, with proxy
-    response permitted for under-16s.
+    response permitted for under-16s. "None of the above" and "Refusal" are spontaneous-only
+    categories per the source — not meant to appear as selectable options on the form.
 
 - id: ons-mental-health-harmonisation-review
   label: Mental health harmonisation guidance (no preferred standard)
@@ -48,6 +71,8 @@
   source_url: https://analysisfunction.civilservice.gov.uk/policy-store/review-of-mental-health-harmonisation
   applies_to: []  # no standard exists to confirm a population against
   use_case: [no-standard-gap]
+  question: null  # no standard was adopted, so there is no question to quote
+  values: null  # no standard exists
   notes: >
     IMPORTANT: this review was archived on 28 March 2023 without recommending a preferred
     classification standard for mental health specifically. Existing harmonised standards
@@ -69,6 +94,8 @@
   source_url: https://standards.nhs.uk/published-standards/mental-health-services-data-set
   applies_to: [adults, children-young-people]
   use_case: [clinical-record]
+  question: null  # clinical/administrative dataset, not a single survey question
+  values: null  # the standards.nhs.uk page itself doesn't publish a compact code list
   notes: >
     Patient-level secondary uses dataset (SCCI0021, ICD-10 5th edition based). Designed for
     commissioning, service improvement and service design re-use — not a public-facing
@@ -76,4 +103,8 @@
     health conditions in an NHS context. The dataset's own scope statement covers "children
     and adults in contact with mental health and wellbeing services" — of the entries in this
     domain, this is the one explicitly confirmed by its source to include young people.
-    Confirm current edition/version before use, as ICD-10 value sets are periodically updated.
+    The standards.nhs.uk page links out to a Technical Output Specification and the NHS Data
+    Model and Dictionary rather than listing ICD-10 codes directly — the full code list (many
+    hundreds of entries) lives there, not here; treat source_url as a pointer to that
+    documentation, not as the value set itself. Confirm current edition/version before use, as
+    ICD-10 value sets are periodically updated.

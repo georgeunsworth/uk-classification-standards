@@ -11,6 +11,9 @@ Checks:
 - applies_to is a list drawn from the allowed population tags (may be empty —
   an empty list means the source doesn't confirm applicability either way)
 - use_case is a non-empty list drawn from the allowed use-case tags
+- question is a string or null
+- values is a list of strings or null (null means no compact value set is
+  published by the source — see notes for where the real one lives)
 """
 import sys
 import glob
@@ -20,7 +23,7 @@ import yaml
 REQUIRED_FIELDS = {
     "id", "label", "source", "source_type", "status",
     "last_reviewed", "source_published", "source_url", "notes",
-    "applies_to", "use_case",
+    "applies_to", "use_case", "question", "values",
 }
 VALID_SOURCE_TYPES = {"harmonised-standard", "clinical-dataset", "survey-instrument"}
 VALID_STATUSES = {"current", "under-review", "archived", "superseded"}
@@ -37,6 +40,18 @@ def check_tag_list(value, field, allowed, entry_id, errors, allow_empty):
     unknown = set(value) - allowed
     if unknown:
         errors.append(f"{entry_id}: {field} has unknown tag(s) {sorted(unknown)}")
+
+
+def check_optional_string(value, field, entry_id, errors):
+    if value is not None and not isinstance(value, str):
+        errors.append(f"{entry_id}: {field} must be a string or null, got {value!r}")
+
+
+def check_optional_string_list(value, field, entry_id, errors):
+    if value is None:
+        return
+    if not isinstance(value, list) or not all(isinstance(v, str) for v in value):
+        errors.append(f"{entry_id}: {field} must be a list of strings or null, got {value!r}")
 
 
 def check_date(value, field, entry_id, errors):
@@ -85,6 +100,9 @@ def validate_file(path):
             entry.get("use_case"), "use_case", VALID_USE_CASE_TAGS,
             entry_id, errors, allow_empty=False,
         )
+
+        check_optional_string(entry.get("question"), "question", entry_id, errors)
+        check_optional_string_list(entry.get("values"), "values", entry_id, errors)
 
         url = entry.get("source_url", "")
         if not (isinstance(url, str) and url.startswith("http")):

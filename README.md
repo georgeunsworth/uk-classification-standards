@@ -54,6 +54,12 @@ Each domain file is a list of entries with this shape:
   applies_to: [enum]           # populations the source *confirms* this covers — see below.
                                 # empty list means not confirmed either way, not "no"
   use_case: [enum]              # design context(s) this entry fits — see below
+  question: string | null      # exact wording used to elicit this classification, quoted
+                                # verbatim from source. null if not a single-question standard
+                                # (e.g. a clinical dataset) or if no standard exists
+  values: [string] | null       # the actual selectable response options, verbatim from
+                                # source. null if the source doesn't publish a compact,
+                                # embeddable list — see notes for where the real one lives
   notes: string                # gaps, caveats, "no preferred standard exists" etc.
 ```
 

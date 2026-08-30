@@ -169,6 +169,45 @@
   .tag.unspecified {
     font-style: italic;
   }
+  .question {
+    font-style: italic;
+    color: var(--text-muted);
+    margin: 0.5rem 0 0.3rem;
+  }
+  .values-block {
+    margin: 0.3rem 0 0.8rem;
+  }
+  .values-block ul {
+    margin: 0.35rem 0 0;
+    padding-left: 1.2rem;
+  }
+  .values-head {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+  .values-head strong {
+    font-size: 0.85rem;
+  }
+  .copy-btn {
+    font: inherit;
+    font-size: 0.75rem;
+    padding: 0.15rem 0.55rem;
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    background: var(--surface);
+    color: var(--text);
+    cursor: pointer;
+  }
+  .copy-btn:hover {
+    border-color: var(--accent);
+  }
+  .no-values {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    font-style: italic;
+    margin: 0.3rem 0 0.8rem;
+  }
   .empty, .error {
     color: var(--text-muted);
     padding: 2rem 0;
@@ -276,6 +315,22 @@
       .map((u) => `<span class="tag${u === "no-standard-gap" ? " gap" : ""}">${escapeHtml(USE_CASE_LABELS[u] || u)}</span>`)
       .join("");
 
+    const questionHtml = entry.question
+      ? `<p class="question">“${escapeHtml(entry.question)}”</p>`
+      : "";
+
+    const valuesHtml = entry.values && entry.values.length
+      ? `
+        <div class="values-block">
+          <div class="values-head">
+            <strong>Response options</strong>
+            <button type="button" class="copy-btn" data-copy-id="${escapeHtml(entry.id)}">Copy</button>
+          </div>
+          <ul>${entry.values.map((v) => `<li>${escapeHtml(v)}</li>`).join("")}</ul>
+        </div>
+      `
+      : `<p class="no-values">No compact value set published by the source — see notes and primary source.</p>`;
+
     return `
       <article class="entry">
         <div class="entry-head">
@@ -284,6 +339,8 @@
         </div>
         <p class="meta">${escapeHtml(entry.source)} · last reviewed ${escapeHtml(lastReviewed)} · source published ${escapeHtml(published)}</p>
         <div class="tags">${populationTags}${useCaseTags}</div>
+        ${questionHtml}
+        ${valuesHtml}
         <p class="notes">${escapeHtml(entry.notes)}</p>
         <div class="entry-foot">
           <code>${escapeHtml(entry.source_type)}</code>
@@ -347,6 +404,21 @@
       countEl.textContent = "";
     }
   }
+
+  entriesEl.addEventListener("click", async (event) => {
+    const btn = event.target.closest(".copy-btn");
+    if (!btn) return;
+    const entry = allEntries.find((e) => e.id === btn.dataset.copyId);
+    if (!entry || !entry.values) return;
+    try {
+      await navigator.clipboard.writeText(entry.values.join("\n"));
+      const original = btn.textContent;
+      btn.textContent = "Copied!";
+      setTimeout(() => { btn.textContent = original; }, 1500);
+    } catch {
+      btn.textContent = "Copy failed";
+    }
+  });
 
   searchEl.addEventListener("input", applyFilters);
   statusEl.addEventListener("change", applyFilters);
