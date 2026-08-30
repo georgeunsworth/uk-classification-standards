@@ -1,0 +1,257 @@
+# GSS Harmonised Standards for demographic fields commonly asked on UK referral/intake forms,
+# beyond mental health. See ../README.md for schema. Verify against source_url before relying
+# on any entry — several of these are marked "under development" by their own publisher.
+
+- id: ons-ethnicity-standard
+  label: Ethnicity harmonised standard
+  source: ONS / GSS Harmonisation Team
+  source_type: harmonised-standard
+  status: current
+  last_reviewed: 2026-08-30
+  source_published: 2011-08-01
+  source_url: https://analysisfunction.civilservice.gov.uk/policy-store/ethnicity-harmonised-standard/
+  applies_to: [adults, children-young-people]
+  use_case: [demographic-survey]
+  question: >-
+    What is your ethnic group? (Choose one option that best describes your ethnic group or
+    background)
+  values:
+    - "English/Welsh/Scottish/Northern Irish/British"
+    - "Irish"
+    - "Gypsy or Irish Traveller"
+    - "Any other White background"
+    - "White and Black Caribbean"
+    - "White and Black African"
+    - "White and Asian"
+    - "Any other Mixed/Multiple ethnic background"
+    - "Indian"
+    - "Pakistani"
+    - "Bangladeshi"
+    - "Chinese"
+    - "Any other Asian background"
+    - "African"
+    - "Caribbean"
+    - "Any other Black/African/Caribbean background"
+    - "Arab"
+    - "Any other ethnic group"
+  notes: >
+    18 England response categories, grouped in the source under White / Mixed-Multiple /
+    Asian-Asian British / Black-African-Caribbean-Black British / Other ethnic group — this
+    tracker lists them flat; see source_url for the grouping and the separate Scotland/Wales/NI
+    variants. Under active review since March 2022 (Inclusive Data Taskforce-driven) but the
+    source explicitly says to keep using this standard for existing collections until the review
+    concludes — treat as current, not archived. Source states the question was "tested and
+    designed for use with adult respondents aged 16 and over"; for younger children it says
+    "guidance from parents/guardians may be needed" — looser wording than the formal proxy-response
+    rule used by some other standards, worth re-checking against source_url if the exact mechanism
+    matters for your form. The same page also states, of language as a related concept: "currently
+    a GSS wide harmonised standard is not offered due to a lack of user need" — see the
+    ons-language-standard-gap entry below.
+
+- id: ons-disability-equality-act-2010
+  label: Measuring disability for the Equality Act 2010 (harmonisation guidance)
+  source: ONS / GSS Harmonisation Team
+  source_type: harmonised-standard
+  status: current
+  last_reviewed: 2026-08-30
+  source_published: 2019-06-25
+  source_url: https://analysisfunction.civilservice.gov.uk/policy-store/measuring-disability-for-the-equality-act-2010/
+  applies_to: [adults, children-young-people]
+  use_case: [demographic-survey]
+  question: >-
+    Does your condition or illness/do any of your conditions or illnesses reduce your ability to
+    carry out day-to-day activities?
+  values:
+    - "Yes, a lot"
+    - "Yes, a little"
+  notes: >
+    This is the second half of the official Equality Act 2010 "disabled person" test — a
+    respondent only qualifies as disabled under the Act if they answer affirmatively to BOTH this
+    question AND the long-lasting-conditions question already tracked as the
+    ons-long-lasting-health-conditions entry in the mental-health domain. Only the two affirmative
+    categories were confirmed from the source; a "No"/negative category presumably also exists but
+    wasn't confirmed verbatim here — check source_url for the complete option set before using this
+    in a live eligibility check. Updated 26 Apr 2023 as part of a 5-yearly Inclusive Data Taskforce
+    review (draft revised questions were expected by 2025 — re-check currency). Source confirms
+    direct response for respondents aged 16 and over, proxy response permitted for under-16s and for
+    respondents too ill to self-respond, and translator assistance for non-English speakers.
+
+- id: ons-sex-standard-gap
+  label: Sex harmonisation guidance (no current standard)
+  source: ONS / GSS Harmonisation Team
+  source_type: harmonised-standard
+  status: under-review
+  last_reviewed: 2026-08-30
+  source_published: 2019-09-04
+  source_url: https://analysisfunction.civilservice.gov.uk/policy-store/sex-harmonisation-guidance/
+  applies_to: []  # no standard exists to confirm a population against
+  use_case: [no-standard-gap]
+  question: null
+  values: null
+  notes: >
+    IMPORTANT: the source states plainly "There is not currently a harmonised standard for
+    collecting data on sex." Historical census categories ("Female"/"Male") are referenced on the
+    page for context only, not as a current recommendation. The GSS Harmonisation team is
+    conducting cognitive/usability testing and expects to publish new guidance and standards for
+    two distinct approaches — biological sex (sex at birth) and certificated sex (sex at birth or as
+    modified by a Gender Recognition Certificate) — in Summer 2026; this work was accelerated
+    following the UK Supreme Court's April 2025 ruling on sex under the Equality Act 2010. Anyone
+    needing a legally defensible sex field on a form right now should treat this as an acknowledged,
+    active gap, not an oversight on this repo's part, and check source_url directly given how live
+    this is.
+
+- id: ons-gender-identity-standard-archived
+  label: Gender identity data harmonised standard (archived)
+  source: ONS / GSS Harmonisation Team
+  source_type: harmonised-standard
+  status: archived
+  last_reviewed: 2026-08-30
+  source_published: 2020-07-16
+  source_url: https://analysisfunction.civilservice.gov.uk/policy-store/gender-identity/
+  applies_to: [adults]
+  use_case: [demographic-survey, no-standard-gap]
+  question: "Is the gender you identify with the same as your sex registered at birth?"
+  values:
+    - "Yes"
+    - "No, enter gender identity"
+    - "Prefer not to say"
+  notes: >
+    IMPORTANT: the source carries an explicit archival notice: "Following the publication of an
+    updated GSS Harmonisation workplan in December 2024, this guidance is outdated and has been
+    archived." Nothing has yet superseded it, so this entry is tagged both as a demographic-survey
+    question (what the standard said while live, in case that's still useful context) AND as a
+    no-standard-gap (there is currently no endorsed gender identity standard to rely on). Confirmed
+    for respondents aged 16 and over; no under-16 provision was stated, so children-young-people is
+    left unconfirmed rather than assumed. See also the ons-sex-standard-gap entry — both sex and
+    gender identity data collection are unsettled at the same time as of this review.
+
+- id: ons-sexual-orientation-standard
+  label: Sexual orientation harmonised standard
+  source: ONS / GSS Harmonisation Team
+  source_type: harmonised-standard
+  status: current
+  last_reviewed: 2026-08-30
+  source_published: 2019-04-17
+  source_url: https://analysisfunction.civilservice.gov.uk/policy-store/sexual-orientation/
+  applies_to: [adults]
+  use_case: [demographic-survey]
+  question: "Which of the following options best describes how you think of yourself?"
+  values:
+    - "Heterosexual or Straight"
+    - "Gay or Lesbian"
+    - "Bisexual"
+    - "Other"
+    - "Prefer not to say"
+  notes: >
+    This is the self-completion mode wording and option set; face-to-face and telephone interview
+    modes differ and mark some categories (e.g. don't know/refusal) as spontaneous-only rather than
+    offered — check source_url for the mode you're actually replicating before copying this into a
+    self-completion web form vs. an interview script. Confirmed "to be asked to all respondents aged
+    16 and over"; no under-16 provision was stated, so children-young-people is left unconfirmed. The
+    source itself warns against altering wording or option order, since that affects comparability
+    with ONS benchmarks. A review was flagged as starting in early 2023; no confirmation was found
+    that it concluded — treat as current but due for review, the same pattern as this repo's
+    impairment-standard entry.
+
+- id: ons-religion-standard
+  label: Religion harmonised standard
+  source: ONS / GSS Harmonisation Team
+  source_type: harmonised-standard
+  status: current
+  last_reviewed: 2026-08-30
+  source_published: 2020-09-10
+  source_url: https://analysisfunction.civilservice.gov.uk/policy-store/religion/
+  applies_to: []  # source states no age scope either way
+  use_case: [demographic-survey]
+  question: "What is your religion?"
+  values:
+    - "No religion"
+    - "Christian"
+    - "Buddhist"
+    - "Hindu"
+    - "Jewish"
+    - "Muslim"
+    - "Sikh"
+    - "Any other religion (please describe)"
+  notes: >
+    England response categories shown; Scotland lists specific Christian denominations separately
+    (Church of Scotland, Roman Catholic, Other Christian) rather than grouping them, and Northern
+    Ireland breaks Christian denominations down further still (Catholic, Presbyterian, Church of
+    Ireland, Methodist, Baptist, Free Presbyterian, Brethren) — check source_url for the nation you
+    need. The source does not state any age scope for this question. It recommends asking this
+    alongside ethnicity and national identity, in that order, for comparability — worth flagging if
+    a form only includes one of the three.
+
+- id: ons-national-identity-standard
+  label: National identity harmonised standard
+  source: ONS / GSS Harmonisation Team
+  source_type: harmonised-standard
+  status: current
+  last_reviewed: 2026-08-30
+  source_published: 2021-04-28
+  source_url: https://analysisfunction.civilservice.gov.uk/policy-store/national-identity-harmonised-standard/
+  applies_to: []  # source states no age scope either way
+  use_case: [demographic-survey]
+  question: "How would you describe your national identity? Please choose all that apply."
+  values:
+    - "British"
+    - "English"
+    - "Welsh"
+    - "Scottish"
+    - "Northern Irish"
+    - "Other (please describe)"
+  notes: >
+    England response categories shown (multi-select). Distinct from ethnicity — this captures
+    self-identified nationality/belonging, not ethnic background. Reviewed and updated 4 April 2022
+    to align with the 2021/2022 censuses, including an adjustment to response option order for
+    England and Scotland. The source does not state any age scope for this question.
+
+- id: ons-tenure-standard
+  label: Tenure harmonised standard
+  source: ONS / GSS Harmonisation Team
+  source_type: harmonised-standard
+  status: current
+  last_reviewed: 2026-08-30
+  source_published: 2017-06-01  # "June 2017" in source; exact day unconfirmed
+  source_url: https://analysisfunction.civilservice.gov.uk/policy-store/tenure/
+  applies_to: []  # asked at household level, not individually age-scoped
+  use_case: [demographic-survey]
+  question: "Do you (or your household) own or rent this accommodation?"
+  values:
+    - "Own it outright"
+    - "Buying it with the help of a mortgage/loan"
+    - "Part own and part rent (shared ownership)"
+    - "Rent it"
+    - "Live here rent-free"
+    - "Squatting"
+  notes: >
+    Version 5.6 (June 2017), ONS, Crown Copyright — confirmed directly from the underlying PDF
+    linked at source_url. Asked of the whole household (of the "Household Reference Person"), not
+    age-scoped to an individual respondent, which is why applies_to is left empty rather than
+    guessing adults/children. Several follow-up questions exist in the full standard (an ownership
+    check, job-based-accommodation flag, and landlord-type question) not reproduced here — see
+    source_url for the complete question set. The policy-store page itself is marked "under
+    development" (a stakeholder consultation on updating it), though the underlying document is
+    unchanged since 2017 — relevant to homelessness/housing-related referral forms needing standard
+    tenure categories rather than ad hoc ones.
+
+- id: ons-language-standard-gap
+  label: Main/preferred language (no GSS-wide harmonised standard)
+  source: ONS / GSS Harmonisation Team
+  source_type: harmonised-standard
+  status: under-review
+  last_reviewed: 2026-08-30
+  source_published: 2011-08-01  # this statement lives within the ethnicity standard page, not a dedicated page
+  source_url: https://analysisfunction.civilservice.gov.uk/policy-store/ethnicity-harmonised-standard/
+  applies_to: []  # no standard exists to confirm a population against
+  use_case: [no-standard-gap]
+  question: null
+  values: null
+  notes: >
+    IMPORTANT: this isn't a dedicated standard with its own page — it's a confirmed gap stated
+    within the ethnicity harmonised standard's own page: "Language is another concept that is often
+    associated with ethnicity, religion and national identity...currently a GSS wide harmonised
+    standard is not offered due to a lack of user need." Recorded here as its own entry (rather than
+    only as a footnote on ethnicity) because "what's the preferred/main language field" is a common,
+    separate need on referral forms — this tracker flags it as an open gap rather than silently
+    having no entry for it at all.
