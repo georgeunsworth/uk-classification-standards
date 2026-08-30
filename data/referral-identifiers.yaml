@@ -1,0 +1,121 @@
+# NHS referral/administrative and safeguarding data standards commonly needed on a referral
+# form, alongside the demographic and mental-health domains. See ../README.md for schema.
+# Unlike the other two domains, none of these are survey questions — they're identifiers and
+# coded flags, so `question` is null throughout; only the consent gap contributes to a
+# question-centric view (as a "known gap," not a question).
+
+- id: nhs-number
+  label: NHS Number
+  source: NHS England / NHS Data Model and Dictionary
+  source_type: clinical-dataset
+  status: current
+  last_reviewed: 2026-08-30
+  source_published: null
+  source_url: https://www.datadictionary.nhs.uk/data_elements/nhs_number.html
+  applies_to: []  # see notes — indirect evidence only, not an explicit population statement
+  use_case: [clinical-record]
+  question: null  # an identifier field, not a survey question
+  values: null  # free-form 10-digit identifier, not a categorical value set
+  notes: >
+    Source definition, quoted directly: "The NHS NUMBER, the primary identifier of a PERSON, is a
+    unique identifier for a PATIENT within the NHS in England and Wales." Format: n10 (10 numeric
+    digits). The page itself doesn't state an explicit age scope, but NHS NUMBER appears as a
+    referenced data element across birth-episode care-record types and baby-specific patient
+    address elements (e.g. "PATIENT USUAL ADDRESS (STRUCTURED (BABY))") — consistent with it
+    applying across all ages including newborns, though that's an inference from cross-references
+    on the page rather than an explicit population statement, hence applies_to is left empty. The
+    canonical patient identifier for tying a referral to a single NHS record — without it,
+    matching/duplicate-avoidance across services is unreliable.
+
+- id: nhs-gp-practice-patient-registration
+  label: General Medical Practice (Patient Registration)
+  source: NHS England / NHS Data Model and Dictionary
+  source_type: clinical-dataset
+  status: current
+  last_reviewed: 2026-08-30
+  source_published: null
+  source_url: https://www.datadictionary.nhs.uk/data_elements/general_medical_practice__patient_registration_.html
+  applies_to: []
+  use_case: [clinical-record]
+  question: null
+  values: null
+  notes: >
+    Source definition, quoted directly: "GENERAL MEDICAL PRACTICE (PATIENT REGISTRATION) is the
+    ORGANISATION CODE of the GP Practice that the PATIENT is registered with," supplied by the NHS
+    Prescription Services. Default codes exist for a patient not currently registered but eligible
+    to be ("V81997") and for cases where registration status can't be determined ("V81998"). A
+    similarly-named but distinct element, "GENERAL MEDICAL PRACTICE CODE (PATIENT REGISTRATION)"
+    (without "CODE" moved), also currently exists live in the Dictionary with a slightly different
+    format spec (fixed an6, vs. this element's min an6/max an8) — neither page states that one
+    supersedes the other, so don't assume it; check source_url for the current recommended element
+    name before use. Needed on a referral form for continuity of care and correspondence routing.
+
+- id: nhs-safeguarding-concern-snomed
+  label: Safeguarding Concern (SNOMED CT)
+  source: NHS England / NHS Data Model and Dictionary
+  source_type: clinical-dataset
+  status: current
+  last_reviewed: 2026-08-30
+  source_published: null
+  source_url: https://www.datadictionary.nhs.uk/data_elements/safeguarding_concern__snomed_ct_.html
+  applies_to: [adults, children-young-people]
+  use_case: [clinical-record]
+  question: null
+  values: null  # a SNOMED CT coded concept, not a fixed short list
+  notes: >
+    Source definition, quoted directly: used "to identify an unresolved issue or concern regarding
+    adult and child safeguarding that requires communication to another ORGANISATION or care
+    agency" — explicitly confirmed to span both adult and child safeguarding. SNOMED CT Refset ID
+    999002381000000108, Refset FSN "Safeguarding issues simple reference set (foundation metadata
+    concept)". This is the closest thing to an official coded safeguarding risk-flag standard —
+    directly relevant to any safeguarding question on a referral form. Compare with the narrower,
+    child-only nhs-safeguarding-vulnerability-indicator entry below.
+
+- id: nhs-safeguarding-vulnerability-indicator
+  label: Safeguarding Vulnerability Factors Indicator
+  source: NHS England / NHS Data Model and Dictionary
+  source_type: clinical-dataset
+  status: current
+  last_reviewed: 2026-08-30
+  source_published: null
+  source_url: https://www.datadictionary.nhs.uk/data_elements/safeguarding_vulnerability_factors_indicator.html
+  applies_to: [children-young-people]  # explicitly child-safeguarding-scoped, not adult
+  use_case: [clinical-record]
+  question: null
+  values:
+    - "Yes - Child Safeguarding vulnerability factors present"
+    - "No - Child Safeguarding vulnerability factors not present"
+  notes: >
+    National codes quoted directly from source: Y = "Yes - Child Safeguarding vulnerability
+    factors present", N = "No - Child Safeguarding vulnerability factors not present". Used within
+    the Community Services Data Set. Explicitly scoped to child safeguarding only, unlike the
+    broader adult-and-child nhs-safeguarding-concern-snomed entry above — don't conflate the two;
+    check which scope your referral pathway actually needs.
+
+- id: nhs-consent-gap
+  label: Consent to referral/treatment (no single official standard)
+  source: NHS England
+  source_type: clinical-dataset
+  status: under-review
+  last_reviewed: 2026-08-30
+  source_published: null
+  source_url: https://www.england.nhs.uk/long-read/consent-to-using-and-sharing-patient-information/
+  applies_to: []
+  use_case: [no-standard-gap]
+  question: null
+  values: null
+  notes: >
+    IMPORTANT: there is no single official coded "consent to referral/treatment" data standard in
+    the NHS Data Model and Dictionary — consent indicators exist only per specific dataset or
+    registry (e.g. a "Patient Consent Obtained Indicator" defined separately for care-professional
+    contact and, separately again, for the National Joint Registry), not as one general-purpose,
+    reusable field. Recorded here as a gap for the same reason the archived mental-health review and
+    the sex/language/gender-identity gaps are recorded: a designer building a referral form needing
+    a consent field will not find one official coded answer, and should treat that as a real
+    constraint rather than a research failure. The linked source_url (NHS England's consent policy
+    long-read) sets out the underlying legal/policy requirements for informed consent under UK
+    GDPR/DPA 2018 (controller identity, purpose, data scope, right to withdraw) — useful context,
+    but it's policy guidance, not a coded classification standard the way other entries here are.
+    NHS Digital's Data Access Request Service (DARS) also publishes GDPR consent guidance, referenced
+    for further context though not used as source_url here (its URL redirects and isn't a stable
+    direct citation).
