@@ -33,9 +33,12 @@
     <select id="use-case-filter" aria-label="Filter by use case">
       <option value="">Any use case</option>
       <option value="demographic-survey">Demographic survey</option>
-      <option value="clinical-record">Clinical record</option>
       <option value="no-standard-gap">No standard exists (gap)</option>
     </select>
+    <!-- "Clinical record" is deliberately omitted here: every clinical-record entry is an
+         identifier/coded flag with no `question`, and none are tagged no-standard-gap, so
+         this filter could never match anything on this page. It's still offered on
+         index.html, where it's meaningful. -->
   </div>
 
   <p class="count" id="count"></p>
