@@ -45,6 +45,7 @@ data/
   demographics.yaml            # GSS harmonised demographic standards
   referral-identifiers.yaml     # NHS/safeguarding referral-data standards
   screening-tools.yaml           # validated clinical screening instruments (not OGL — see below)
+  access-needs.yaml               # NHS access/communication-need and reasonable-adjustment flags
 index.html / questions.html     # the two views, sharing app.js + style.css
 CHANGELOG.md                     # dated log of source revisions we've caught
 ```
@@ -159,9 +160,21 @@ some but not others (`scripts/validate.py` enforces this).
   gap for consent (no single official coded consent standard exists — only per-dataset indicators).
 - **Screening tools** (`data/screening-tools.yaml`) — validated clinical screening instruments
   commonly embedded in referral/intake forms: PHQ-9 (depression) and GAD-7 (anxiety), both
-  confirmed public domain. The only non-OGL domain in this repo — see `licence_status` above.
-  Other commonly-used tools (SDQ, ORS/SRS, WEMWBS, RCADS) were researched but deliberately not
-  added; see Roadmap.
+  confirmed public domain, added in full with items/scoring/severity bands. The only non-OGL
+  domain in this repo — see `licence_status` above. SDQ, ORS, SRS, WEMWBS, and RCADS are also
+  included, but each carries real copyright/licensing restrictions (a paid licence, a
+  no-digital-reproduction clause, or an unclear "free but check permissions" status), so
+  they're `licence_status: restricted` reference-only entries — name, source, and link, with
+  no reproduced content; see Roadmap.
+- **Access needs** (`data/access-needs.yaml`, 3 entries) — NHS standards for identifying, coding,
+  and sharing a person's information/communication support needs and reasonable adjustments,
+  distinct from the disability-status question (demographics) and impairment-type question (mental
+  health) already tracked elsewhere: the Accessible Information Standard (DAPB1605), the Reasonable
+  Adjustment Digital Flag (DAPB4019) at category level, and that flag's ~94 granular, form-ready
+  answer codes (BSL interpreter, Easyread, contact by email, etc.) for the "if so, what" half of an
+  access-needs question. None publishes one fixed survey question — all are coded flags — so
+  `question` is `null` throughout; population scope (`applies_to`) is left empty on all three
+  because no source explicitly confirms whether it covers children as well as adults.
 
 ## Update cadence
 
@@ -169,7 +182,7 @@ v1: manually reviewed against source publications on an ad hoc basis, logged in 
 
 ## Sources & licensing
 
-Government content referenced here is published under the [Open Government Licence](https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/). The `screening-tools` domain is the one exception — third-party clinical content, confirmed public domain rather than OGL (see each entry's `licence_status`/`licence_notes`). Each entry links back to its primary source — always verify against that source before use in a live service. This repo's own structure, schema, and code are [MIT licensed](LICENSE).
+Government content referenced here is published under the [Open Government Licence](https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/). The `screening-tools` domain is the one exception — third-party clinical content, not OGL. Two entries (PHQ-9, GAD-7) are confirmed public domain and reproduced in full; the rest (SDQ, ORS, SRS, WEMWBS, RCADS) carry real reproduction restrictions and are `restricted`/reference-only (see each entry's `licence_status`/`licence_notes`). Each entry links back to its primary source — always verify against that source before use in a live service. This repo's own structure, schema, and code are [MIT licensed](LICENSE).
 
 ## Roadmap
 
@@ -179,11 +192,14 @@ Government content referenced here is published under the [Open Government Licen
   (by standard, by question), both filterable by status, population (`applies_to`), and use case
 - [x] Clinical screening/outcome tools — PHQ-9 and GAD-7 added as the `screening-tools`
   domain (both confirmed public domain, with full items/scoring/severity bands, not just a
-  citation link). Other commonly-used tools (SDQ, ORS/SRS, WEMWBS, RCADS) were researched but
-  deliberately left out: each carries real copyright/licensing restrictions (a paid licence, a
-  no-digital-reproduction clause, or an unclear "free but check permissions" status) that need
-  individual handling — see `licence_status: restricted` in the schema, which anticipates
-  adding these later as reference-only (name + link, no reproduced content)
+  citation link). SDQ, ORS, SRS, WEMWBS, and RCADS were also researched: each carries real
+  copyright/licensing restrictions (a paid licence, a no-digital-reproduction clause, or an
+  unclear "free but check permissions" status), individually cited in each entry's
+  `licence_notes` — so they're added as `licence_status: restricted` reference-only entries
+  (name, source, and link, no reproduced content)
+- [x] Access needs / reasonable adjustments domain — added as `access-needs.yaml`: the NHS
+  Accessible Information Standard (DAPB1605), the Reasonable Adjustment Digital Flag (DAPB4019),
+  and that flag's granular communication/access-need answer codes
 - [ ] Automated change-detection against source publication pages
 - [ ] Structured diffing between standard revisions
 

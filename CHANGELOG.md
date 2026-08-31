@@ -64,3 +64,46 @@ dated by when the change was caught, not necessarily when the source changed.
   citation link, since that's what makes an entry actually usable for building a form. Other
   commonly-used tools (SDQ, ORS/SRS, WEMWBS, RCADS) were researched but deliberately left
   out — each carries real copyright/licensing restrictions; see README roadmap.
+- Added the 5 previously-deferred screening tools as `licence_status: restricted`
+  reference-only entries in `screening-tools.yaml`: SDQ (Youthinmind — free paper
+  photocopying only, electronic reproduction requires a paid licence), ORS and SRS (Duncan &
+  Miller — free individual paper-and-pencil use only, "NO ELECTRONIC OR DIGITAL USE OF THE
+  SCALES IS PERMITTED," tiered paid licences for organisations/digital use), WEMWBS (NHS
+  Health Scotland/Warwick/Edinburgh — tiered commercial/NHS/non-commercial licence portal),
+  and RCADS (Chorpita & Spence — free for individual clinical/educational use, written
+  permission required for translations, derivatives, or EHR/digital inclusion). Each entry
+  has `question`/`values`/`items`/`response_scale`/`scoring` left null and cites the specific
+  rights holder's language in `licence_notes`, per the CONTRIBUTING.md rule. Added a
+  `scripts/validate.py` check enforcing that `restricted` entries stay reference-only (all
+  five of those fields null), and gave `app.js` a distinct "reference only" message for
+  restricted entries instead of the generic "no compact value set" text used for sources that
+  simply don't publish a list.
+- `questions.html`: added a "Licensed instruments — not reproduced here" subsection per
+  domain (alongside the existing "Known gaps" one) so restricted entries are still visible on
+  the by-question view — as name, source, licence tag, and link only, never as reproduced
+  question/item content. Re-added the "Restricted" option to that page's licence filter, now
+  that it's meaningful there.
+- New `access-needs.yaml` domain (2 entries): the Accessible Information Standard (DAPB1605)
+  and the Reasonable Adjustment Digital Flag (DAPB4019) — NHS standards for identifying, coding,
+  and sharing a person's information/communication support needs and reasonable adjustments,
+  filling a real gap this repo had: disability *status* (demographics.yaml) and impairment
+  *type* (mental-health.yaml's ons-impairment-standard) were both tracked, but not the
+  administrative flags a service uses once a communication/access need is identified. Neither
+  source publishes one fixed survey question — both are coded flags recorded via SNOMED CT/Read
+  v2/CTV3 — so `question` is `null` on both entries, matching the referral-identifiers.yaml
+  pattern for administrative flags. `applies_to` left empty on both: DAPB1605's own scope
+  language ("NHS and adult social care services") doesn't resolve whether "adult" restricts the
+  whole standard or only its social-care leg, and DAPB4019's page states no explicit age scope
+  either way — left as a recorded gap rather than guessed, per this repo's existing discipline.
+- Added a third `access-needs.yaml` entry, `nhs-reasonable-adjustment-flag-need-codes`: the
+  ~94 granular, form-ready answer options behind DAPB4019's 5 communication-relevant categories
+  (BSL interpreter, Easyread, contact by email, hearing loop, etc.) — the actual "if so, what"
+  values for an access-needs question, as opposed to the category-level names already captured
+  in the DAPB4019 entry above. Extracted and cross-checked directly against the live page's raw
+  HTML (not a summarised fetch) to avoid transcription error on a list this size. Deliberately
+  excludes that same source's category 6 (~190 community-language-interpreter codes, left out
+  for size, source_url points to the full list) and categories 7-11 (broader care/environment
+  reasonable-adjustment categories, out of scope for "access needs" specifically). Licence note
+  is more specific than this repo's usual OGL boilerplate: NHS England Digital's terms carve out
+  "Information Standards" content as OGL-for-copying but not OGL-for-adaptation, which matters
+  here because every value is a verbatim SNOMED CT description, not a paraphrase.

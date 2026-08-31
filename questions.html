@@ -10,7 +10,7 @@
 <main>
   <header>
     <h1>Questions & known gaps</h1>
-    <p>The same tracked standards, organised as a service designer actually needs them: by the question you're trying to ask, grouped by domain, with source, currency, and licence shown for each. Only standards that publish an actual question or item (including multi-item screening instruments like PHQ-9) appear here — administrative identifiers and coded flags (e.g. NHS Number) still live on the standards view. Entries with no usable standard are listed as known gaps rather than silently omitted.</p>
+    <p>The same tracked standards, organised as a service designer actually needs them: by the question you're trying to ask, grouped by domain, with source, currency, and licence shown for each. Only standards that publish an actual question or item (including multi-item screening instruments like PHQ-9) appear here — administrative identifiers and coded flags (e.g. NHS Number) still live on the standards view. Entries with no usable standard are listed as known gaps rather than silently omitted. Instruments that exist but carry real reproduction restrictions (e.g. SDQ, RCADS) are listed too, by name and link only — see "Licensed instruments" under each domain.</p>
     <p class="repo-link"><a href="https://github.com/georgeunsworth/uk-classification-standards">View the source repo on GitHub</a></p>
     <nav class="view-nav"><a href="index.html">← Switch to the by-standard view</a></nav>
   </header>
@@ -44,11 +44,8 @@
       <option value="">Any licence</option>
       <option value="ogl">OGL</option>
       <option value="public-domain">Public domain</option>
+      <option value="restricted">Restricted — reference only</option>
     </select>
-    <!-- "Restricted" is omitted here for the same reason as "Clinical record": no
-         restricted-licence entries exist in this repo yet (the screening tools that would
-         be restricted were deliberately left out — see README roadmap), so the option
-         would always be empty. Add it back if/when one is. -->
   </div>
 
   <p class="count" id="count"></p>
@@ -81,13 +78,21 @@
   function questionHeading(e) {
     return e.question || (e.response_scale && e.response_scale.instruction);
   }
+  // A restricted entry has no question/items to show (reference-only), but it's still a
+  // real, named instrument worth surfacing here so it isn't invisible on the by-question
+  // view — just without any reproduced content (renderEntryCard already handles this,
+  // showing the licence tag, notes, and source link instead of items/values).
+  function isLicensedReferenceOnly(e) {
+    return e.licence_status === "restricted";
+  }
 
   function renderDomainSection(meta, filteredEntries) {
     const domainEntries = filteredEntries.filter((e) => e._domain === meta.domain);
     const questions = domainEntries.filter(isQuestionLike);
     const gaps = domainEntries.filter((e) => (e.use_case || []).includes("no-standard-gap"));
+    const licensed = domainEntries.filter(isLicensedReferenceOnly);
 
-    if (questions.length === 0 && gaps.length === 0) return "";
+    if (questions.length === 0 && gaps.length === 0 && licensed.length === 0) return "";
 
     const questionsHtml = questions.length
       ? questions.map((e) => renderEntryCard(e, { heading: questionHeading(e), headingTag: "h3" })).join("")
@@ -102,11 +107,21 @@
       `
       : "";
 
+    const licensedHtml = licensed.length
+      ? `
+        <div class="domain-licensed">
+          <h3 class="licensed-heading">Licensed instruments — not reproduced here</h3>
+          ${licensed.map((e) => renderEntryCard(e, { headingTag: "h3" })).join("")}
+        </div>
+      `
+      : "";
+
     return `
       <section class="domain-section">
         <h2 class="domain-heading">${escapeHtml(meta.label)}</h2>
         ${questionsHtml}
         ${gapsHtml}
+        ${licensedHtml}
       </section>
     `;
   }
@@ -122,14 +137,15 @@
 
     const filtered = allEntries.filter((e) => matchesFilters(e, filters));
 
-    const isEligible = (e) => isQuestionLike(e) || (e.use_case || []).includes("no-standard-gap");
+    const isEligible = (e) =>
+      isQuestionLike(e) || (e.use_case || []).includes("no-standard-gap") || isLicensedReferenceOnly(e);
     const eligible = filtered.filter(isEligible);
-    countEl.textContent = `${eligible.length} of ${allEntries.filter(isEligible).length} questions & gaps`;
+    countEl.textContent = `${eligible.length} of ${allEntries.filter(isEligible).length} questions, gaps & licensed instruments`;
 
     const sections = DOMAIN_FILES.map((meta) => renderDomainSection(meta, filtered)).join("");
     entriesEl.innerHTML = sections.trim()
       ? sections
-      : '<p class="empty">No questions or known gaps match your filters.</p>';
+      : '<p class="empty">No questions, gaps, or licensed instruments match your filters.</p>';
   }
 
   async function loadAll() {

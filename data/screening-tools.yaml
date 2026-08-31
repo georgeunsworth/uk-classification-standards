@@ -3,16 +3,19 @@
 # they're third-party clinical instruments, so licence_status/licence_notes is what makes
 # each entry safe (or not) to reproduce; verify it before copying anything from here.
 #
-# Only PHQ-9 and GAD-7 are included. Other commonly-used tools (SDQ, ORS/SRS, WEMWBS,
-# RCADS) were researched but deliberately left out — each carries real copyright/licensing
-# restriction (paid licences, no-digital-reproduction clauses, or "free but check
-# permissions" caveats) that needs individual handling before anything is added. See
-# README.md roadmap.
+# PHQ-9 and GAD-7 are confirmed public domain and included in full (items/scoring/severity
+# bands). SDQ, ORS, SRS, WEMWBS, and RCADS were researched and each carries real
+# copyright/licensing restrictions (a paid licence, a no-digital-reproduction clause, or an
+# unclear "free but check permissions" status) — see each entry's licence_notes for the
+# specific basis. They're included as reference-only entries: name, source, and link, with
+# question/values/items/response_scale/scoring all null, per licence_status: restricted.
 #
 # These entries use a different shape from the other domains: question/values are null,
 # and the actual content lives in `items` (individually addressable statements — each with
 # its own stable id, so a future form-builder can cite or reuse a single item), a shared
 # `response_scale`, and `scoring` (summing rule + severity bands + any clinical caveats).
+# For restricted, reference-only entries, all of items/response_scale/scoring/question/
+# values stay null — there's nothing reproduced to structure.
 
 - id: phq-9
   label: Patient Health Questionnaire-9 (PHQ-9)
@@ -158,3 +161,162 @@
     found in the sources checked for this entry (unlike PHQ-9, which has the separate PHQ-A) —
     treat applies_to as adults-only until/unless that's confirmed, rather than assuming
     parity with PHQ-9's situation.
+
+- id: sdq
+  label: Strengths and Difficulties Questionnaire (SDQ)
+  source: Robert Goodman / Youthinmind
+  source_type: survey-instrument
+  status: current
+  last_reviewed: 2026-08-31
+  source_published: 1997-01-01  # Goodman R, "The Strengths and Difficulties Questionnaire: A Research Note," J Child Psychol Psychiatry 1997;38:581-586
+  source_url: https://youthinmind.com/copyright/
+  applies_to: [children-young-people]
+  use_case: [screening-instrument]
+  licence_status: restricted
+  licence_notes: >-
+    Quoted from the publisher's own copyright page (youthinmind.com/copyright/): paper
+    versions "can be printed or photocopied without charge by individuals or non-profit
+    organisations" provided those organisations are "not making any charge to families," but
+    "No one except Youthinmind is authorised to create or distribute electronic versions for
+    any purpose" and organisations wanting to do so "may need to pay a license fee." Making
+    or distributing unauthorised translations is also stated to be prohibited without first
+    contacting Youthinmind to arrange authorisation. A classic no-digital-reproduction
+    clause — free paper photocopying for non-charging individuals/non-profits is not the
+    same as free digital reproduction, so this entry is reference-only.
+  question: null
+  values: null
+  items: null
+  response_scale: null
+  scoring: null
+  notes: >
+    The SDQ is a brief behavioural screening questionnaire for children and young people
+    (parent-, teacher-, and self-report versions exist for different age bands, roughly
+    2-17). Full items, response scale, and scoring bands are not reproduced here because of
+    the electronic-reproduction restriction above — see source_url for the current paper
+    versions, permitted uses, and how to request a licence for electronic use.
+
+- id: ors
+  label: Outcome Rating Scale (ORS)
+  source: Barry L. Duncan and Scott D. Miller
+  source_type: survey-instrument
+  status: current
+  last_reviewed: 2026-08-31
+  source_published: 2003-01-01  # Miller SD, Duncan BL, Brown J, Sparks JA, Claud DA, "The Outcome Rating Scale: A preliminary study of the reliability, validity, and feasibility of a brief visual analog measure," Journal of Brief Therapy 2003;2:91-100
+  source_url: https://www.scottdmiller.com/downloadmeasures.html
+  applies_to: [adults]
+  use_case: [screening-instrument]
+  licence_status: restricted
+  licence_notes: >-
+    Quoted from the publisher's own download page (scottdmiller.com/downloadmeasures.html):
+    "A license to use the ORS and SRS in paper and pencil format is available for free to
+    individual practitioners," but "NO ELECTRONIC OR DIGITAL USE OF THE SCALES IS PERMITTED"
+    under that free licence. Organisations and agencies must pay a tiered fee (from $100 for
+    10 or fewer providers up to $2,000+ for larger organisations) for paper-and-pencil use at
+    scale, and electronic/digital use requires a separate licensed system from an authorised
+    vendor. Free individual paper use is not the same as free reproduction here, so this
+    entry is reference-only.
+  question: null
+  values: null
+  items: null
+  response_scale: null
+  scoring: null
+  notes: >
+    The ORS is a brief 4-item visual-analog outcome-tracking measure used session-to-session
+    in therapy, for adults (child variants CORS/Child ORS exist separately and aren't covered
+    by this entry). Not reproduced here because of the digital-reproduction and organisational
+    licensing restrictions above — see source_url for licensing terms and authorised
+    electronic systems.
+
+- id: srs
+  label: Session Rating Scale (SRS)
+  source: Barry L. Duncan and Scott D. Miller
+  source_type: survey-instrument
+  status: current
+  last_reviewed: 2026-08-31
+  source_published: 2003-01-01  # Duncan BL, Miller SD, Sparks JA, et al., "The Session Rating Scale: Preliminary psychometric properties of a 'working' alliance measure," Journal of Brief Therapy 2003;3:3-12
+  source_url: https://www.scottdmiller.com/downloadmeasures.html
+  applies_to: [adults]
+  use_case: [screening-instrument]
+  licence_status: restricted
+  licence_notes: >-
+    Same licensing regime and source page as the ORS entry above: "A license to use the ORS
+    and SRS in paper and pencil format is available for free to individual practitioners,"
+    but "NO ELECTRONIC OR DIGITAL USE OF THE SCALES IS PERMITTED" under that free licence,
+    with tiered paid licences required for organisational paper-and-pencil use or authorised
+    electronic systems for digital use. Reference-only for the same reason as ORS.
+  question: null
+  values: null
+  items: null
+  response_scale: null
+  scoring: null
+  notes: >
+    The SRS is a brief 4-item visual-analog therapeutic-alliance measure completed at the end
+    of a session, for adults (a child variant, Child SRS, exists separately and isn't covered
+    by this entry). Not reproduced here for the same digital-reproduction and organisational
+    licensing restrictions as ORS — see source_url.
+
+- id: wemwbs
+  label: Warwick-Edinburgh Mental Well-being Scale (WEMWBS)
+  source: NHS Health Scotland, University of Warwick, and University of Edinburgh
+  source_type: survey-instrument
+  status: current
+  last_reviewed: 2026-08-31
+  source_published: 2007-01-01  # Tennant R, Hiller L, Fishwick R, et al., "The Warwick-Edinburgh Mental Well-being Scale (WEMWBS): development and UK validation," Health Qual Life Outcomes 2007;5:63
+  source_url: https://warwick.ac.uk/services/innovations/wemwbs
+  applies_to: [adults]
+  use_case: [screening-instrument]
+  licence_status: restricted
+  licence_notes: >-
+    Quoted from the current official licensing portal (warwick.ac.uk/services/innovations/wemwbs):
+    "Each license is validated to support proper use, whether for commercial, NHS, non-profit,
+    or academic purposes," with a distinct non-commercial licence tier "for organisations
+    whose main purpose is not directed towards commercial advantage or monetary compensation"
+    alongside paid commercial/NHS tiers. This is a formal tiered-licence system rather than
+    simple free registration (older secondary sources describe WEMWBS as free with
+    registration only — that appears to have changed; re-check the live portal before relying
+    on this note, since it wasn't possible in this session to confirm current fee amounts or
+    whether the non-commercial tier is free or nominally charged). Reference-only pending that
+    confirmation.
+  question: null
+  values: null
+  items: null
+  response_scale: null
+  scoring: null
+  notes: >
+    WEMWBS is a 14-item positively-worded mental well-being scale for adults; a shorter
+    7-item version (SWEMWBS) and versions for younger populations also exist separately and
+    aren't covered by this entry. Not reproduced here because current licensing requires
+    obtaining the appropriate tier through the official portal first — see source_url.
+
+- id: rcads
+  label: Revised Children's Anxiety and Depression Scale (RCADS)
+  source: Bruce F. Chorpita and Susan H. Spence
+  source_type: survey-instrument
+  status: current
+  last_reviewed: 2026-08-31
+  source_published: 2000-01-01  # Chorpita BF, Yim L, Moffitt C, Umemoto LA, Francis SE, "Assessment of symptoms of DSM-IV anxiety and depression in children: a revised child anxiety and depression scale," Behav Res Ther 2000;38:835-855
+  source_url: https://rcads.ucla.edu/permissions
+  applies_to: [children-young-people]
+  use_case: [screening-instrument]
+  licence_status: restricted
+  licence_notes: >-
+    Quoted from the publisher's own permissions page (rcads.ucla.edu/permissions): the
+    instruments are available "at no cost" for "individual professional use for clinical
+    purposes" and for "educational purposes" or "presentations" with attribution, but written
+    permission is required for translations, for "authoring or editing any derivatives"
+    (including reuse of individual items), and for "inclusion in an Electronic Health Record
+    system." It also states that "commercial distribution of the RCADS instruments, scoring
+    resources, derivatives, or items in any form or medium is prohibited." Free individual
+    clinical use is not the same as free reproduction/digital inclusion here, so this entry
+    is reference-only.
+  question: null
+  values: null
+  items: null
+  response_scale: null
+  scoring: null
+  notes: >
+    RCADS is a self-report (and parent-report) anxiety/depression scale for children and
+    young people, typically used around ages 8-18; a shorter form (RCADS-25) also exists
+    separately and isn't covered by this entry. Not reproduced here because digital
+    incorporation and reuse of items requires written permission per the terms above — see
+    source_url for the current permissions process.
