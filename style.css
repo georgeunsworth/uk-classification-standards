@@ -107,6 +107,16 @@ a { color: var(--link); }
 .domain-gaps .entry {
   border-left: 3px solid var(--status-review-text);
 }
+.licensed-heading {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--status-review-text);
+  margin: 1.25rem 0 0.6rem;
+}
+.domain-licensed .entry {
+  border-left: 3px solid var(--status-review-text);
+}
 .entry {
   background: var(--surface);
   border: 1px solid var(--border);

@@ -1,0 +1,252 @@
+# NHS standards for identifying, recording, and flagging a person's information/communication
+# support needs and reasonable adjustments — distinct from the disability *status* question in
+# demographics.yaml (Equality Act 2010 test) and the impairment *type* question already tracked
+# in mental-health.yaml (ons-impairment-standard). This domain covers the administrative flags a
+# referral/intake form needs once a need has been identified, not the identification question
+# itself. See ../README.md for schema.
+
+- id: nhs-accessible-information-standard
+  label: Accessible Information Standard (DAPB1605) — information and communication support needs
+  source: NHS England / Data Alliance Partnership Board (DAPB)
+  source_type: clinical-dataset
+  status: current
+  last_reviewed: 2026-08-31
+  source_published: 2025-06-30
+  source_url: https://www.england.nhs.uk/publication/accessible-information-standard/
+  applies_to: []
+  use_case: [clinical-record]
+  question: null
+  values:
+    - "Accessible information – communication support"
+    - "Accessible Information – requires communication professional"
+    - "Accessible Information – requires specific contact method"
+    - "Accessible Information – requires specific information format"
+  licence_status: ogl
+  licence_notes: >-
+    UK Open Government Licence v3.0 (government/publisher content) — see this repo's LICENSE
+    and README "Sources & licensing" section. Safe to reproduce with attribution.
+  items: null
+  response_scale: null
+  scoring: null
+  notes: >
+    Mandatory NHS/social-care standard (version 4.0, approved by the Data Assurance Board
+    3 June 2025, published 30 June 2025) requiring providers to identify, record, flag, share,
+    meet, and review the information and communication support needs of patients, service users,
+    and — where relevant — their carers, where those needs relate to a disability, impairment, or
+    sensory loss (e.g. British Sign Language, braille, easy read, advocate/communication
+    professional required). Source, quoted directly: "This specifically applies to people who
+    have information or communication support needs related to a disability, impairment or
+    sensory loss." The standard defines 4 coded subsets (listed above, quoted verbatim) within
+    the Data Dictionary for Care (dd4c), recorded via SNOMED CT/Read v2/CTV3 codes in electronic
+    systems or human-readable definitions on paper. Unlike a screening instrument, it does NOT
+    mandate one fixed question — implementation guidance instead requires providers to "establish
+    one or more standard question to identify people's needs" and gives only an illustrative
+    example ("Please let us know: if you find it hard to read our letters; if you need someone to
+    support you at appointments; if you need information in alternative formats..."), so `question`
+    is left null rather than presenting that example as the official wording. `applies_to` is left
+    empty deliberately: the standard's own scope language repeatedly says "NHS and adult social
+    care services," which is ambiguous between (a) NHS services generally, which cover all ages,
+    with "adult" qualifying only the social-care leg, and (b) adult-only scope throughout — the
+    source doesn't resolve this explicitly, so don't guess; check source_url directly if the exact
+    age scope matters for your form. Complements ons-impairment-standard (mental-health.yaml),
+    which covers the earlier "what type of impairment" question — this standard is what a service
+    does administratively once a communication/access need has been identified. See also
+    nhs-reasonable-adjustment-digital-flag below, the NHS Spine flag that operationalises this
+    standard's requirement to share needs across care settings. Full conformance/assurance dates
+    run to 30 June 2027.
+
+- id: nhs-reasonable-adjustment-digital-flag
+  label: Reasonable Adjustment Digital Flag (DAPB4019)
+  source: NHS England / Data Assurance Board (NHS Spine, Patient Flags service)
+  source_type: clinical-dataset
+  status: current
+  last_reviewed: 2026-08-31
+  source_published: 2025-12-19
+  source_url: https://digital.nhs.uk/services/reasonable-adjustment-flag/impairment-and-adjustment-codes
+  applies_to: []
+  use_case: [clinical-record]
+  question: null
+  values:
+    - "Communication support"
+    - "Requires communication professional"
+    - "Requires specific contact method"
+    - "Requires specific information format"
+    - "Additional communication needs and support"
+    - "Community language support"
+    - "Adjustments for providing additional support to patients"
+    - "Adjustments for individual care requirements"
+    - "Adjustments in relation to the environment of care"
+    - "Adjustments to support additional needs"
+    - "Bespoke reasonable adjustments"
+  licence_status: ogl
+  licence_notes: >-
+    UK Open Government Licence v3.0 (government/publisher content) — see this repo's LICENSE
+    and README "Sources & licensing" section. Safe to reproduce with attribution.
+  items: null
+  response_scale: null
+  scoring: null
+  notes: >
+    National digital flag on the NHS Spine, distinct from but linked to the Accessible
+    Information Standard above. Source, quoted directly: "The Reasonable Adjustment Flag is part
+    of the Patient Flags service. It is a national record that shows a person needs accommodations
+    and may include details about their impairments and necessary adjustments," developed "to
+    enable health and care workers to record, share and view details of reasonable adjustments
+    across the NHS, wherever the person is treated." Legal basis is the Equality Act 2010
+    reasonable-adjustments duty (see also the ons-disability-equality-act-2010 entry in
+    demographics.yaml, which covers the separate disability-status question). Recording has two
+    parts: an impairment-type code — reuses the same categories as ons-impairment-standard
+    (mental-health.yaml), plus a "prefer not to say" option not present in that GSS standard, so
+    check both if building a full picker — and the adjustment-category codes listed above
+    (`values`), which describe the *type* of adjustment required rather than a diagnosis. No
+    single fixed survey question is published for either part; codes are selected from a
+    structured SNOMED CT picker rather than answered as free text, so `question` is left null, same
+    as the administrative flags in referral-identifiers.yaml. `applies_to` is left empty: the
+    source describes scope as "for health and social care workers in any care setting who are
+    treating patients that require reasonable adjustments" without an explicit age statement —
+    don't infer all-ages from the absence of a restriction. Compliance dates: implementation
+    19 December 2025, full conformance 31 March 2027 (health) / 31 October 2027 (social care).
+
+- id: nhs-reasonable-adjustment-flag-need-codes
+  label: Reasonable Adjustment Digital Flag — communication and access need codes (DAPB4019)
+  source: NHS England Digital / Patient Flags service
+  source_type: clinical-dataset
+  status: current
+  last_reviewed: 2026-08-31
+  source_published: 2025-12-19
+  source_url: https://digital.nhs.uk/services/reasonable-adjustment-flag/impairment-and-adjustment-codes
+  applies_to: []
+  use_case: [clinical-record]
+  question: null
+  values:
+    - "Communication support: Does lip read"
+    - "Communication support: Does use communication device"
+    - "Communication support: Does use hearing aid"
+    - "Communication support: Preferred method of communication: British Sign Language"
+    - "Communication support: Preferred method of communication: written"
+    - "Communication support: Requires aphasia-friendly communication"
+    - "Communication support: Requires support for expressive communication needs"
+    - "Communication support: Requires support for receptive communication needs"
+    - "Communication support: Uses a citizen advocate"
+    - "Communication support: Uses a legal advocate"
+    - "Communication support: Uses a non-speech system for communication"
+    - "Communication support: Uses alternative communication skill"
+    - "Communication support: Uses augmentative and alternative communication"
+    - "Communication support: Uses British sign language"
+    - "Communication support: Uses cued speech transliterator"
+    - "Communication support: Uses deafblind intervener"
+    - "Communication support: Uses Deafblind Manual Alphabet"
+    - "Communication support: Uses electronic note taker"
+    - "Communication support: Uses functional communication skills"
+    - "Communication support: Uses gestures for communication"
+    - "Communication support: Uses hearing loop"
+    - "Communication support: Uses high technology communication device"
+    - "Communication support: Uses lipspeaker"
+    - "Communication support: Uses low technology communication device"
+    - "Communication support: Uses Makaton sign language"
+    - "Communication support: Uses manual note taker"
+    - "Communication support: Uses non-powered communication device"
+    - "Communication support: Uses non-verbal communication"
+    - "Communication support: Uses objects for communication"
+    - "Communication support: Uses personal audio recording device to record information"
+    - "Communication support: Uses Personal Communication Passport"
+    - "Communication support: Uses photographs for communication"
+    - "Communication support: Uses powered communication device"
+    - "Communication support: Uses sign language"
+    - "Communication support: Uses speech to text reporter"
+    - "Communication support: Uses symbols for communication"
+    - "Communication support: Uses telecommunications device for the deaf"
+    - "Communication support: Uses verbal communication"
+    - "Communication support: Uses voice amplifier to support communication"
+    - "Communication support: Uses voice output communication aid"
+    - "Requires communication professional: British Sign Language interpreter needed"
+    - "Requires communication professional: Hands-on signing interpreter needed"
+    - "Requires communication professional: Makaton Sign Language interpreter needed"
+    - "Requires communication professional: Needs an advocate"
+    - "Requires communication professional: Requires deafblind block alphabet interpreter"
+    - "Requires communication professional: Requires deafblind communicator guide"
+    - "Requires communication professional: Requires deafblind haptic communication interpreter"
+    - "Requires communication professional: Requires deafblind manual alphabet interpreter"
+    - "Requires communication professional: Requires lipspeaker"
+    - "Requires communication professional: Requires manual note taker"
+    - "Requires communication professional: Requires sighted guide"
+    - "Requires communication professional: Requires speech and language therapist support to communicate"
+    - "Requires communication professional: Requires speech to text reporter"
+    - "Requires communication professional: Sign Supported English interpreter needed"
+    - "Requires communication professional: Visual frame sign language interpreter needed"
+    - "Requires specific contact method: Requires audible alert"
+    - "Requires specific contact method: Requires contact by email"
+    - "Requires specific contact method: Requires contact by letter"
+    - "Requires specific contact method: Requires contact by short message service text message"
+    - "Requires specific contact method: Requires contact by telephone"
+    - "Requires specific contact method: Requires contact by text relay"
+    - "Requires specific contact method: Requires contact via carer"
+    - "Requires specific contact method: Requires tactile alert"
+    - "Requires specific contact method: Requires visual alert"
+    - "Requires specific information format: Requires healthcare information recording on personal audio recording device"
+    - "Requires specific information format: Requires information by email"
+    - "Requires specific information format: Requires information in aphasia-accessible format"
+    - "Requires specific information format: Requires information in contracted (Grade 2) Braille"
+    - "Requires specific information format: Requires information in Easyread"
+    - "Requires specific information format: Requires information in electronic audio format"
+    - "Requires specific information format: Requires information in electronic downloadable format"
+    - "Requires specific information format: Requires information in Makaton"
+    - "Requires specific information format: Requires information in Moon alphabet"
+    - "Requires specific information format: Requires information in uncontracted (Grade 1) Braille"
+    - "Requires specific information format: Requires information on audio cassette tape"
+    - "Requires specific information format: Requires information on compact disc"
+    - "Requires specific information format: Requires information on digital versatile disc"
+    - "Requires specific information format: Requires information on universal serial bus mass storage device"
+    - "Requires specific information format: Requires information verbally"
+    - "Requires specific information format: Requires third party to read out written information"
+    - "Requires specific information format: Requires written information in at least 20 point sans serif font"
+    - "Requires specific information format: Requires written information in at least 24 point sans serif font"
+    - "Requires specific information format: Requires written information in at least 28 point sans serif font"
+    - "Additional communication needs and support: Difficulty analysing information"
+    - "Additional communication needs and support: Difficulty processing information accurately"
+    - "Additional communication needs and support: Difficulty processing information at normal speed"
+    - "Additional communication needs and support: Emergency contact details of specialist support team"
+    - "Additional communication needs and support: Expresses pain atypically"
+    - "Additional communication needs and support: Has My Healthcare Passport"
+    - "Additional communication needs and support: Needs assistance with communication"
+    - "Additional communication needs and support: Requires appointment reminders"
+    - "Additional communication needs and support: Requires approach to care to be discussed with carer"
+    - "Additional communication needs and support: Requires carer to be present at encounters"
+    - "Additional communication needs and support: Uses apps on mobile device to support communication"
+    - "Additional communication needs and support: Uses switches for communication"
+    - "Additional communication needs and support: Uses Tadoma method for communication"
+  licence_status: ogl
+  licence_notes: >-
+    UK Open Government Licence v3.0, per NHS England Digital's site-wide terms and conditions
+    ("Copyright and database rights in the NHS England Content are released free-of-charge under
+    the current version of the Open Government Licence"), with one specific carve-out that applies
+    here: Information Standards content is OGL for copying but explicitly NOT for adaptation
+    without consent. Every value above is reproduced verbatim (copied, not adapted/reworded), so
+    this stays within the licence; do not paraphrase or translate these labels for reuse without
+    checking that carve-out yourself. Attribute as "Contains information from NHS England, licenced
+    under the current version of the Open Government Licence."
+  items: null
+  response_scale: null
+  scoring: null
+  notes: >
+    The granular, form-ready answer options behind nhs-reasonable-adjustment-digital-flag's
+    11 category-level codes above — i.e. the actual "if so, what" values a service designer would
+    offer as selectable options once someone has said yes to having an access/communication need.
+    Verified directly against the live page's HTML (fetched and parsed, not taken from a summary)
+    on 2026-08-31; each value here is the SNOMED CT description text for one coded concept (the
+    numeric SNOMED CT codes themselves are on the source page but not reproduced here, consistent
+    with how this repo's `values` field carries display labels, not codes, elsewhere). Scoped
+    deliberately to the 5 categories most relevant to communication/access needs specifically —
+    "Communication support," "Requires communication professional," "Requires specific contact
+    method," "Requires specific information format," and "Additional communication needs and
+    support." Two things from the same source are deliberately NOT reproduced here: (1) category
+    6, "Community language support" — a separate reference set of roughly 190 language-interpreter
+    codes (e.g. "Arabic language interpreter needed"), left out purely for size, see source_url for
+    the full list; (2) categories 7-11 ("Adjustments for providing additional support to patients,"
+    "individual care requirements," "environment of care," "additional needs," and "bespoke
+    reasonable adjustments") — these are broader reasonable-adjustment/care-planning categories
+    (e.g. wheelchair access, needle phobia, single room, guide dog) rather than communication/access
+    needs specifically, so they're out of scope for this entry; see
+    nhs-reasonable-adjustment-digital-flag above for their category-level names if you need the
+    full flag. As with the other two entries in this file, no single fixed question is published —
+    these are picked from a structured coded list, not answered as free text — so `question` is
+    null and `applies_to` is left empty for the same reason given on nhs-reasonable-adjustment-digital-flag.

@@ -6,6 +6,7 @@ const DOMAIN_FILES = [
   { file: "data/demographics.yaml", domain: "demographics", label: "Demographics" },
   { file: "data/referral-identifiers.yaml", domain: "referral-identifiers", label: "Referral & safeguarding identifiers" },
   { file: "data/screening-tools.yaml", domain: "screening-tools", label: "Screening tools" },
+  { file: "data/access-needs.yaml", domain: "access-needs", label: "Access needs" },
 ];
 
 const STATUS_LABELS = {
@@ -130,6 +131,8 @@ function renderEntryCard(entry, options = {}) {
         <ul>${entry.values.map((v) => `<li>${escapeHtml(v)}</li>`).join("")}</ul>
       </div>
     `;
+  } else if (entry.licence_status === "restricted") {
+    contentHtml = `<p class="no-values">Reference only — this instrument is copyrighted with reproduction restrictions; see the licence notes and primary source before using it.</p>`;
   } else {
     contentHtml = `<p class="no-values">No compact value set published by the source — see notes and primary source.</p>`;
   }

@@ -20,6 +20,8 @@ Checks:
   response_scale (its shared response options), and scoring (summing rule +
   severity bands) are each either present together and well-formed, or all
   null — an entry shouldn't have some but not others
+- a `restricted` entry has question/values/items/response_scale/scoring all
+  null — restricted entries are reference-only, never reproduced content
 """
 import sys
 import glob
@@ -127,6 +129,18 @@ def check_instrument_shape(entry, entry_id, errors):
         )
 
 
+def check_restricted_is_reference_only(entry, entry_id, errors):
+    if entry.get("licence_status") != "restricted":
+        return
+    fields = ("question", "values", "items", "response_scale", "scoring")
+    non_null = [f for f in fields if entry.get(f) is not None]
+    if non_null:
+        errors.append(
+            f"{entry_id}: licence_status is restricted, so {non_null} must be null "
+            f"— restricted entries are reference-only, no reproduced content"
+        )
+
+
 def check_date(value, field, entry_id, errors):
     if value is None:
         return
@@ -186,6 +200,7 @@ def validate_file(path):
         check_response_scale(entry.get("response_scale"), entry_id, errors)
         check_scoring(entry.get("scoring"), entry_id, errors)
         check_instrument_shape(entry, entry_id, errors)
+        check_restricted_is_reference_only(entry, entry_id, errors)
 
         url = entry.get("source_url", "")
         if not (isinstance(url, str) and url.startswith("http")):
