@@ -107,3 +107,26 @@ dated by when the change was caught, not necessarily when the source changed.
   is more specific than this repo's usual OGL boilerplate: NHS England Digital's terms carve out
   "Information Standards" content as OGL-for-copying but not OGL-for-adaptation, which matters
   here because every value is a verbatim SNOMED CT description, not a paraphrase.
+- Added 7 more GSS Harmonisation Team standards to `demographics.yaml`: economic activity status,
+  NS-SEC (socio-economic classification), qualifications, marital and civil partnership status,
+  household relationships, and unpaid care (all `current` or `under-review`), plus a recorded gap
+  for income (`no-standard-gap` — the source page is a directory of 15 separate official
+  income/earnings publications, not an operative question or set of bands). Economic activity
+  status and NS-SEC share a single 2018 source document; `question` is left `null` on both, and on
+  qualifications, because none of the three is asked as one question — economic activity needs
+  ~15 routed questions, NS-SEC needs 8 more on top of that (3 on occupation, 5 on employment
+  status/organisation size), and qualifications needs ~100 routed variables — so `values` holds
+  each standard's official derived output classification instead (NS-SEC's 8-class list;
+  qualifications' 7-category list), with the full input question sets preserved in `notes`. Also
+  noted in `notes` rather than added as their own entries: the older, simpler "Educational
+  attainment" standard (qualifications' interviewer-led fallback, its own development paused since
+  2022) and the "Cohabitation" and "Household reference person" standards (related gaps/concepts
+  to marital status and household relationships respectively) — added only where the source itself
+  treats something as the primary standard for its topic, not every adjacent GSS page. `unpaid
+  care` is recorded `under-review` rather than `current` since its own source page carries an
+  explicit "awaiting an update" banner and states "No consistent question on unpaid care is
+  currently used across the UK. A 2019 review identified 23 surveys collecting information on
+  unpaid care" — the recommended question/values are reproduced anyway, same as the ethnicity
+  entry's "under active review but keep using this standard" treatment. Every question, value,
+  date, and caveat was re-verified directly against the live GSS Harmonisation Team pages (not
+  taken from research summaries as-is) before writing.
