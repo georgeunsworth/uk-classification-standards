@@ -318,3 +318,312 @@
     only as a footnote on ethnicity) because "what's the preferred/main language field" is a common,
     separate need on referral forms — this tracker flags it as an open gap rather than silently
     having no entry for it at all.
+
+- id: ons-economic-activity-status-standard
+  label: Economic activity status harmonised standard
+  source: ONS / GSS Harmonisation Team
+  source_type: harmonised-standard
+  status: current
+  last_reviewed: 2026-09-01
+  source_published: 2018-04-01  # "Version 3.5, April 2018" per the underlying PDF
+  source_url: https://analysisfunction.civilservice.gov.uk/policy-store/economic-activity-status-ns-sec-and-employment-related-questions-harmonised-standard/
+  applies_to: [adults]
+  use_case: [demographic-survey]
+  question: null
+  values:
+    - "Employees"
+    - "Self-employed"
+    - "All in employment"
+    - "ILO unemployed"
+    - "All economically active"
+  licence_status: ogl
+  licence_notes: >-
+    UK Open Government Licence v3.0 (government/publisher content) — see this repo's LICENSE
+    and README "Sources & licensing" section. Safe to reproduce with attribution.
+  items: null
+  response_scale: null
+  scoring: null
+  notes: >
+    IMPORTANT: there is no single "what is your economic activity status?" question — the classification
+    above is derived from a battery of roughly 15 questions, so question is left null rather than picking
+    one and implying it's the whole picture. The gateway question, asked IF AGE >= 16, is verbatim: "Did
+    you do any paid work in the seven days ending Sunday the (n), either as an employee or as
+    self-employed?" (Yes/No), followed by further questions on government training schemes (asked only if
+    age 16-64, since the source notes "men and women aged over 64 are not on government schemes, by
+    definition"), being away from a job, unpaid work for a family business, job-seeking, and full-time
+    education — see source_url for the complete question set and routing. Economically inactive is
+    everything not captured above ("all others"), not a category respondents are asked to self-select.
+    This is the same source document as the ons-nssec-standard entry below (Version 3.5, April 2018),
+    which also derives from this question battery. The source itself notes these harmonised outputs
+    "differ in minor respects from the International Labour Office (ILO) standards followed in the Labour
+    Force Survey," that the government-training-scheme category "is not separately identified because the
+    harmonised question does not identify all such persons," and that unpaid family workers "are not shown
+    separately" due to sample size. A review was flagged as due in "2018/2019" in the source text itself;
+    no newer version has been published since — current but stale, the same pattern as this repo's
+    ons-tenure-standard entry. Use of these questions is explicitly stated as optional for survey teams.
+
+- id: ons-nssec-standard
+  label: National Statistics Socio-economic Classification (NS-SEC) harmonised standard
+  source: ONS / GSS Harmonisation Team
+  source_type: harmonised-standard
+  status: current
+  last_reviewed: 2026-09-01
+  source_published: 2018-04-01  # same "Version 3.5, April 2018" document as economic activity status
+  source_url: https://analysisfunction.civilservice.gov.uk/policy-store/economic-activity-status-ns-sec-and-employment-related-questions-harmonised-standard/
+  applies_to: [adults]
+  use_case: [demographic-survey]
+  question: null
+  values:
+    - "1. Higher managerial and professional occupations"
+    - "1.1 Large employers and higher managerial occupations"
+    - "1.2 Higher professional occupations"
+    - "2. Lower managerial and professional occupations"
+    - "3. Intermediate occupations"
+    - "4. Small employers and own account workers"
+    - "5. Lower supervisory and technical occupations"
+    - "6. Semi-routine occupations"
+    - "7. Routine occupations"
+    - "8. Never worked and long-term unemployed"
+    - "Not classified"
+  licence_status: ogl
+  licence_notes: >-
+    UK Open Government Licence v3.0 (government/publisher content) — see this repo's LICENSE
+    and README "Sources & licensing" section. Safe to reproduce with attribution.
+  items: null
+  response_scale: null
+  scoring: null
+  notes: >
+    IMPORTANT: NS-SEC is not asked directly — question is left null because deriving it needs 8 further
+    questions from the same source document: three on occupation ("What did the firm/organisation you
+    worked for mainly make or do (at the place where you worked)?"; "What was your (main) job (in the week
+    ending Sunday the xx)?"; "What did you mainly do in your job?") and five on employment status/
+    organisation size ("Were you working as an employee or were you self-employed?"; a supervisory-
+    responsibility question; organisation-size bands of "1-24", "25-499", "500 or more"; and, for the
+    self-employed branch, whether working alone or with employees). The 8-class list above is the source's
+    primary "analytic version" (its first class, 1, can be subdivided into 1.1/1.2 as shown); 5-class and
+    3-class versions also exist in the same document for coarser analysis — see source_url for both.
+    Priority order for full adult population coverage is: full-time students, long-term unemployed, never
+    worked, NS-SEC from current/last main job, then "not classified" for anyone whose occupation is
+    inadequately described. IMPORTANT STALENESS FLAG: this document (last dated 2018) derives NS-SEC using
+    the SOC2010 occupational classification; ONS has since published SOC2020-rebased NS-SEC guidance not
+    reflected in this GSS harmonisation-standard text — check ONS's occupational classification guidance
+    directly if SOC2020 alignment matters for a live service. Distinct from, but related to, the newer
+    "Socio-economic background harmonised standard" (published 2023, source_url
+    https://analysisfunction.civilservice.gov.uk/policy-store/socio-economic-background-harmonised-standard/),
+    which asks retrospectively about parental/childhood circumstances at age ~14 rather than the
+    respondent's own current/last occupation — a "see also," not a substitute for this entry.
+
+- id: ons-qualifications-standard
+  label: Qualifications harmonised standard
+  source: ONS / GSS Harmonisation Team
+  source_type: harmonised-standard
+  status: current
+  last_reviewed: 2026-09-01
+  source_published: 2022-08-31
+  source_url: https://analysisfunction.civilservice.gov.uk/policy-store/qualifications-harmonised-standard/
+  applies_to: []  # no single blanket age stated; Scotland/non-UK school-qualification sub-questions are scoped to 14+, not the whole standard
+  use_case: [demographic-survey]
+  question: null
+  values:
+    - "Degree Equivalent or Above"
+    - "Higher Education"
+    - "GCE A Level or Equivalent"
+    - "GCSE Grades A*-C or Equivalent"
+    - "GCSE Grades D-G or Below"
+    - "No Qualifications"
+    - "Unclassified"
+  licence_status: ogl
+  licence_notes: >-
+    UK Open Government Licence v3.0 (government/publisher content) — see this repo's LICENSE
+    and README "Sources & licensing" section. Safe to reproduce with attribution.
+  items: null
+  response_scale: null
+  scoring: null
+  notes: >
+    IMPORTANT: "highest qualification" isn't asked as one question — question is left null because the
+    7-category output above is derived from a routed battery of roughly 100 variables: a country-of-
+    qualification gate ("In the past, in which of these places did you gain your qualifications?") leading
+    to separate question blocks for England/Wales/Northern Ireland school qualifications, Scotland school
+    qualifications (from age 14), non-UK school qualifications (from age 14), current apprenticeships, and
+    further college/professional/university qualifications, each mapped to a level via detailed lookup
+    tables — see source_url for the complete question set and routing logic. IMPORTANT MODE RESTRICTION:
+    the source states plainly this standard "is suitable for online self-completion modes. It is not
+    suitable for paper self-completion because of the complicated routing," and directs anyone needing a
+    telephone version to contact the Harmonisation team directly rather than adapt it unsupervised. Welsh-
+    language versions of the questions exist, since the underlying survey (the Transformed Labour Force
+    Survey) has a Welsh questionnaire. The source acknowledges the question set "will undoubtedly need
+    updating in the future when new qualifications become available." A simpler, older alternative — the
+    "Educational attainment harmonised standard" (published 2020, 3 questions, designed for interviewer-led
+    rather than self-completion modes, source_url
+    https://analysisfunction.civilservice.gov.uk/policy-store/educational-attainment/) — exists for
+    lightweight/interviewer-led use, but its own page states development "has not been further developed
+    or updated since" the Harmonisation team's priorities shifted in 2022, so it's noted here rather than
+    added as its own entry: treat it as a paused fallback, not a current alternative standard.
+
+- id: ons-income-standard-gap
+  label: Income and earnings harmonisation guidance (no current standard)
+  source: ONS / GSS Harmonisation Team
+  source_type: harmonised-standard
+  status: under-review
+  last_reviewed: 2026-09-01
+  source_published: 2019-08-01
+  source_url: https://analysisfunction.civilservice.gov.uk/policy-store/income-and-earnings/
+  applies_to: []  # no standard exists to confirm a population against
+  use_case: [no-standard-gap]
+  question: null
+  values: null
+  licence_status: ogl
+  licence_notes: >-
+    UK Open Government Licence v3.0 (government/publisher content) — see this repo's LICENSE
+    and README "Sources & licensing" section. Safe to reproduce with attribution.
+  items: null
+  response_scale: null
+  scoring: null
+  notes: >
+    IMPORTANT: there is no GSS harmonised question or set of income bands to reproduce here. The
+    source_url page is conceptual/directory guidance only — it defines "earnings" vs "income" and links out
+    to 15 separate official income/earnings publications (Annual Survey of Hours and Earnings, Average
+    Weekly Earnings, the Labour Force Survey, Family Resources Survey, Households Below Average Income,
+    Pensioners' Incomes, Living Costs and Food Survey, Effects of Taxes and Benefits, Wealth and Assets
+    Survey, Survey of Personal Incomes, benefits data, Small Area Income Estimates, UK National Accounts,
+    EU-SILC, and Pension Trends) rather than publishing one itself. The page states this work was paused
+    following an Office for Statistics Regulation review that recommended improving coherence across these
+    sources: "this work was paused following a review of the team's priorities," with a review "expected...
+    in the coming years" and no committed date — recorded here as under-review rather than current, since
+    there's nothing current to point to. A DWP Freedom of Information response containing gross household
+    income bands is findable online, but it answers a one-off specific data request rather than being a
+    published GSS harmonised standard — deliberately not reproduced here so it isn't mistaken for one.
+
+- id: ons-marital-civil-partnership-status-standard
+  label: Marital and civil partnership status harmonised standard
+  source: ONS / GSS Harmonisation Team
+  source_type: harmonised-standard
+  status: current
+  last_reviewed: 2026-09-01
+  source_published: 2020-11-27
+  source_url: https://analysisfunction.civilservice.gov.uk/policy-store/marital-or-partnership-status/
+  applies_to: []  # no blanket age stated; see notes on the 2022 minimum-age legislation
+  use_case: [demographic-survey]
+  question: "What is your legal marital or registered civil partnership status?"
+  values:
+    - "Never married and never legally registered in a civil partnership"
+    - "Married"
+    - "In a legally registered civil partnership"
+    - "Separated but still legally married"
+    - "Separated but still legally in a civil partnership"
+    - "Divorced"
+    - "Formerly in a civil partnership which is now legally dissolved"
+    - "Widowed"
+    - "A surviving member of a legally registered civil partnership"
+  licence_status: ogl
+  licence_notes: >-
+    UK Open Government Licence v3.0 (government/publisher content) — see this repo's LICENSE
+    and README "Sources & licensing" section. Safe to reproduce with attribution.
+  items: null
+  response_scale: null
+  scoring: null
+  notes: >
+    The source discusses the Marriage and Civil Partnership (Minimum Age) Act 2022, which raised the legal
+    minimum age to marry or register a civil partnership to 18 in England and Wales, and recommends "soft
+    checks, such as interviewer prompt" where a respondent under 18 selects a married/partnered category,
+    to catch likely data-entry errors rather than block a response outright. Mode guidance: "For online
+    surveys, response options should be tick boxes, and respondents should only select one answer," and for
+    face-to-face interviews, "using showcards... to help the respondent remember the possible response
+    options." The standard explicitly states it "will not provide insight into persons who are: living
+    together, or 'cohabiting'... in casual, dating or long-term relationships... engaged to be married;
+    engaged to enter a civil partnership" — a separate "Cohabitation harmonised standard" exists at
+    https://analysisfunction.civilservice.gov.uk/policy-store/cohabitation for that gap, not reproduced as
+    its own entry here.
+
+- id: ons-household-relationships-standard
+  label: Household relationships harmonised standard
+  source: ONS / GSS Harmonisation Team
+  source_type: harmonised-standard
+  status: current
+  last_reviewed: 2026-09-01
+  source_published: 2020-11-27
+  source_url: https://analysisfunction.civilservice.gov.uk/policy-store/household-relationships/
+  applies_to: []  # asked at household level, not individually age-scoped — same reasoning as ons-tenure-standard
+  use_case: [demographic-survey]
+  question: "How are members of this household related to each other? [Person 1] is the … of [Person 2]."
+  values:
+    - "Husband or wife"
+    - "Legally registered civil partner"
+    - "Partner"
+    - "Son or daughter (including adopted child)"
+    - "Stepchild"
+    - "Son-in-law or daughter-in-law"
+    - "Father or mother (including adopted parent)"
+    - "Stepfather or stepmother"
+    - "Father-in-law or mother-in-law"
+    - "Brother or sister (including half brother or sister)"
+    - "Stepbrother or stepsister"
+    - "Brother-in-law or sister-in-law"
+    - "Grandson or granddaughter"
+    - "Grandfather or grandmother"
+    - "Other relative"
+    - "Unrelated"
+  licence_status: ogl
+  licence_notes: >-
+    UK Open Government Licence v3.0 (government/publisher content) — see this repo's LICENSE
+    and README "Sources & licensing" section. Safe to reproduce with attribution.
+  items: null
+  response_scale: null
+  scoring: null
+  notes: >
+    "These questions can be used in both self-complete (such as online or paper) and interviewer-led (such
+    as telephone or face-to-face) surveys" — a question stem was added specifically so the standard works
+    in self-complete modes, and "unrelated" replaces the interview-mode wording "other non-relative" in
+    self-complete mode since, per the source, it "makes more grammatical sense." "Cohabiting" was tested and
+    dropped from the option list as "poorly understood," leaving "Partner" to cover that relationship
+    instead. The source ties this standard's comparability to Census 2021 (England & Wales; Northern
+    Ireland) and Census 2022 (Scotland), and states it "is designed to collect basic information, for use
+    in the majority of surveys. It is not designed to replace questions used in specialist surveys where
+    more detailed analysis is required." A related but distinct "Household reference person harmonised
+    standard" exists at
+    https://analysisfunction.civilservice.gov.uk/policy-store/household-reference-person/ for identifying
+    which household member's characteristics a survey uses as the reference point — not reproduced as its
+    own entry here.
+
+- id: ons-unpaid-care-standard
+  label: Unpaid care harmonised standard
+  source: ONS / GSS Harmonisation Team
+  source_type: harmonised-standard
+  status: under-review
+  last_reviewed: 2026-09-01
+  source_published: 2020-01-24
+  source_url: https://analysisfunction.civilservice.gov.uk/policy-store/unpaid-care
+  applies_to: []  # no age scope stated for the recommended question itself
+  use_case: [demographic-survey]
+  question: >-
+    Do you look after, or give any help or support to, anyone because they have long-term physical or
+    mental health conditions or illnesses, or problems related to old age? Exclude anything you do as part
+    of your paid employment
+  values:
+    - "No"
+    - "Yes, 9 hours a week or less"
+    - "Yes, 10 to 19 hours a week"
+    - "Yes, 20 to 34 hours a week"
+    - "Yes, 35 to 49 hours a week"
+    - "Yes, 50 or more hours a week"
+  licence_status: ogl
+  licence_notes: >-
+    UK Open Government Licence v3.0 (government/publisher content) — see this repo's LICENSE
+    and README "Sources & licensing" section. Safe to reproduce with attribution.
+  items: null
+  response_scale: null
+  scoring: null
+  notes: >
+    IMPORTANT: the source page carries an explicit "this page is awaiting an update" banner, pointing to a
+    Census 2021 output article in the meantime, and states plainly: "No consistent question on unpaid care
+    is currently used across the UK. A 2019 review identified 23 surveys collecting information on unpaid
+    care." The question/values above are the source's own recommended wording from the 2019 Census Dress
+    Rehearsal, explicitly flagged as self-completion only: "This is for self-completion surveys. The GSS
+    harmonisation team are proposing to develop an equivalent question for interviewer-led data collection"
+    — that interviewer-led version does not yet exist. Devolved variation: Northern Ireland's proposed
+    question merges the first two England & Wales bands into a single "Yes, 19 hours a week or less"
+    category; Scotland's question "will not change from the 2011 Census." The source itself caveats the
+    recommended question as combining whether-a-person-cares and hours-of-care into one question, not
+    specifying who is being cared for or residency requirements, and not offering a "varying hours" option
+    — listed factors affecting comparability across the 23 identified surveys, not fully resolved by this
+    standard.

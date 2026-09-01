@@ -4,10 +4,9 @@
 
 Maintained by George Unsworth ([@georgeunsworth](https://github.com/georgeunsworth)) at [Mortar Works](https://mortar.works).
 
-**Browsable by standard: ** https://georgeunsworth.github.io/uk-classification-standards/ or
-**Browsable by question: ** https://georgeunsworth.github.io/uk-classification-standards/questions.html 
-grouped by domain (administrative identifiers and coded flags without a survey question live only on the
-by-standard view).
+**Browsable by standard:** https://georgeunsworth.github.io/uk-classification-standards/
+
+**Browsable by question:** https://georgeunsworth.github.io/uk-classification-standards/questions.html — grouped by domain (administrative identifiers and coded flags without a survey question live only on the by-standard view).
 
 ## The problem
 
@@ -127,10 +126,16 @@ some but not others (`scripts/validate.py` enforces this).
 - **Mental health** (`data/mental-health.yaml`) — Covers ONS GSS Harmonisation standards (long-lasting health
   conditions, impairment, mental health) and the NHS Mental Health Services Data Set (MHSDS).
 - **Demographics** (`data/demographics.yaml`) — ethnicity, disability (Equality Act 2010), sex, gender identity,
-  sexual orientation, religion, national identity, tenure, and language. Two of these (sex,
-  language) are recorded as confirmed gaps — no GSS-wide standard currently exists — and gender
-  identity is archived with nothing yet superseding it, so check `status` before relying on any of
-  the three.
+  sexual orientation, religion, national identity, tenure, language, economic activity status,
+  NS-SEC (socio-economic classification), qualifications, income, marital and civil partnership
+  status, household relationships, and unpaid care. Three of these (sex, language, income) are
+  recorded as confirmed gaps — no GSS-wide standard currently exists — gender identity is archived
+  with nothing yet superseding it, and unpaid care is under review with an explicit "no consistent
+  question is used across the UK" caveat from its own source, so check `status` before relying on
+  any of the five. Economic activity status, NS-SEC, and qualifications are each derived from a
+  battery of questions rather than one, so `question` is left `null` on those three and `values`
+  holds the official output classification instead — see each entry's `notes` for the full input
+  question set.
 - **Referral & safeguarding identifiers** (`data/referral-identifiers.yaml`) — NHS
   administrative/safeguarding data standards needed on a referral form rather than survey
   questions: NHS Number, GP practice registration, two safeguarding data elements, and a recorded
