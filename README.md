@@ -1,41 +1,33 @@
 # UK Classification Standards Tracker
 
-*A maintained, versioned reference of current UK official classification standards used in service design — starting with mental health.*
-
-> Working title — rename freely before you publish.
+*A versioned, maintained reference of current UK official classification standards used in service and system design, grouped by domain, with source, currency, and licence shown for each; and a browsable list of their  published questions or items.*
 
 Maintained by George Unsworth ([@georgeunsworth](https://github.com/georgeunsworth)) at [Mortar Works](https://mortar.works).
 
-**Browse it:** https://georgeunsworth.github.io/uk-classification-standards/ (by standard) or
-https://georgeunsworth.github.io/uk-classification-standards/questions.html (by question, grouped
-by domain — administrative identifiers and coded flags without a survey question live only on the
-by-standard view)
-
+**Browsable by standard: ** https://georgeunsworth.github.io/uk-classification-standards/ or
+**Browsable by question: ** https://georgeunsworth.github.io/uk-classification-standards/questions.html 
+grouped by domain (administrative identifiers and coded flags without a survey question live only on the
+by-standard view).
 
 ## The problem
 
-When you're designing an intake form, a data model, or a reporting field for a UK public-facing service, you need to know: **what's the current official category set for this field, and where did it come from?**
+When designing an onboarding or referral form, a data model, or a reporting field for a UK public-facing service, you need to know: 
+**what's the current official category set for this field, and where did it come from?**
 
-That answer is scattered across ONS harmonisation guidance, NHS data dictionaries, and legacy survey instruments — some of it contradictory, some of it explicitly marked as under review with no replacement yet published. There's no single place that tells you, as of today, which classification to use and whether it's stale.
-
-This repo is that place. It doesn't invent new classifications — it tracks the official ones, flags their currency, and notes known gaps.
-
-Service and system designers working to actually deliver services — not just those producing statistics — are the people who feel this gap most directly. When a referral pathway, an intake form, or a directory schema has to reconcile categories across multiple organisations, the absence of a single current answer becomes a live delivery problem, not just a data quality footnote.
-
-**A design note on structure:** the schema is deliberately built to be *consumed*, not just browsed — every field a form-builder would need (the exact question, the response options, licensing/reproduction rights, population confirmed) is structured data, not prose buried in a paragraph. The two static pages here are one consumer of that data; the intent is that another project could read the same YAML directly to assemble a real form, citing provenance for every field it uses.
+That answer is scattered across ONS harmonisation guidance, NHS data dictionaries, and legacy survey instruments. Some of it is contradictory, some of it is explicitly marked as under review with no replacement yet published. This repo tracks official classifications, flags their currency, and notes known gaps. It is designed to not just be browsable. The exact questions, response options, reproduction rights and population confirmations, are structured data to support the production of services and products. Read the YAML to assemble forms, citing provenance for the fields used. 
 
 ## What this is
 
 - A structured, versioned dataset of UK official classification standards, organised by domain
 - A changelog tracking when source standards are reviewed, revised, or archived
-- A place to record known gaps or ambiguities in the official guidance itself (e.g. "no preferred standard currently exists for X")
+- A place to record known gaps or ambiguities in the official guidance itself (eg. "no preferred standard currently exists for X")
 
-## What this isn't
+## What this is not
 
-- Not an official government product, and not affiliated with ONS, NHS, or GDS
-- Not a replacement for checking the primary source before using a classification in a live service — always link back to source
-- Not a UI/accessibility pattern library (see the [GOV.UK Design System](https://design-system.service.gov.uk/) for that)
-- Not attempting new classification design — this only tracks what already exists officially
+- This is not an official government product, and not affiliated with ONS, NHS, or GDS
+- This is not a replacement for checking the primary source before using a classification in a live service (sources are provided to be checked)
+- This is not a UI/accessibility pattern library (for this please see the [GOV.UK Design System](https://design-system.service.gov.uk/))
+- This is not attempting new classification design, this only tracks what already exists officially
 
 ## Structure
 
@@ -89,53 +81,42 @@ Each domain file is a list of entries with this shape:
   (directly or via a documented mechanism, e.g. proxy response)
 
 An entry can list both, one, or neither. **An empty list is a meaningful gap, not an
-oversight** — it means the source doesn't state either way, which is exactly the kind
-of ambiguity this tracker exists to surface rather than paper over. Don't infer or
-guess applicability to fill this in; cite what the source itself says (quote it in
-`notes` if it clarifies the tag), and leave it empty if the source is silent.
+oversight** — it means the source doesn't state either way. 
 
 ### `use_case` — design-context tags
 
 - `demographic-survey` — population-level self-report category (census/survey style)
 - `clinical-record` — patient/service-user-level clinical or administrative dataset
 - `no-standard-gap` — flags that no usable standard currently exists for this scenario
-  (used instead of inventing one — see the archived mental health harmonisation entry)
-- `screening-instrument` — a validated clinical screening/outcome tool (e.g. PHQ-9)
+- `screening-instrument` — a validated clinical screening/outcome tool (eg. PHQ-9)
 
 ### `licence_status` — can this content actually be reproduced?
 
-Everything in this repo up to the `screening-tools` domain has been UK government/NHS
-content published under the OGL — safe to reproduce with attribution, which is why every
-entry (regardless of domain) carries this field rather than just the two OGL-sourced ones
-having it as an afterthought. A future consumer (a form-builder, say) should be able to ask
-"what am I actually allowed to put in front of a user" as one consistent query across the
-whole dataset:
+Everything in this repo has been UK government/NHS content published under the OGL and is safe to reproduce with attribution. Users should be able to ask
+'what am I actually allowed to put in front of a user' as one consistent query across the whole dataset:
 
 - `ogl` — UK Open Government Licence / Crown copyright government or NHS content
 - `public-domain` — explicitly released without copyright restriction by a non-government
   rights holder (e.g. PHQ-9/GAD-7, released by Pfizer with "no permission required")
 - `restricted` — copyrighted with real reproduction restrictions (a paid licence, a
   no-digital-reproduction clause, or an unclear "free but check permissions" status) — such
-  entries would only ever be added as reference-only (name + link, no reproduced content),
-  never with `items`/`values` populated
+  entries would only ever be added as reference-only (name + link), with `items`/`values` populated.
 
 `licence_notes` must cite the *specific* basis for the status (quote the source's own
 permission language), not just assert it — same discipline as `applies_to`.
 
 ### `items` / `response_scale` / `scoring` — multi-item instruments
 
-Every entry so far has assumed one question with a list of response options. That doesn't
-fit a scale like PHQ-9, which is 9 separate statements all rated on one shared scale, summed
-into a score with clinical severity bands. For those entries, `question` and `values` are
-both `null`, and the real content lives here instead:
+Every entry assumes one question with a list of response options. 
+For scales like PHQ-9 `question` and `values` are both `null`, and the real content lives here instead:
 
-- `items` — the individual statements, each with a stable per-item `id` (e.g.
+- `items` — the individual statements, each with a stable per-item `id` (eg.
   `phq-9-item-1`) so they can be addressed independently, not just as part of the whole
   instrument
 - `response_scale` — the shared instruction text and response options (each option carries
   its numeric `score`, since that's what makes scoring possible at all)
 - `scoring` — the summing `method`, severity `bands` (each a `min`/`max`/`label`), and an
-  optional `clinical_note` for anything a band alone doesn't capture (e.g. PHQ-9 item 9's
+  optional `clinical_note` for anything a band alone doesn't capture (eg. PHQ-9 item 9's
   self-harm follow-up requirement, which applies regardless of total score)
 
 These three fields are either all present together or all `null` — an entry doesn't have
@@ -143,13 +124,9 @@ some but not others (`scripts/validate.py` enforces this).
 
 ## Domains
 
-- **Mental health** (`data/mental-health.yaml`) — the first domain, chosen deliberately because
-  it's the messiest: the ONS mental-health-specific harmonisation review was archived without a
-  preferred standard being adopted, which is exactly the kind of thing a static gov PDF won't
-  surface but this tracker should. Covers ONS GSS Harmonisation standards (long-lasting health
+- **Mental health** (`data/mental-health.yaml`) — Covers ONS GSS Harmonisation standards (long-lasting health
   conditions, impairment, mental health) and the NHS Mental Health Services Data Set (MHSDS).
-- **Demographics** (`data/demographics.yaml`) — the sibling GSS Harmonised Standards commonly
-  asked on referral/intake forms: ethnicity, disability (Equality Act 2010), sex, gender identity,
+- **Demographics** (`data/demographics.yaml`) — ethnicity, disability (Equality Act 2010), sex, gender identity,
   sexual orientation, religion, national identity, tenure, and language. Two of these (sex,
   language) are recorded as confirmed gaps — no GSS-wide standard currently exists — and gender
   identity is archived with nothing yet superseding it, so check `status` before relying on any of
@@ -178,7 +155,7 @@ some but not others (`scripts/validate.py` enforces this).
 
 ## Update cadence
 
-v1: manually reviewed against source publications on an ad hoc basis, logged in `CHANGELOG.md`. No automation yet — see [Roadmap](#roadmap).
+v1: manually reviewed against source publications on an bi-monthly basis, logged in `CHANGELOG.md`. No automation yet — see [Roadmap](#roadmap).
 
 ## Sources & licensing
 
@@ -205,4 +182,4 @@ Government content referenced here is published under the [Open Government Licen
 
 ## Contributing
 
-Corrections and additions welcome, especially from anyone who's hit this same problem in service design work. Please cite the primary source for any new or amended entry.
+Corrections and additions welcome. Please cite the primary source for any new or amended entry.
