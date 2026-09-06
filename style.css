@@ -88,6 +88,15 @@ a { color: var(--link); }
   font-size: 0.85rem;
   margin: 0 0 1rem;
 }
+.category-section {
+  margin: 0 0 2.5rem;
+}
+.category-heading {
+  font-size: 1.4rem;
+  margin: 0 0 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--accent);
+}
 .domain-section {
   margin: 0 0 2rem;
 }
@@ -132,7 +141,8 @@ a { color: var(--link); }
   flex-wrap: wrap;
 }
 .entry-head h2,
-.entry-head h3 {
+.entry-head h3,
+.entry-head h4 {
   font-size: 1.05rem;
   margin: 0;
 }

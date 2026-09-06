@@ -2,12 +2,16 @@
 // Requires js-yaml to be loaded first (window.jsyaml).
 
 const DOMAIN_FILES = [
-  { file: "data/mental-health.yaml", domain: "mental-health", label: "Mental health" },
-  { file: "data/demographics.yaml", domain: "demographics", label: "Demographics" },
-  { file: "data/referral-identifiers.yaml", domain: "referral-identifiers", label: "Referral & safeguarding identifiers" },
-  { file: "data/screening-tools.yaml", domain: "screening-tools", label: "Screening tools" },
-  { file: "data/access-needs.yaml", domain: "access-needs", label: "Access needs" },
+  { file: "data/demographics.yaml", domain: "demographics", label: "Demographics", category: "Demographics & population characteristics" },
+  { file: "data/mental-health.yaml", domain: "mental-health", label: "Mental health", category: "Health & clinical" },
+  { file: "data/screening-tools.yaml", domain: "screening-tools", label: "Screening tools", category: "Health & clinical" },
+  { file: "data/referral-identifiers.yaml", domain: "referral-identifiers", label: "Referral & safeguarding identifiers", category: "Referral & safeguarding" },
+  { file: "data/access-and-support-needs.yaml", domain: "access-and-support-needs", label: "Access & support needs", category: "Access & support needs" },
+  { file: "data/official-classifications.yaml", domain: "official-classifications", label: "Official classifications", category: "Geography & official classifications" },
 ];
+
+// Ordered list of categories, derived from DOMAIN_FILES so the UI and the data can't drift apart.
+const CATEGORIES = [...new Set(DOMAIN_FILES.map((d) => d.category))];
 
 const STATUS_LABELS = {
   current: "Current",
@@ -26,12 +30,25 @@ const USE_CASE_LABELS = {
   "clinical-record": "Clinical record",
   "no-standard-gap": "No standard exists — gap",
   "screening-instrument": "Screening instrument",
+  "support-needs-identification": "Support needs identification",
+  "official-classification": "Official classification",
 };
 
 const LICENCE_LABELS = {
   ogl: "OGL",
   "public-domain": "Public domain",
   restricted: "Restricted — reference only",
+};
+
+const SOURCE_TYPE_LABELS = {
+  "harmonised-standard": "Harmonised standard",
+  "clinical-dataset": "Clinical dataset",
+  "survey-instrument": "Survey instrument",
+  "official-classification": "Official classification",
+  "cross-government-taxonomy": "Cross-government taxonomy",
+  "regulatory-framework": "Regulatory framework",
+  "sector-eligibility-framework": "Sector eligibility framework",
+  "international-standard": "International standard",
 };
 
 function escapeHtml(str) {
@@ -149,14 +166,14 @@ function renderEntryCard(entry, options = {}) {
       ${contentHtml}
       <p class="notes">${escapeHtml(entry.notes)}</p>
       <div class="entry-foot">
-        <code>${escapeHtml(entry.source_type)}</code>
+        <code>${escapeHtml(SOURCE_TYPE_LABELS[entry.source_type] || entry.source_type)}</code>
         <a href="${escapeHtml(entry.source_url)}" target="_blank" rel="noopener">View primary source →</a>
       </div>
     </article>
   `;
 }
 
-// filters: { search (lowercased), status, population, useCase, licence }
+// filters: { search (lowercased), status, population, useCase, licence, category, sourceType }
 function matchesFilters(entry, filters) {
   if (filters.status && entry.status !== filters.status) return false;
 
@@ -168,6 +185,8 @@ function matchesFilters(entry, filters) {
 
   if (filters.useCase && !(entry.use_case || []).includes(filters.useCase)) return false;
   if (filters.licence && entry.licence_status !== filters.licence) return false;
+  if (filters.category && entry._category !== filters.category) return false;
+  if (filters.sourceType && entry.source_type !== filters.sourceType) return false;
 
   if (filters.search) {
     const itemsText = entry.items ? entry.items.map((i) => i.text).join(" ") : "";
@@ -185,7 +204,7 @@ async function loadAllEntries() {
       if (!res.ok) throw new Error(`Failed to load ${meta.file}: ${res.status}`);
       const text = await res.text();
       const entries = jsyaml.load(text) || [];
-      return entries.map((e) => ({ ...e, _domain: meta.domain, _domainLabel: meta.label }));
+      return entries.map((e) => ({ ...e, _domain: meta.domain, _domainLabel: meta.label, _category: meta.category }));
     })
   );
   return results.flat();

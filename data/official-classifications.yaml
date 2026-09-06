@@ -1,0 +1,483 @@
+# Geography & official classifications — ONS/DfE statistical and administrative
+# classifications used in service/system design for targeting, eligibility, and
+# reporting, but which aren't GSS harmonised standards (see README for the distinction).
+
+- id: ons-soc2020-standard
+  label: Standard Occupational Classification 2020 (SOC 2020)
+  source: ONS / Standard Occupational Classification
+  source_type: official-classification
+  status: current
+  last_reviewed: 2026-09-04
+  source_published: 2020-02-01  # ONS materials date "SOC 2020" to February 2020; exact day unconfirmed
+  source_url: https://www.ons.gov.uk/methodology/classificationsandstandards/standardoccupationalclassificationsoc/soc2020
+  applies_to: []
+  use_case: [official-classification]
+  question: null
+  values:
+    - "1 Managers, directors and senior officials"
+    - "2 Professional occupations"
+    - "3 Associate professional occupations"
+    - "4 Administrative and secretarial occupations"
+    - "5 Skilled trades occupations"
+    - "6 Caring, leisure and other service occupations"
+    - "7 Sales and customer service occupations"
+    - "8 Process, plant and machine operatives"
+    - "9 Elementary occupations"
+  licence_status: ogl
+  licence_notes: >-
+    UK Open Government Licence v3.0 (government/publisher content) — see this repo's LICENSE
+    and README "Sources & licensing" section. Safe to reproduce with attribution.
+  items: null
+  response_scale: null
+  scoring: null
+  notes: >
+    The ONS source page states "the current Standard Occupational Classification (SOC) for the
+    UK is published in three volumes," confirming SOC2020 as current and superseding SOC2010
+    (referenced only under "Related information" as the prior edition). The 9 major groups
+    (1-digit codes) above are the top level of a four-level hierarchy — ONS's own Volume 1 page
+    states verbatim "SOC 2020 has nine major groups, 26 sub-major groups, 104 minor groups and
+    412 unit groups" (up from SOC2010's 9/25/90/369) — only the major-group level is reproduced
+    here; the full unit-group list lives in SOC 2020 Volume 1
+    (https://www.ons.gov.uk/methodology/classificationsandstandards/standardoccupationalclassificationsoc/soc2020/soc2020volume1structureanddescriptionsofunitgroups).
+    IMPORTANT — Extended SOC2020: ONS has also published a six-digit "Sub Unit Group" (SUG)
+    extension, adding a fifth, more granular level (1,384 SUGs, up from 412 four-digit unit
+    groups) — its own documentation states this "six-digit structure of SOC2020 is treated as
+    an extension to the classification," not a separate classification, so it's noted here
+    rather than added as its own entry
+    (https://www.ons.gov.uk/methodology/classificationsandstandards/standardoccupationalclassificationsoc/standardoccupationalclassificationsocextensionproject).
+    A SOC2020 revision consultation has also been run by ONS since this review; check
+    source_url directly if a live service depends on the exact current unit-group set. See also
+    the ons-nssec-standard entry in demographics.yaml, whose notes flag that NS-SEC's harmonised
+    question-battery documentation still derives NS-SEC from SOC2010 — ONS has separately
+    published SOC2020-rebased NS-SEC guidance (SOC 2020 Volume 3:
+    https://www.ons.gov.uk/methodology/classificationsandstandards/standardoccupationalclassificationsoc/soc2020/soc2020volume3thenationalstatisticssocioeconomicclassificationnssecrebasedonthesoc2020)
+    for services needing SOC2020 alignment.
+
+- id: ons-sic2007-standard
+  label: UK Standard Industrial Classification of Economic Activities 2007 (SIC 2007)
+  source: ONS / UK Standard Industrial Classification
+  source_type: official-classification
+  status: current
+  last_reviewed: 2026-09-04
+  source_published: 2008-01-01  # ONS's own page references "the original version - as published in 2008"
+  source_url: https://www.ons.gov.uk/methodology/classificationsandstandards/ukstandardindustrialclassificationofeconomicactivities/uksic2007
+  applies_to: []
+  use_case: [official-classification]
+  question: null
+  values: null  # too many categories to compactly list — see notes
+  licence_status: ogl
+  licence_notes: >-
+    UK Open Government Licence v3.0 (government/publisher content) — see this repo's LICENSE
+    and README "Sources & licensing" section. Safe to reproduce with attribution.
+  items: null
+  response_scale: null
+  scoring: null
+  notes: >
+    IMPORTANT: values is null because SIC 2007 has 21 sections (single letters A-U), 88
+    divisions (2-digit), 272 groups (3-digit), 615 classes (4-digit), plus UK-only 5-digit
+    subclasses — far too many to compactly or safely list here without truncating; use the
+    ONS Interactive SIC hierarchy tool linked from source_url for the full code list. The
+    source page's own description, quoted verbatim, is "The current Standard Industrial
+    Classification (SIC) used in classifying business establishments and other statistical
+    units by the type of economic activity in which they are engaged" — no supersession banner
+    is present. UK SIC 2007 is the UK's national version of NACE Rev. 2 (the EU's Statistical
+    Classification of Economic Activities), identical to it down to and including the 4-digit
+    class level. IMPORTANT CURRENCY FLAG: ONS has since published UK SIC 2026
+    (https://www.ons.gov.uk/methodology/classificationsandstandards/ukstandardindustrialclassificationofeconomicactivities/uksic2026),
+    finalised in April 2026 and formally published 3 August 2026 (668 classes across 22
+    sections: 132 new codes, 98 retired, 614 unchanged from SIC2007), aligned to a newer NACE/
+    ISIC revision. However, per the SIC2026 guidance page, "The Office for National Statistics
+    (ONS) does not mandate the use of SIC classifications by external organisations," adoption
+    is phased (Business Registers, then survey sampling, then National Accounts), and "the
+    earliest anticipated use of SIC 2026 in National Accounts is the 2031 Blue Book
+    publication" — SIC 2007 remains the operational classification for services and systems
+    right now, but check source_url and the SIC2026 pages directly given how live this
+    transition is; re-review this entry's status well before 2031.
+
+- id: mhclg-imd-2025-england
+  label: Indices of Deprivation 2025 (IoD2025) — Index of Multiple Deprivation, England
+  source: Ministry of Housing, Communities and Local Government (MHCLG)
+  source_type: official-classification
+  status: current
+  last_reviewed: 2026-09-04
+  source_published: 2025-10-30
+  source_url: https://www.gov.uk/government/statistics/english-indices-of-deprivation-2025
+  applies_to: []
+  use_case: [official-classification]
+  question: null
+  values:
+    - "Income Deprivation (22.5%)"
+    - "Employment Deprivation (22.5%)"
+    - "Education, Skills and Training Deprivation (13.5%)"
+    - "Health Deprivation and Disability (13.5%)"
+    - "Crime (9.3%)"
+    - "Barriers to Housing and Services (9.3%)"
+    - "Living Environment Deprivation (9.3%)"
+  licence_status: ogl
+  licence_notes: >-
+    UK Open Government Licence v3.0 (government/publisher content) — see this repo's LICENSE
+    and README "Sources & licensing" section. Safe to reproduce with attribution.
+  items: null
+  response_scale: null
+  scoring: null
+  notes: >
+    IMPORTANT — verified directly rather than assumed: IoD2025 has genuinely been published
+    (30 October 2025), so it is the live, current version, not IoD2019 — check any prior
+    assumption that "IoD2019 is still current" against this. Source states this release
+    "updates the English Indices of Deprivation 2019" and combines the 7 weighted domains
+    above into the Index of Multiple Deprivation (IMD), the headline combined measure, plus
+    supplementary indices (e.g. income deprivation affecting children/older people) not
+    reproduced here. Published at Lower-layer Super Output Area (LSOA) level, covering 33,755
+    small areas in England. IoD2025 is built from 55 indicators (up from 39 in IoD2019), with
+    expanded Crime, Barriers to Housing & Services, and Living Environment domains (e.g. new
+    anti-social behaviour, broadband connectivity, GP ratio, and noise-pollution indicators),
+    and includes a dedicated rural-deprivation analysis for the first time. MHCLG also
+    publishes a "Local Deprivation Explorer" interactive lookup tool alongside the statistical
+    release and technical/research reports — see source_url for the full suite. This is one of
+    four nation-specific entries in this domain (see scotgov-simd-2020, welshgov-wimd-2025, and
+    nisra-nimdm-2017) — deliberately not combined into one entry, since methodology, domain
+    sets, weightings, and publication dates differ enough between the four nations that a
+    single source_url/source_published pair would blur the distinction.
+
+- id: scotgov-simd-2020
+  label: Scottish Index of Multiple Deprivation 2020 (SIMD 2020v2)
+  source: Scottish Government
+  source_type: official-classification
+  status: current
+  last_reviewed: 2026-09-04
+  source_published: 2020-01-28
+  source_url: https://www.gov.scot/collections/scottish-index-of-multiple-deprivation-2020/
+  applies_to: []
+  use_case: [official-classification]
+  question: null
+  values:
+    - "Income"
+    - "Employment"
+    - "Health"
+    - "Education, Skills and Training"
+    - "Geographic Access to Services"
+    - "Crime"
+    - "Housing"
+  licence_status: ogl
+  licence_notes: >-
+    UK Open Government Licence v3.0 (government/publisher content) — this page's own footer
+    states "All content is available under the Open Government Licence v3.0, except for
+    graphic assets and where otherwise stated. © Crown Copyright" — see also this repo's
+    LICENSE and README "Sources & licensing" section. Safe to reproduce with attribution.
+  items: null
+  response_scale: null
+  scoring: null
+  notes: >
+    SIMD combines the 7 domains above (weighted, Income and Employment highest at 28% each,
+    Access lowest at 9%) into a relative ranking of Scotland's 6,976 data zones, from most
+    deprived (rank 1) to least deprived (rank 6,976). SIMD 2020 was first published 28 January
+    2020; the "v2" in this entry's label reflects a subsequent revision after "a problem
+    identified with the income domain ranks provided by the Department for Work and Pensions"
+    — only the income domain ranks and overall SIMD ranks were affected. IMPORTANT CURRENCY
+    CHECK: as of this review, SIMD 2020v2 remains the current published version — no SIMD 2026
+    has been published yet — but the Scottish Government's own November 2024 blog post
+    ("Our plans to update the Scottish Index of Multiple Deprivation") states a SIMD 2026
+    update is planned, timed to the availability of 2022 Census data zone geography, and
+    "anticipated" for later in 2026; re-check source_url before relying on 2020v2 being current
+    much beyond this review date. This is one of four nation-specific entries in this domain —
+    see mhclg-imd-2025-england, welshgov-wimd-2025, and nisra-nimdm-2017.
+
+- id: welshgov-wimd-2025
+  label: Welsh Index of Multiple Deprivation 2025 (WIMD 2025)
+  source: Welsh Government
+  source_type: official-classification
+  status: current
+  last_reviewed: 2026-09-04
+  source_published: 2025-11-27
+  source_url: https://www.gov.wales/welsh-index-multiple-deprivation-2025-series
+  applies_to: []
+  use_case: [official-classification]
+  question: null
+  values:
+    - "Income (22%)"
+    - "Employment (20%)"
+    - "Health (15%)"
+    - "Education (14%)"
+    - "Access to services (10%)"
+    - "Housing (9%)"
+    - "Community safety (5%)"
+    - "Physical environment (5%)"
+  licence_status: ogl
+  licence_notes: >-
+    UK Open Government Licence v3.0 / Crown copyright (government/publisher content) — see
+    this repo's LICENSE and README "Sources & licensing" section. Safe to reproduce with
+    attribution; check the linked gov.wales copyright statement for any asset-specific
+    exceptions before reproducing non-text content.
+  items: null
+  response_scale: null
+  scoring: null
+  notes: >
+    IMPORTANT — verified directly rather than assumed: WIMD 2025 has already been published
+    (27 November 2025) and supersedes WIMD 2019 — check any prior assumption that "WIMD 2019 is
+    still current" against this; the WIMD 2019 page itself now carries the notice "This is not
+    the latest release in the series." WIMD 2025 is calculated from the 8 weighted domains
+    above across all 1,917 Lower Layer Super Output Areas (LSOAs) in Wales (up from 1,909 for
+    WIMD 2019, following an ONS post-Census-2021 LSOA boundary review), ranking each from 1
+    (most deprived) to 1,917 (least deprived). Produced by Welsh Government statisticians as an
+    accredited official statistic under the Code of Practice for Statistics. This is one of
+    four nation-specific entries in this domain — see mhclg-imd-2025-england,
+    scotgov-simd-2020, and nisra-nimdm-2017.
+
+- id: nisra-nimdm-2017
+  label: Northern Ireland Multiple Deprivation Measure 2017 (NIMDM 2017)
+  source: NISRA (Northern Ireland Statistics and Research Agency)
+  source_type: official-classification
+  status: current
+  last_reviewed: 2026-09-04
+  source_published: 2017-11-23
+  source_url: https://www.nisra.gov.uk/statistics/deprivation/northern-ireland-multiple-deprivation-measure-2017-nimdm2017
+  applies_to: []
+  use_case: [official-classification]
+  question: null
+  values:
+    - "Income Deprivation"
+    - "Employment Deprivation"
+    - "Health Deprivation and Disability"
+    - "Education, Skills and Training Deprivation"
+    - "Access to Services"
+    - "Living Environment"
+    - "Crime and Disorder"
+  licence_status: ogl
+  licence_notes: >-
+    UK Open Government Licence v3.0 / Crown copyright (the page's own footer states "© Crown
+    Copyright") — see this repo's LICENSE and README "Sources & licensing" section. Safe to
+    reproduce with attribution.
+  items: null
+  response_scale: null
+  scoring: null
+  notes: >
+    NIMDM 2017 combines the 7 weighted domains above (38 indicators in total) to rank Northern
+    Ireland's 890 Super Output Areas (SOAs) from most deprived (rank 1) to least deprived (rank
+    890). Published 23 November 2017. No newer edition has been found as of this review — this
+    is the oldest of the four nations' indices tracked here (England IoD2025, Scotland SIMD
+    2020v2, Wales WIMD2025 have all been refreshed more recently), so it is recorded as current
+    but check source_url directly given how much more recently the other three nations have
+    updated. This is one of four nation-specific entries in this domain — see
+    mhclg-imd-2025-england, scotgov-simd-2020, and welshgov-wimd-2025 — deliberately kept
+    separate rather than combined into one entry, since methodology, domain sets, weightings,
+    and publication dates differ enough between the four nations that a single
+    source_url/source_published pair would blur the distinction.
+
+- id: ons-rural-urban-classification-2021
+  label: Rural Urban Classification 2021
+  source: ONS Geography (with DEFRA, Welsh Government and the Government Geography Profession)
+  source_type: official-classification
+  status: current
+  last_reviewed: 2026-09-04
+  source_published: 2025-03-06
+  source_url: https://www.ons.gov.uk/methodology/geography/geographicalproducts/ruralurbanclassifications/2021ruralurbanclassification
+  applies_to: []
+  use_case: [official-classification]
+  question: null
+  values:
+    - "Urban: Nearer to a major town or city"
+    - "Urban: Further from a major town or city"
+    - "Larger Rural: Nearer to a major town or city"
+    - "Larger Rural: Further from a major town or city"
+    - "Smaller Rural: Nearer to a major town or city"
+    - "Smaller Rural: Further from a major town or city"
+  licence_status: ogl
+  licence_notes: >-
+    UK Open Government Licence v3.0 (government/publisher content) — see this repo's LICENSE
+    and README "Sources & licensing" section. Safe to reproduce with attribution.
+  items: null
+  response_scale: null
+  scoring: null
+  notes: >
+    Published 6 March 2025, superseding the 2011 Rural Urban Classification as the current
+    version (the 2011 version remains available on the same collection page for historical
+    comparison, not as a live alternative). Output-area-level categories shown above; a
+    separate, coarser Local Authority District-level classification also exists ("Rural
+    majority," "Intermediate rural," "Intermediate urban," "Urban") — see source_url for both.
+    The classification "provides a consistent and standardised method for categorising
+    geographies as either rural or urban, based on: address density, physical settlement form,
+    population size, [and] relative access to major towns and cities (populations of over
+    75,000 people)" (source's own description). IMPORTANT: the source explicitly warns the 2021
+    methodology changed from 2011's — the "market"/"hub town" treatment of settlements with
+    10,000-30,000 population "has not been applied for the 2021 classification" — so figures
+    aren't directly comparable across the two versions; don't assume a straight read-across
+    when migrating a service from the 2011 to the 2021 classification.
+
+- id: ons-output-area-classification-2021
+  label: Output Area Classification 2021/2 (OAC)
+  source: Geographic Data Service (GeoDS), in partnership with ONS
+  source_type: official-classification
+  status: current
+  last_reviewed: 2026-09-04
+  source_published: 2025-01-01  # dataset page cites "version 3.2, January 2025"; exact day unconfirmed
+  source_url: https://data.geods.ac.uk/dataset/output-area-classification-2021
+  applies_to: []
+  use_case: [official-classification]
+  question: null
+  values: null  # source doesn't publish a compact supergroup-name list on the dataset landing page itself — see notes
+  licence_status: ogl
+  licence_notes: >-
+    UK Open Government Licence v3.0 — the dataset page itself states "UK Open Government
+    Licence (OGL)" and carries an Open Data badge — see this repo's LICENSE and README
+    "Sources & licensing" section. Safe to reproduce with attribution.
+  items: null
+  response_scale: null
+  scoring: null
+  notes: >
+    IMPORTANT: values is left null because the dataset landing page describes the structure
+    ("8 different supergroups, into which are nested 21 groups and 52 sub-groups") without
+    printing the supergroup/group/subgroup names verbatim on that page — the actual names live
+    in the accompanying pen portraits and technical report (linked from source_url), not
+    reproduced here to avoid guessing at wording that should be quoted exactly. This is a
+    hierarchical geodemographic classification — "a hierarchical geodemographic classification
+    across the UK which identifies areas of the country with similar characteristics" (source's
+    own description) — distinct from the Rural Urban Classification above (which classifies by
+    rurality/access) and from NS-SEC/SOC (which classify people, not places). IMPORTANT
+    CURRENCY NOTE: ONS's own methodology page
+    (https://www.ons.gov.uk/methodology/geography/geographicalproducts/areaclassifications/2021residentialbasedareaclassifications)
+    covers an earlier, England/Wales-only "2021 interim OAC" and states plainly "This work has
+    been superseded by the 2021 and 2022 residential-based area classifications UK" — that
+    successor UK-wide product (covering England, Wales, Scotland, and Northern Ireland, version
+    3.2 as of January 2025) is what source_url points to; don't cite the England/Wales-only
+    interim 2021 OAC as current. This UK-wide OAC supersedes the 2011 OAC. A related but
+    distinct product, the "2021/2022 Local Authority District Classification" (6 supergroups,
+    19 groups, 32 subgroups, covering 374 UK local authorities), classifies at LAD level rather
+    than Output Area level — not reproduced as its own entry here, see
+    https://www.ons.gov.uk/methodology/geography/geographicalproducts/areaclassifications/2021and2022residentialbasedareaclassifications
+    if LAD-level clustering is what's actually needed instead of OA-level.
+
+- id: ons-geography-hierarchy-gss-codes
+  label: ONS statistical geography hierarchy and GSS coding system
+  source: ONS Geography
+  source_type: official-classification
+  status: current
+  last_reviewed: 2026-09-04
+  source_published: null  # continuously maintained reference geography, not a single dated publication
+  source_url: https://www.ons.gov.uk/methodology/geography/ukgeographies/statisticalgeographies
+  applies_to: []
+  use_case: [official-classification]
+  question: null
+  values:
+    - "Output Area (OA)"
+    - "Lower layer Super Output Area (LSOA)"
+    - "Middle layer Super Output Area (MSOA)"
+    - "Local Authority District"
+    - "Region"
+    - "Country"
+  licence_status: ogl
+  licence_notes: >-
+    UK Open Government Licence v3.0 (government/publisher content) — see this repo's LICENSE
+    and README "Sources & licensing" section. Safe to reproduce with attribution.
+  items: null
+  response_scale: null
+  scoring: null
+  notes: >
+    The source states "Output Areas (OAs) are the lowest level of geographical area for census
+    statistics," "Lower layer Super Output Areas (LSOAs) are made up of groups of Output Areas
+    (OAs)," and "Middle layer Super Output Areas (MSOAs) are made up of groups of Lower layer
+    Super Output Areas (LSOAs)" — each level nests cleanly inside exactly one of the level
+    above, so data aggregates upward from OA to LSOA to MSOA to Local Authority District to
+    Region to Country without overlap or double-counting. Census 2021 area-type definitions
+    (https://www.ons.gov.uk/census/census2021dictionary/areatypedefinitions) give population
+    thresholds: OAs "usually resident population of between 100 and 625 persons," LSOAs
+    "usually resident population between 1,000 and 3,000 persons," MSOAs "usually resident
+    population between 5,000 and 15,000 persons." Scotland and Northern Ireland use equivalent
+    but differently named small-area geographies (Data Zones and Super Output Areas
+    respectively) rather than LSOA/MSOA — check the relevant nation's statistics agency before
+    assuming LSOA/MSOA terminology applies UK-wide. GSS (Government Statistical Service) codes
+    are the standard identifier for every level: a fixed nine-character alphanumeric code,
+    implemented from 1 January 2011, replacing the previous hierarchical ONS coding scheme —
+    "there is no relation between the code for a lower-tier area and the corresponding parent
+    area" (source: ONS names-and-codes-for-administrative-geography page,
+    https://www.ons.gov.uk/methodology/geography/geographicalproducts/namescodesandlookups/namesandcodeslistings/namesandcodesforadministrativegeography).
+    The structure is a one-letter country prefix (e.g. E = England, W = Wales, S = Scotland, N
+    = Northern Ireland), then two digits for the geography/entity type (e.g. 01 = LSOA, 02 =
+    MSOA), then six digits uniquely identifying the individual instance — for example, English
+    LSOA codes run E01017453-E01017554 in one worked example on the source page. See the
+    ons-local-authority-type-classification entry below for the specific entity-type code
+    prefixes (E06-E12) used for local authority geographies.
+
+- id: dfe-gias-school-type-classification
+  label: School/establishment type classification (Get Information about Schools, GIAS)
+  source: Department for Education (DfE) / Get Information about Schools
+  source_type: official-classification
+  status: current
+  last_reviewed: 2026-09-04
+  source_published: null  # GIAS is a continuously updated live register, not a single dated publication
+  source_url: https://get-information-schools.service.gov.uk/glossary
+  applies_to: []
+  use_case: [official-classification]
+  question: null
+  values: null  # GIAS doesn't publish one single compact canonical list of every establishment-type value on a static page — see notes
+  licence_status: ogl
+  licence_notes: >-
+    UK Open Government Licence v3.0 — the GIAS site footer states "All content is available
+    under the Open Government Licence v3.0, except where otherwise stated" alongside a "©
+    Crown copyright" notice — see also this repo's LICENSE and README "Sources & licensing"
+    section. Safe to reproduce with attribution.
+  items: null
+  response_scale: null
+  scoring: null
+  notes: >
+    IMPORTANT: values is left null rather than reconstructed, because GIAS's live "Type of
+    establishment" field and its advanced-search filter (a JavaScript-driven interface not
+    reliably extractable as static text) are the actual definitive, current source for the
+    complete value set, and this tracker doesn't want to publish a partial or slightly-stale
+    hand-typed copy of it. The GIAS glossary (source_url) confirms and defines a broad set of
+    establishment types spanning maintained schools (e.g. Community School, Community Special
+    School, Foundation School, Foundation Special School, Voluntary Aided School — Voluntary
+    Controlled School also exists as a maintained category but wasn't itself defined on the
+    glossary page checked), academies (Academy Converter, Academy Sponsor Led, Academy
+    Special), Free Schools, independent-sector types (Independent School, Independent Special
+    School, Non-maintained Special School), alternative provision (Pupil Referral Unit, Secure
+    16 to 19 Academy), and further categories including City Technology Colleges, University
+    Technical Colleges, Studio Schools, Sixth Form Colleges, Local Authority Nursery Schools,
+    Children's Centres, European Schools, and British Schools Overseas — check source_url and
+    GIAS's own advanced search filters directly for the exact, current, complete list and its
+    grouping (GIAS also exposes a broader "Establishment Type Group" field, e.g. grouping
+    academies together) before building an eligibility or reporting field on this.
+
+- id: ons-local-authority-type-classification
+  label: Local authority type classification (England)
+  source: ONS Geography
+  source_type: official-classification
+  status: current
+  last_reviewed: 2026-09-04
+  source_published: 2023-01-03  # ONS names-and-codes-for-administrative-geography page's own "last updated" date
+  source_url: https://www.ons.gov.uk/methodology/geography/ukgeographies/administrativegeography/england
+  applies_to: []
+  use_case: [official-classification]
+  question: null
+  values:
+    - "Region (E12)"
+    - "County (E10)"
+    - "Metropolitan County (E11)"
+    - "Non-Metropolitan District (E07)"
+    - "Metropolitan District (E08)"
+    - "Unitary Authority (E06)"
+    - "London Borough (E09)"
+  licence_status: ogl
+  licence_notes: >-
+    UK Open Government Licence v3.0 (government/publisher content) — see this repo's LICENSE
+    and README "Sources & licensing" section. Safe to reproduce with attribution.
+  items: null
+  response_scale: null
+  scoring: null
+  notes: >
+    The GSS entity-type code prefix is shown in brackets above (see ons-geography-hierarchy-
+    gss-codes for how these fit into the wider nine-character GSS code structure). England's
+    local government is two-tier in most of the country (County Councils plus District, Borough
+    or City Councils underneath) and single-tier elsewhere (Unitary Authorities, London
+    Boroughs, and Metropolitan Districts/Boroughs each provide all local services directly) —
+    per GOV.UK's own plain-English description: "Many parts of England have 2 tiers of local
+    government: county councils and district, borough or city councils. In some parts of the
+    country, there's just 1 (unitary) tier of local government providing all the local
+    services" (https://www.gov.uk/understand-how-your-council-works). District, borough, and
+    city councils are all the same tier/type under this classification (E07 non-metropolitan
+    district), differing only in the honorific the individual council uses, not in function or
+    GSS entity code. Parish, town, and community councils sit below this classification
+    entirely and aren't covered here. Scotland, Wales, and Northern Ireland each use their own
+    single-tier local authority structures with their own GSS country-prefixed entity codes
+    (S12, W06, N09 respectively) rather than this England-specific 6-type breakdown — check the
+    relevant nation's page under https://www.ons.gov.uk/methodology/geography/ukgeographies/administrativegeography
+    before assuming this classification applies UK-wide.

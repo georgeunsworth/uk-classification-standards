@@ -17,6 +17,9 @@
 
   <div class="controls">
     <input type="search" id="search" placeholder="Search question, label, source, or notes…" aria-label="Search entries">
+    <select id="category-filter" aria-label="Filter by category">
+      <option value="">All categories</option>
+    </select>
     <select id="status-filter" aria-label="Filter by status">
       <option value="">All statuses</option>
       <option value="current">Current</option>
@@ -34,12 +37,23 @@
       <option value="">Any use case</option>
       <option value="demographic-survey">Demographic survey</option>
       <option value="screening-instrument">Screening instrument</option>
+      <option value="support-needs-identification">Support needs identification</option>
       <option value="no-standard-gap">No standard exists (gap)</option>
     </select>
-    <!-- "Clinical record" is deliberately omitted here: every clinical-record entry is an
-         identifier/coded flag with no `question` or `items`, and none are tagged
-         no-standard-gap, so this filter could never match anything on this page. It's
-         still offered on index.html, where it's meaningful. -->
+    <!-- "Clinical record" and "Official classification" are deliberately omitted here:
+         those entries are identifiers/coded flags/derived classifications with no
+         `question` or `items`, and none are tagged no-standard-gap, so these filters
+         could never match anything on this page. Both are still offered on index.html,
+         where they're meaningful. -->
+    <select id="source-type-filter" aria-label="Filter by source type">
+      <option value="">Any source type</option>
+      <option value="harmonised-standard">Harmonised standard</option>
+      <option value="survey-instrument">Survey instrument</option>
+      <option value="cross-government-taxonomy">Cross-government taxonomy</option>
+      <option value="regulatory-framework">Regulatory framework</option>
+      <option value="sector-eligibility-framework">Sector eligibility framework</option>
+      <option value="international-standard">International standard</option>
+    </select>
     <select id="licence-filter" aria-label="Filter by licence">
       <option value="">Any licence</option>
       <option value="ogl">OGL</option>
@@ -63,10 +77,14 @@
   const entriesEl = document.getElementById("entries");
   const countEl = document.getElementById("count");
   const searchEl = document.getElementById("search");
+  const categoryEl = document.getElementById("category-filter");
   const statusEl = document.getElementById("status-filter");
   const populationEl = document.getElementById("population-filter");
   const useCaseEl = document.getElementById("use-case-filter");
+  const sourceTypeEl = document.getElementById("source-type-filter");
   const licenceEl = document.getElementById("licence-filter");
+
+  categoryEl.insertAdjacentHTML("beforeend", CATEGORIES.map((c) => `<option value="${escapeHtml(c)}">${escapeHtml(c)}</option>`).join(""));
 
   let allEntries = [];
 
@@ -95,14 +113,14 @@
     if (questions.length === 0 && gaps.length === 0 && licensed.length === 0) return "";
 
     const questionsHtml = questions.length
-      ? questions.map((e) => renderEntryCard(e, { heading: questionHeading(e), headingTag: "h3" })).join("")
+      ? questions.map((e) => renderEntryCard(e, { heading: questionHeading(e), headingTag: "h4" })).join("")
       : "";
 
     const gapsHtml = gaps.length
       ? `
         <div class="domain-gaps">
-          <h3 class="gaps-heading">Known gaps</h3>
-          ${gaps.map((e) => renderEntryCard(e, { headingTag: "h3" })).join("")}
+          <h4 class="gaps-heading">Known gaps</h4>
+          ${gaps.map((e) => renderEntryCard(e, { headingTag: "h4" })).join("")}
         </div>
       `
       : "";
@@ -110,15 +128,15 @@
     const licensedHtml = licensed.length
       ? `
         <div class="domain-licensed">
-          <h3 class="licensed-heading">Licensed instruments — not reproduced here</h3>
-          ${licensed.map((e) => renderEntryCard(e, { headingTag: "h3" })).join("")}
+          <h4 class="licensed-heading">Licensed instruments — not reproduced here</h4>
+          ${licensed.map((e) => renderEntryCard(e, { headingTag: "h4" })).join("")}
         </div>
       `
       : "";
 
     return `
       <section class="domain-section">
-        <h2 class="domain-heading">${escapeHtml(meta.label)}</h2>
+        <h3 class="domain-heading">${escapeHtml(meta.label)}</h3>
         ${questionsHtml}
         ${gapsHtml}
         ${licensedHtml}
@@ -126,12 +144,30 @@
     `;
   }
 
+  // Categories group domains for navigation. A category with no eligible content in any
+  // of its domains renders nothing, same as an individual domain section.
+  function renderCategorySection(category, filteredEntries) {
+    const domainSections = DOMAIN_FILES
+      .filter((meta) => meta.category === category)
+      .map((meta) => renderDomainSection(meta, filteredEntries))
+      .join("");
+    if (!domainSections.trim()) return "";
+    return `
+      <section class="category-section">
+        <h2 class="category-heading">${escapeHtml(category)}</h2>
+        ${domainSections}
+      </section>
+    `;
+  }
+
   function applyFilters() {
     const filters = {
       search: searchEl.value.trim().toLowerCase(),
+      category: categoryEl.value,
       status: statusEl.value,
       population: populationEl.value,
       useCase: useCaseEl.value,
+      sourceType: sourceTypeEl.value,
       licence: licenceEl.value,
     };
 
@@ -142,7 +178,7 @@
     const eligible = filtered.filter(isEligible);
     countEl.textContent = `${eligible.length} of ${allEntries.filter(isEligible).length} questions, gaps & licensed instruments`;
 
-    const sections = DOMAIN_FILES.map((meta) => renderDomainSection(meta, filtered)).join("");
+    const sections = CATEGORIES.map((category) => renderCategorySection(category, filtered)).join("");
     entriesEl.innerHTML = sections.trim()
       ? sections
       : '<p class="empty">No questions, gaps, or licensed instruments match your filters.</p>';
@@ -161,9 +197,11 @@
   wireCopyButtons(entriesEl, () => allEntries);
 
   searchEl.addEventListener("input", applyFilters);
+  categoryEl.addEventListener("change", applyFilters);
   statusEl.addEventListener("change", applyFilters);
   populationEl.addEventListener("change", applyFilters);
   useCaseEl.addEventListener("change", applyFilters);
+  sourceTypeEl.addEventListener("change", applyFilters);
   licenceEl.addEventListener("change", applyFilters);
   loadAll();
 </script>
