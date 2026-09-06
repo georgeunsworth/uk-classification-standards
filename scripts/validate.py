@@ -34,11 +34,16 @@ REQUIRED_FIELDS = {
     "applies_to", "use_case", "question", "values",
     "licence_status", "licence_notes", "items", "response_scale", "scoring",
 }
-VALID_SOURCE_TYPES = {"harmonised-standard", "clinical-dataset", "survey-instrument"}
+VALID_SOURCE_TYPES = {
+    "harmonised-standard", "clinical-dataset", "survey-instrument",
+    "official-classification", "cross-government-taxonomy", "regulatory-framework",
+    "sector-eligibility-framework", "international-standard",
+}
 VALID_STATUSES = {"current", "under-review", "archived", "superseded"}
 VALID_POPULATION_TAGS = {"adults", "children-young-people"}
 VALID_USE_CASE_TAGS = {
     "demographic-survey", "clinical-record", "no-standard-gap", "screening-instrument",
+    "support-needs-identification", "official-classification",
 }
 VALID_LICENCE_STATUSES = {"ogl", "public-domain", "restricted"}
 

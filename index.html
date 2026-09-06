@@ -17,6 +17,9 @@
 
   <div class="controls">
     <input type="search" id="search" placeholder="Search label, source, or notes…" aria-label="Search entries">
+    <select id="category-filter" aria-label="Filter by category">
+      <option value="">All categories</option>
+    </select>
     <select id="status-filter" aria-label="Filter by status">
       <option value="">All statuses</option>
       <option value="current">Current</option>
@@ -35,7 +38,20 @@
       <option value="demographic-survey">Demographic survey</option>
       <option value="clinical-record">Clinical record</option>
       <option value="screening-instrument">Screening instrument</option>
+      <option value="support-needs-identification">Support needs identification</option>
+      <option value="official-classification">Official classification</option>
       <option value="no-standard-gap">No standard exists (gap)</option>
+    </select>
+    <select id="source-type-filter" aria-label="Filter by source type">
+      <option value="">Any source type</option>
+      <option value="harmonised-standard">Harmonised standard</option>
+      <option value="clinical-dataset">Clinical dataset</option>
+      <option value="survey-instrument">Survey instrument</option>
+      <option value="official-classification">Official classification</option>
+      <option value="cross-government-taxonomy">Cross-government taxonomy</option>
+      <option value="regulatory-framework">Regulatory framework</option>
+      <option value="sector-eligibility-framework">Sector eligibility framework</option>
+      <option value="international-standard">International standard</option>
     </select>
     <select id="licence-filter" aria-label="Filter by licence">
       <option value="">Any licence</option>
@@ -60,19 +76,25 @@
   const entriesEl = document.getElementById("entries");
   const countEl = document.getElementById("count");
   const searchEl = document.getElementById("search");
+  const categoryEl = document.getElementById("category-filter");
   const statusEl = document.getElementById("status-filter");
   const populationEl = document.getElementById("population-filter");
   const useCaseEl = document.getElementById("use-case-filter");
+  const sourceTypeEl = document.getElementById("source-type-filter");
   const licenceEl = document.getElementById("licence-filter");
+
+  categoryEl.insertAdjacentHTML("beforeend", CATEGORIES.map((c) => `<option value="${escapeHtml(c)}">${escapeHtml(c)}</option>`).join(""));
 
   let allEntries = [];
 
   function applyFilters() {
     const filters = {
       search: searchEl.value.trim().toLowerCase(),
+      category: categoryEl.value,
       status: statusEl.value,
       population: populationEl.value,
       useCase: useCaseEl.value,
+      sourceType: sourceTypeEl.value,
       licence: licenceEl.value,
     };
 
@@ -106,9 +128,11 @@
   wireCopyButtons(entriesEl, () => allEntries);
 
   searchEl.addEventListener("input", applyFilters);
+  categoryEl.addEventListener("change", applyFilters);
   statusEl.addEventListener("change", applyFilters);
   populationEl.addEventListener("change", applyFilters);
   useCaseEl.addEventListener("change", applyFilters);
+  sourceTypeEl.addEventListener("change", applyFilters);
   licenceEl.addEventListener("change", applyFilters);
   loadAll();
 </script>

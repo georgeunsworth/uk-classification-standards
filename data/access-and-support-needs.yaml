@@ -1,0 +1,630 @@
+# NHS standards for identifying, recording, and flagging a person's information/communication
+# support needs and reasonable adjustments — distinct from the disability *status* question in
+# demographics.yaml (Equality Act 2010 test) and the impairment *type* question already tracked
+# in mental-health.yaml (ons-impairment-standard). This domain covers the administrative flags a
+# referral/intake form needs once a need has been identified, not the identification question
+# itself. See ../README.md for schema.
+
+- id: nhs-accessible-information-standard
+  label: Accessible Information Standard (DAPB1605) — information and communication support needs
+  source: NHS England / Data Alliance Partnership Board (DAPB)
+  source_type: clinical-dataset
+  status: current
+  last_reviewed: 2026-08-31
+  source_published: 2025-06-30
+  source_url: https://www.england.nhs.uk/publication/accessible-information-standard/
+  applies_to: []
+  use_case: [clinical-record]
+  question: null
+  values:
+    - "Accessible information – communication support"
+    - "Accessible Information – requires communication professional"
+    - "Accessible Information – requires specific contact method"
+    - "Accessible Information – requires specific information format"
+  licence_status: ogl
+  licence_notes: >-
+    UK Open Government Licence v3.0 (government/publisher content) — see this repo's LICENSE
+    and README "Sources & licensing" section. Safe to reproduce with attribution.
+  items: null
+  response_scale: null
+  scoring: null
+  notes: >
+    Mandatory NHS/social-care standard (version 4.0, approved by the Data Assurance Board
+    3 June 2025, published 30 June 2025) requiring providers to identify, record, flag, share,
+    meet, and review the information and communication support needs of patients, service users,
+    and — where relevant — their carers, where those needs relate to a disability, impairment, or
+    sensory loss (e.g. British Sign Language, braille, easy read, advocate/communication
+    professional required). Source, quoted directly: "This specifically applies to people who
+    have information or communication support needs related to a disability, impairment or
+    sensory loss." The standard defines 4 coded subsets (listed above, quoted verbatim) within
+    the Data Dictionary for Care (dd4c), recorded via SNOMED CT/Read v2/CTV3 codes in electronic
+    systems or human-readable definitions on paper. Unlike a screening instrument, it does NOT
+    mandate one fixed question — implementation guidance instead requires providers to "establish
+    one or more standard question to identify people's needs" and gives only an illustrative
+    example ("Please let us know: if you find it hard to read our letters; if you need someone to
+    support you at appointments; if you need information in alternative formats..."), so `question`
+    is left null rather than presenting that example as the official wording. `applies_to` is left
+    empty deliberately: the standard's own scope language repeatedly says "NHS and adult social
+    care services," which is ambiguous between (a) NHS services generally, which cover all ages,
+    with "adult" qualifying only the social-care leg, and (b) adult-only scope throughout — the
+    source doesn't resolve this explicitly, so don't guess; check source_url directly if the exact
+    age scope matters for your form. Complements ons-impairment-standard (mental-health.yaml),
+    which covers the earlier "what type of impairment" question — this standard is what a service
+    does administratively once a communication/access need has been identified. See also
+    nhs-reasonable-adjustment-digital-flag below, the NHS Spine flag that operationalises this
+    standard's requirement to share needs across care settings. Full conformance/assurance dates
+    run to 30 June 2027.
+
+- id: nhs-reasonable-adjustment-digital-flag
+  label: Reasonable Adjustment Digital Flag (DAPB4019)
+  source: NHS England / Data Assurance Board (NHS Spine, Patient Flags service)
+  source_type: clinical-dataset
+  status: current
+  last_reviewed: 2026-08-31
+  source_published: 2025-12-19
+  source_url: https://digital.nhs.uk/services/reasonable-adjustment-flag/impairment-and-adjustment-codes
+  applies_to: []
+  use_case: [clinical-record]
+  question: null
+  values:
+    - "Communication support"
+    - "Requires communication professional"
+    - "Requires specific contact method"
+    - "Requires specific information format"
+    - "Additional communication needs and support"
+    - "Community language support"
+    - "Adjustments for providing additional support to patients"
+    - "Adjustments for individual care requirements"
+    - "Adjustments in relation to the environment of care"
+    - "Adjustments to support additional needs"
+    - "Bespoke reasonable adjustments"
+  licence_status: ogl
+  licence_notes: >-
+    UK Open Government Licence v3.0 (government/publisher content) — see this repo's LICENSE
+    and README "Sources & licensing" section. Safe to reproduce with attribution.
+  items: null
+  response_scale: null
+  scoring: null
+  notes: >
+    National digital flag on the NHS Spine, distinct from but linked to the Accessible
+    Information Standard above. Source, quoted directly: "The Reasonable Adjustment Flag is part
+    of the Patient Flags service. It is a national record that shows a person needs accommodations
+    and may include details about their impairments and necessary adjustments," developed "to
+    enable health and care workers to record, share and view details of reasonable adjustments
+    across the NHS, wherever the person is treated." Legal basis is the Equality Act 2010
+    reasonable-adjustments duty (see also the ons-disability-equality-act-2010 entry in
+    demographics.yaml, which covers the separate disability-status question). Recording has two
+    parts: an impairment-type code — reuses the same categories as ons-impairment-standard
+    (mental-health.yaml), plus a "prefer not to say" option not present in that GSS standard, so
+    check both if building a full picker — and the adjustment-category codes listed above
+    (`values`), which describe the *type* of adjustment required rather than a diagnosis. No
+    single fixed survey question is published for either part; codes are selected from a
+    structured SNOMED CT picker rather than answered as free text, so `question` is left null, same
+    as the administrative flags in referral-identifiers.yaml. `applies_to` is left empty: the
+    source describes scope as "for health and social care workers in any care setting who are
+    treating patients that require reasonable adjustments" without an explicit age statement —
+    don't infer all-ages from the absence of a restriction. Compliance dates: implementation
+    19 December 2025, full conformance 31 March 2027 (health) / 31 October 2027 (social care).
+
+- id: nhs-reasonable-adjustment-flag-need-codes
+  label: Reasonable Adjustment Digital Flag — communication and access need codes (DAPB4019)
+  source: NHS England Digital / Patient Flags service
+  source_type: clinical-dataset
+  status: current
+  last_reviewed: 2026-08-31
+  source_published: 2025-12-19
+  source_url: https://digital.nhs.uk/services/reasonable-adjustment-flag/impairment-and-adjustment-codes
+  applies_to: []
+  use_case: [clinical-record]
+  question: null
+  values:
+    - "Communication support: Does lip read"
+    - "Communication support: Does use communication device"
+    - "Communication support: Does use hearing aid"
+    - "Communication support: Preferred method of communication: British Sign Language"
+    - "Communication support: Preferred method of communication: written"
+    - "Communication support: Requires aphasia-friendly communication"
+    - "Communication support: Requires support for expressive communication needs"
+    - "Communication support: Requires support for receptive communication needs"
+    - "Communication support: Uses a citizen advocate"
+    - "Communication support: Uses a legal advocate"
+    - "Communication support: Uses a non-speech system for communication"
+    - "Communication support: Uses alternative communication skill"
+    - "Communication support: Uses augmentative and alternative communication"
+    - "Communication support: Uses British sign language"
+    - "Communication support: Uses cued speech transliterator"
+    - "Communication support: Uses deafblind intervener"
+    - "Communication support: Uses Deafblind Manual Alphabet"
+    - "Communication support: Uses electronic note taker"
+    - "Communication support: Uses functional communication skills"
+    - "Communication support: Uses gestures for communication"
+    - "Communication support: Uses hearing loop"
+    - "Communication support: Uses high technology communication device"
+    - "Communication support: Uses lipspeaker"
+    - "Communication support: Uses low technology communication device"
+    - "Communication support: Uses Makaton sign language"
+    - "Communication support: Uses manual note taker"
+    - "Communication support: Uses non-powered communication device"
+    - "Communication support: Uses non-verbal communication"
+    - "Communication support: Uses objects for communication"
+    - "Communication support: Uses personal audio recording device to record information"
+    - "Communication support: Uses Personal Communication Passport"
+    - "Communication support: Uses photographs for communication"
+    - "Communication support: Uses powered communication device"
+    - "Communication support: Uses sign language"
+    - "Communication support: Uses speech to text reporter"
+    - "Communication support: Uses symbols for communication"
+    - "Communication support: Uses telecommunications device for the deaf"
+    - "Communication support: Uses verbal communication"
+    - "Communication support: Uses voice amplifier to support communication"
+    - "Communication support: Uses voice output communication aid"
+    - "Requires communication professional: British Sign Language interpreter needed"
+    - "Requires communication professional: Hands-on signing interpreter needed"
+    - "Requires communication professional: Makaton Sign Language interpreter needed"
+    - "Requires communication professional: Needs an advocate"
+    - "Requires communication professional: Requires deafblind block alphabet interpreter"
+    - "Requires communication professional: Requires deafblind communicator guide"
+    - "Requires communication professional: Requires deafblind haptic communication interpreter"
+    - "Requires communication professional: Requires deafblind manual alphabet interpreter"
+    - "Requires communication professional: Requires lipspeaker"
+    - "Requires communication professional: Requires manual note taker"
+    - "Requires communication professional: Requires sighted guide"
+    - "Requires communication professional: Requires speech and language therapist support to communicate"
+    - "Requires communication professional: Requires speech to text reporter"
+    - "Requires communication professional: Sign Supported English interpreter needed"
+    - "Requires communication professional: Visual frame sign language interpreter needed"
+    - "Requires specific contact method: Requires audible alert"
+    - "Requires specific contact method: Requires contact by email"
+    - "Requires specific contact method: Requires contact by letter"
+    - "Requires specific contact method: Requires contact by short message service text message"
+    - "Requires specific contact method: Requires contact by telephone"
+    - "Requires specific contact method: Requires contact by text relay"
+    - "Requires specific contact method: Requires contact via carer"
+    - "Requires specific contact method: Requires tactile alert"
+    - "Requires specific contact method: Requires visual alert"
+    - "Requires specific information format: Requires healthcare information recording on personal audio recording device"
+    - "Requires specific information format: Requires information by email"
+    - "Requires specific information format: Requires information in aphasia-accessible format"
+    - "Requires specific information format: Requires information in contracted (Grade 2) Braille"
+    - "Requires specific information format: Requires information in Easyread"
+    - "Requires specific information format: Requires information in electronic audio format"
+    - "Requires specific information format: Requires information in electronic downloadable format"
+    - "Requires specific information format: Requires information in Makaton"
+    - "Requires specific information format: Requires information in Moon alphabet"
+    - "Requires specific information format: Requires information in uncontracted (Grade 1) Braille"
+    - "Requires specific information format: Requires information on audio cassette tape"
+    - "Requires specific information format: Requires information on compact disc"
+    - "Requires specific information format: Requires information on digital versatile disc"
+    - "Requires specific information format: Requires information on universal serial bus mass storage device"
+    - "Requires specific information format: Requires information verbally"
+    - "Requires specific information format: Requires third party to read out written information"
+    - "Requires specific information format: Requires written information in at least 20 point sans serif font"
+    - "Requires specific information format: Requires written information in at least 24 point sans serif font"
+    - "Requires specific information format: Requires written information in at least 28 point sans serif font"
+    - "Additional communication needs and support: Difficulty analysing information"
+    - "Additional communication needs and support: Difficulty processing information accurately"
+    - "Additional communication needs and support: Difficulty processing information at normal speed"
+    - "Additional communication needs and support: Emergency contact details of specialist support team"
+    - "Additional communication needs and support: Expresses pain atypically"
+    - "Additional communication needs and support: Has My Healthcare Passport"
+    - "Additional communication needs and support: Needs assistance with communication"
+    - "Additional communication needs and support: Requires appointment reminders"
+    - "Additional communication needs and support: Requires approach to care to be discussed with carer"
+    - "Additional communication needs and support: Requires carer to be present at encounters"
+    - "Additional communication needs and support: Uses apps on mobile device to support communication"
+    - "Additional communication needs and support: Uses switches for communication"
+    - "Additional communication needs and support: Uses Tadoma method for communication"
+  licence_status: ogl
+  licence_notes: >-
+    UK Open Government Licence v3.0, per NHS England Digital's site-wide terms and conditions
+    ("Copyright and database rights in the NHS England Content are released free-of-charge under
+    the current version of the Open Government Licence"), with one specific carve-out that applies
+    here: Information Standards content is OGL for copying but explicitly NOT for adaptation
+    without consent. Every value above is reproduced verbatim (copied, not adapted/reworded), so
+    this stays within the licence; do not paraphrase or translate these labels for reuse without
+    checking that carve-out yourself. Attribute as "Contains information from NHS England, licenced
+    under the current version of the Open Government Licence."
+  items: null
+  response_scale: null
+  scoring: null
+  notes: >
+    The granular, form-ready answer options behind nhs-reasonable-adjustment-digital-flag's
+    11 category-level codes above — i.e. the actual "if so, what" values a service designer would
+    offer as selectable options once someone has said yes to having an access/communication need.
+    Verified directly against the live page's HTML (fetched and parsed, not taken from a summary)
+    on 2026-08-31; each value here is the SNOMED CT description text for one coded concept (the
+    numeric SNOMED CT codes themselves are on the source page but not reproduced here, consistent
+    with how this repo's `values` field carries display labels, not codes, elsewhere). Scoped
+    deliberately to the 5 categories most relevant to communication/access needs specifically —
+    "Communication support," "Requires communication professional," "Requires specific contact
+    method," "Requires specific information format," and "Additional communication needs and
+    support." Two things from the same source are deliberately NOT reproduced here: (1) category
+    6, "Community language support" — a separate reference set of roughly 190 language-interpreter
+    codes (e.g. "Arabic language interpreter needed"), left out purely for size, see source_url for
+    the full list; (2) categories 7-11 ("Adjustments for providing additional support to patients,"
+    "individual care requirements," "environment of care," "additional needs," and "bespoke
+    reasonable adjustments") — these are broader reasonable-adjustment/care-planning categories
+    (e.g. wheelchair access, needle phobia, single room, guide dog) rather than communication/access
+    needs specifically, so they're out of scope for this entry; see
+    nhs-reasonable-adjustment-digital-flag above for their category-level names if you need the
+    full flag. As with the other two entries in this file, no single fixed question is published —
+    these are picked from a structured coded list, not answered as free text — so `question` is
+    null and `applies_to` is left empty for the same reason given on nhs-reasonable-adjustment-digital-flag.
+
+- id: washington-group-short-set-functioning
+  label: Washington Group Short Set on Functioning (WG-SS)
+  source: Washington Group on Disability Statistics (UN Statistical Commission city group)
+  source_type: international-standard
+  status: current
+  last_reviewed: 2026-09-04
+  source_published: 2020-03-19
+  source_url: https://www.washingtongroup-disability.com/question-sets/wg-short-set-on-functioning-wg-ss/
+  applies_to: [adults]
+  use_case: [support-needs-identification]
+  question: null
+  values: null
+  licence_status: restricted
+  licence_notes: >-
+    No free-reproduction or "no permission required" statement was found anywhere in the WG's
+    own materials checked for this entry (the WG-SS questionnaire PDF itself, the WG-SS question
+    specifications document, and the short-set FAQ page all carry no copyright/permission text at
+    all). The only explicit statement found is on the WG's own site-wide Terms & Conditions page
+    (washingtongroup-disability.com/terms-conditions/), quoted directly: "no part of the site or
+    of any material on it may be reproduced or used by anyone in any form or for any purpose
+    whatsoever without their obtaining the prior written consent of WG or any other copyright
+    holder," and separately, "No part of the site may be used for commercial gain, included in
+    any other website, or transmitted in any form, or by any means, nor may any link to the site
+    be created on a website." This is the opposite of the "free to reuse with attribution"
+    reputation the WG-SS has informally — worldwide adoption in national censuses happens through
+    National Statistical Offices' participation in the Washington Group process itself, not
+    through an open reproduction licence available to any third party. Absent a confirmed
+    public-domain or OGL basis, this is treated the same as the restricted screening instruments
+    in screening-tools.yaml (SDQ, ORS, SRS, WEMWBS, RCADS) — reference-only, with
+    question/values/items/response_scale/scoring all left null despite this being structurally a
+    multi-item instrument like PHQ-9. **Flagged for human double-check**: it's plausible this
+    generic site-wide T&C text is meant to cover the website's own content (page text, images,
+    layout) rather than the WG-SS questionnaire itself, which the WG's entire mission is to see
+    adopted verbatim worldwide — but no separate, more permissive statement specific to the
+    question sets was found in this session to justify reading it that narrowly, so the
+    conservative reading is used here.
+  items: null
+  response_scale: null
+  scoring: null
+  notes: >
+    A 6-domain functional-difficulty screen (seeing, hearing, mobility, cognition, self-care,
+    communication), developed and maintained by the Washington Group on Disability Statistics — a
+    voluntary UN Statistical Commission city group of 100+ National Statistical Offices — for use
+    in censuses and surveys worldwide, and incorporated into the UN's Principles and
+    Recommendations for Population and Housing Censuses. Structurally this is a multi-item
+    instrument like PHQ-9 (one 4-point response scale shared across all 6 items, read after each
+    question), not reproduced here for licensing reasons (see licence_notes) but described for
+    orientation: preamble "The next questions ask about difficulties you may have doing certain
+    activities because of a HEALTH PROBLEM," then one question per domain (e.g. "Do you have
+    difficulty seeing, even if wearing glasses?"), each offered the same 4 response categories —
+    "No difficulty," "Some difficulty," "A lot of difficulty," "Cannot do at all" (plus
+    interviewer-only "Refused"/"Don't know" codes). WG's own recommended analysis method for
+    international comparability, quoted directly from their Short Set FAQ page
+    (washingtongroup-disability.com/resources/frequently-asked-questions/short-set/): "The
+    population disabled includes everyone with at least one domain that is coded as a lot of
+    difficulty or cannot do it at all" — i.e. a "cut" at the third of four response levels, applied
+    per domain, then combined with OR logic across all 6 domains. `applies_to` is set to
+    `[adults]` only, not `children-young-people`, despite the source stating the questions are
+    "designed to collect information on the population aged 5 years and above, with a
+    knowledgeable proxy respondent providing information for children" (a proxy-response
+    mechanism that would otherwise qualify under this repo's own `children-young-people`
+    definition) — because the same source immediately qualifies that: "The WG-SS was not
+    specifically designed for use among children, as it does not include key aspects of child
+    development important for identifying disability in children and the wording of certain
+    domains may not be relevant (or suitable) for children and adolescents," recommending the
+    separate WG-UNICEF Module on Child Functioning (CFM) instead. Treating the age-5+/proxy
+    mechanism as confirming child applicability would misrepresent WG's own explicit caveat, so
+    the more cautious reading is used — check source_url directly, and consider the CFM instead,
+    for any under-18 use case.
+
+    Distinct from ons-disability-equality-act-2010 (demographics.yaml): that entry is a
+    self-perceived, legal-impact test ("do you have a physical or mental health condition... that
+    has lasted or is expected to last 12 months or more" and "does this reduce your ability to
+    carry out day-to-day activities") tied to Equality Act 2010 protected-characteristic status,
+    whereas WG-SS is a function-based measure of difficulty performing 6 specific basic actions,
+    deliberately excluding mental health and designed for cross-national comparability rather than
+    a legal test. These are not interchangeable, and ONS's own comparison found they identify
+    substantially different populations: "Measuring disability: comparing approaches" (ONS, 6
+    August 2019, ons.gov.uk/peoplepopulationandcommunity/healthandsocialcare/disability/articles/measuringdisabilitycomparingapproaches/2019-08-06),
+    quoted directly: "The adult disability prevalence using the Equalities Act disability
+    definition (EADD) was around three times that based on the most commonly used definition of
+    the Washington Group Short Set of questions (WGSS)... The difference can be attributed partly
+    to the exclusion of mental health issues from the WGSS, and partly to the higher severity
+    threshold for inclusion in the Disability 3 measure" — and separately, that "less than half of
+    the individuals included were counted as disabled by both definitions" even where broader WG
+    indicators showed similar overall prevalence to the EADD. Don't assume a person who screens
+    positive on one measure would screen positive on the other, or vice versa.
+
+- id: govuk-vulnerability-risk-factors-taxonomy
+  label: Taxonomy of Vulnerability Risk Factors — top-level categories
+  source: Government Digital Service, Department for Science, Innovation and Technology, and Department for Digital, Culture, Media and Sport
+  source_type: cross-government-taxonomy
+  status: current
+  last_reviewed: 2026-09-04
+  source_published: 2026-06-30
+  source_url: https://www.gov.uk/government/publications/taxonomy-of-vulnerability-risk-factors/taxonomy-of-risk-factors
+  applies_to: []
+  use_case: [support-needs-identification]
+  question: null
+  values:
+    - "Age"
+    - "Gender or sexual identity"
+    - "Health"
+    - "Disabilities"
+    - "Financial"
+    - "Ethnicity"
+    - "Social care"
+    - "Living arrangements"
+    - "Social circumstances"
+    - "Criminal justice system"
+    - "Citizenship status"
+  licence_status: ogl
+  licence_notes: >-
+    Quoted directly from the source document: "© Crown copyright 2026" and "This publication is
+    licensed under the terms of the Open Government Licence v3.0 except where otherwise stated."
+  items: null
+  response_scale: null
+  scoring: null
+  notes: >
+    A cross-government reference taxonomy of vulnerability risk factors — "single facts that may
+    apply to a person or household" — developed through the SAVVI (Single Assessment/View of
+    Vulnerability Information) programme and refined by the cross-government Vulnerabilities
+    Working Group (Government Digital Service, DSIT, DCMS), intended for information systems that
+    identify and support vulnerable people/households and need a shared language for sharing that
+    information between systems and organisations. The 11 items above are the taxonomy's
+    top-level categories only, quoted verbatim from the published HTML document; the source
+    states these top-level categories (and any sub-categories) "are not usable as Risk Factors and
+    are only intended to provide classification" — the actual leaf-level risk factors (the granular
+    facts a system would actually flag) live one level down in that same document and in a
+    companion machine-readable spreadsheet ("Taxonomy of Risk Factors (ODS)"), neither reproduced
+    here given their size and rate of change — same pattern as the NS-SEC entry in
+    demographics.yaml, which points to a fuller input-question-set document rather than
+    reproducing it. Risk factors can also "extend" other risk factors in a documented hierarchy
+    (if B extends A, B applying implies A applies) — see source_url for that structure. Two
+    categories are explicitly incomplete as published: "Gender or sexual identity" is
+    "intentionally not expanded for now – this will be expanded by the work of the Domain Expert
+    Group on Person," and "Ethnicity" is "intentionally omitted for now" — so treat this as a
+    growing, alpha-stage taxonomy (it sits under the wider "Vulnerabilities Data Standards Alpha"
+    programme) rather than a finished closed list; re-check source_url before assuming the 11
+    categories above are exhaustive or stable. `applies_to` is left empty: the taxonomy is scoped
+    to "a Person or Household" generically, with no statement distinguishing adults from
+    children/young people.
+
+- id: fca-vulnerability-drivers-fg21-1
+  label: FCA vulnerability drivers (FG21/1) — Health, Life events, Resilience, Capability
+  source: Financial Conduct Authority
+  source_type: regulatory-framework
+  status: current
+  last_reviewed: 2026-09-04
+  source_published: 2021-02-01
+  source_url: https://www.fca.org.uk/publication/finalised-guidance/fg21-1.pdf
+  applies_to: []
+  use_case: [support-needs-identification]
+  question: null
+  values: null
+  licence_status: restricted
+  licence_notes: >-
+    The FG21/1 PDF itself carries the footer "© Financial Conduct Authority 2021 ... All rights
+    reserved" (Pubref: 007407) — not Crown copyright and not marked OGL, contrary to what might be
+    assumed for a UK regulator's published guidance. The FCA's own site-wide legal terms
+    (fca.org.uk/legal) confirm this is deliberate: "The FCA or its licensors own the copyright and
+    any other rights in all material on the Site;" permitted use is limited to "print and download
+    extracts from this Site for personal use or for use within an individual firm or organisation
+    only," with attribution required, and "You must not use any part of the content on this Site
+    for commercial purposes without obtaining a licence to do so from the FCA or its licensors."
+    The terms note that some FCA statistical outputs published jointly with the Bank of
+    England/PRA are separately released under OGL, but FG21/1 guidance itself isn't identified as
+    one of those. Given no confirmed public-domain/OGL basis for wholesale reproduction, this
+    entry is reference-only (`values` null) per this repo's restricted-licence convention (see the
+    SDQ/ORS/SRS/WEMWBS/RCADS entries in screening-tools.yaml for the same pattern) — the driver
+    names and their one-line definitions are described in `notes` below only as short, attributed
+    quotation for identification/citation purposes, not reproduced as structured, form-ready data.
+  items: null
+  response_scale: null
+  scoring: null
+  notes: >
+    FG21/1 ("Guidance for firms on the fair treatment of vulnerable customers," February 2021) is
+    the FCA's finalised guidance under section 139A of the Financial Services and Markets Act 2000,
+    setting out what firms should do to treat vulnerable customers fairly under the FCA's
+    Principles for Businesses. Paragraph 2.5, quoted directly: "All customers are at risk of
+    becoming vulnerable and this risk is increased by characteristics of vulnerability related to
+    4 key drivers" — "Health – health conditions or illnesses that affect ability to carry out
+    day-to-day tasks," "Life events – life events such as bereavement, job loss or relationship
+    breakdown," "Resilience – low ability to withstand financial or emotional shocks," and
+    "Capability – low knowledge of financial matters or low confidence in managing money (financial
+    capability). Low capability in other relevant areas such as literacy, or digital skills." The
+    guidance stresses (2.6, 2.10) these drivers are illustrative not exhaustive, frequently
+    overlap, and can be transient or persistent (2.13). A fuller table of example characteristics
+    per driver ("Table 1: Characteristics associated with the 4 drivers of vulnerability") exists
+    in the source but isn't reproduced here — the table's column layout didn't extract reliably
+    from the PDF in this session (rows came out re-ordered across columns), and risking a
+    misattributed example under the wrong driver seemed worse than pointing to source_url directly
+    for the full table. Per 2.12, quoted directly: "the driver of vulnerability, health, largely
+    overlaps with the protected characteristic 'disability' under the Equality Act" — cross-refer
+    to ons-disability-equality-act-2010 in demographics.yaml, which is the separate legal-status
+    test that overlap points to. As of the FCA's March 2025 review of firms' treatment of
+    vulnerable customers, the FCA concluded its "existing guidance in FG21/1 remains appropriate"
+    and has not updated it, though FG21/1 predates the Consumer Duty and firms are directed
+    separately to the FCA's Consumer Duty pages for current expectations on outcomes monitoring and
+    management information. `applies_to` is left empty: FG21/1 addresses "customers" generally
+    without an explicit statement distinguishing adults from children/young people.
+
+- id: ofgem-priority-services-register
+  label: Priority Services Register (PSR) — energy sector, situations that may qualify
+  source: Ofgem (Office of Gas and Electricity Markets)
+  source_type: sector-eligibility-framework
+  status: current
+  last_reviewed: 2026-09-04
+  source_published: 2016-10-25
+  source_url: https://www.ofgem.gov.uk/energy-advice-households/getting-extra-help-priority-services-register
+  applies_to: []
+  use_case: [support-needs-identification]
+  question: null
+  values:
+    - "have reached state pension age"
+    - "are pregnant, or have young children"
+    - "struggle with speaking or reading English"
+    - "Living with a disability or a long-term medical condition: mental health conditions"
+    - "Living with a disability or a long-term medical condition: conditions affecting your sight, hearing or sense of smell"
+    - "Living with a disability or a long-term medical condition: conditions that mean you need to use medical equipment that requires a power supply"
+    - "Circumstances have recently changed: are recovering from an injury, or need support after a stay in hospital"
+    - "Circumstances have recently changed: have been bereaved"
+    - "Circumstances have recently changed: have lost your job"
+  licence_status: ogl
+  licence_notes: >-
+    Quoted directly from Ofgem's own copyright page (ofgem.gov.uk/c-ofgem-2026): "Material
+    featured on this website is subject to Crown copyright protection unless otherwise indicated.
+    You may use Crown copyright information (not including logos) free of charge in any format or
+    medium, under the terms of the Open Government Licence." The live guidance page itself
+    (source_url) carries the matching footer "© Ofgem 2026."
+  items: null
+  response_scale: null
+  scoring: null
+  notes: >
+    `values` above is the current, verbatim bulleted list from Ofgem's live consumer-facing PSR
+    guidance page (fetched and parsed directly, not from a secondary summary), reproduced under
+    its "Who can join" heading, with the "Living with a disability or a long-term medical
+    condition" and "Circumstances have recently changed" groupings preserved as a category prefix
+    on each sub-item — the same "Category: sub-item" convention already used elsewhere in this file
+    (see nhs-reasonable-adjustment-flag-need-codes). Historically the PSR ran on a fixed,
+    closed 3-category test; Ofgem's own press release announcing the change, quoted directly
+    (25 October 2016, ofgem.gov.uk/press-release/more-customers-vulnerable-situations-receive-help-under-priority-services-register):
+    "Currently, only consumers who are disabled, chronically sick, or of pensionable age can get
+    these services" was broadened so that suppliers and network operators must consider "any
+    energy customers in vulnerable situations who need it – including those whose situation is
+    temporary" — e.g. "customers with mental health issues which prevent them from understanding
+    their bill, or who have injuries which stop them topping up their pre-payment meter." That
+    press release is the clearest primary statement found that the current framework is meant to
+    be assessed against individual circumstances rather than treated as a fixed, exhaustive
+    category list, even though the live guidance page's own bulleted list (reproduced above) reads
+    like one — check source_url directly rather than treating `values` as a closed set. **Flag for
+    human review**: the live guidance page carries no visible publish/last-updated date, so
+    `source_published` above is the date of the clearest primary statement confirming the current
+    circumstances-based framing (the 2016 press release), not a date drawn from the page itself —
+    re-check the live page periodically for wording drift. This is a separate, sector-specific
+    framework from ofwat-priority-services-register below: energy and water regulators coordinate
+    (Ofwat's own PSR standards document references a "joint Ofwat/Ofgem Vulnerability Summit") but
+    do not publish one shared eligibility list — the categories below genuinely differ in scope and
+    wording (e.g. Ofwat's explicit "poor sense of taste or smell," "cognitive impairment, learning
+    disability, developmental conditions or dementia," and "additional showering or bathing"
+    entries have no Ofgem equivalent above), so both are tracked as separate entries rather than
+    one shared one. `applies_to` is left empty: the source describes household/customer
+    circumstances (including having young children) without confirming the age of the person the
+    entry itself covers.
+
+- id: ofwat-priority-services-register
+  label: Priority Services Register (PSR) — water sector, customers likely to benefit
+  source: Ofwat (Water Services Regulation Authority)
+  source_type: sector-eligibility-framework
+  status: current
+  last_reviewed: 2026-09-04
+  source_published: 2025-03-01
+  source_url: https://www.ofwat.gov.uk/wp-content/uploads/2024/11/Priority-services-registers-%E2%80%93-standards-for-water-companies-in-England-and-Wales-from-1-April-2025.pdf
+  applies_to: []
+  use_case: [support-needs-identification]
+  question: null
+  values:
+    - "Of pensionable age"
+    - "Are disabled"
+    - "Have an illness which affects their day-to-day life"
+    - "Are pregnant or live with children aged 5 and under"
+    - "Have a mental health problem"
+    - "Have a hearing or sight condition"
+    - "Have a poor sense of taste or smell"
+    - "Are unable to or have difficulties in communicating in English or Welsh"
+    - "Have a cognitive impairment, learning disability, developmental conditions or dementia"
+    - "Require additional showering or bathing due to a health condition"
+    - "Have physical impairments"
+    - "Are going through a disruptive life event, such as bereavement"
+  licence_status: ogl
+  licence_notes: >-
+    Quoted directly from the source PDF's own back-cover text: "© Crown copyright 2025 This
+    publication is licensed under the terms of the Open Government Licence v3.0 except where
+    otherwise stated. To view this licence, visit nationalarchives.gov.uk/doc/
+    open-government-licence/version/3."
+  items: null
+  response_scale: null
+  scoring: null
+  notes: >
+    "Priority services registers – standards for water companies in England and Wales from 1 April
+    2025" (Ofwat, March 2025) sets out standards water companies must meet when running their
+    PSRs, under 5 headings: Definitions, Needs and services, Reach, Data Checking, Registration.
+    `values` above is Ofwat's own bulleted list under "Needs and services," quoted verbatim,
+    introduced by: "Customers who are likely to benefit from being on the PSR include those who
+    meet one or more of the following criteria." Immediately after the list, the source states
+    directly: "The above list is non-exhaustive and companies should consider the full range of
+    customers who may benefit from PSR support. This includes customers who may only benefit from
+    PSR services for a short or intermittent period of time" — so, unlike a closed classification
+    (e.g. NS-SEC), this list is explicitly illustrative rather than exhaustive; don't treat it as a
+    hard eligibility gate in a live service. Companies are also told to refer to their register as
+    a "priority services register" or "PSR" rather than a company-specific name, and the standards
+    tie to licence condition "Condition G: Principles for Customer Care" and Ofwat's broader
+    "Service For All" vulnerability guidance (not reproduced here — see source_url). See
+    ofgem-priority-services-register above for why this is tracked as a separate entry rather than
+    merged with the energy-sector list: the two regulators' published category sets differ in
+    scope and wording even though the underlying policy goal (extra help for customers who need
+    it) is the same. `applies_to` is left empty: the source scopes by customer/household
+    circumstance (e.g. "live with children aged 5 and under") without confirming the age of the
+    person the entry itself covers.
+
+- id: essential-digital-skills-framework
+  label: Essential Digital Skills Framework — skill domains
+  source: Department for Education
+  source_type: cross-government-taxonomy
+  status: current
+  last_reviewed: 2026-09-04
+  source_published: 2018-09-12
+  source_url: https://www.gov.uk/government/publications/essential-digital-skills-framework
+  applies_to: [adults]
+  use_case: [support-needs-identification]
+  question: null
+  values:
+    - "Communicating"
+    - "Handling information and content"
+    - "Transacting"
+    - "Problem Solving"
+    - "Being safe and legal online"
+  licence_status: ogl
+  licence_notes: >-
+    Quoted directly from the source PDF: "© Crown copyright 2018." The gov.uk publication page
+    itself confirms "All content is available under the Open Government Licence v3.0, except
+    where otherwise stated."
+  items: null
+  response_scale: null
+  scoring: null
+  notes: >
+    `source_type` is set to `cross-government-taxonomy` rather than `official-classification`:
+    although Department for Education is the sole publishing department listed on gov.uk today,
+    this doesn't fit the `official-classification` examples in this repo's README (SOC, SIC, IMD,
+    geography codes, school type — all ONS/DfE statistical or administrative classifications). The
+    Essential Digital Skills Framework is instead a competency/skills model, whose 2018 update was
+    "coordinated by Lloyds Banking Group and the Tech Partnership, overseen by a steering group
+    including... DfE, DCMS, DWP" and numerous other public and private bodies (quoted directly from
+    the source), and it's referenced across government (adult education funding, digital inclusion
+    programmes) rather than used as a single department's administrative code list — closer in
+    spirit to the actively-governed, multi-body taxonomies this repo files under
+    `cross-government-taxonomy` (see the GOV.UK Taxonomy of Vulnerability Risk Factors entry
+    above), even though it isn't literally a taxonomy of risk factors. Flag this choice for
+    reconsideration if a better-fitting domain/type emerges. `values` above are the 5 top-level
+    domain names, quoted verbatim from the source ("There are five categories of Essential Digital
+    Skills for life and work"). Not reproduced here: each domain splits further into a
+    "Foundation Skills" tier (8 device/connectivity basics that underpin all 5 domains, e.g. "I can
+    turn on a device," "I can connect my device to a safe and secure Wi-Fi network") plus, within
+    each of the 5 domains, separate "Skills for life" and "Additional skills for work" statement
+    lists with worked examples — too granular for a compact `values` list, see source_url for the
+    full statement-level detail (same reason NS-SEC/economic-activity-status in demographics.yaml
+    leave their input-question detail to their source document rather than reproducing it here).
+    `applies_to` is `[adults]` only: quoted directly, "The framework is intended to be used by
+    everyone in the UK engaged in supporting adults to enhance their essential digital skills" —
+    no statement extends this to children/young people. This is the first update of the "Basic
+    Digital Skills Framework" (originally published 2015); last updated 23 April 2019, with no
+    withdrawal notice found on the live gov.uk page. A separate, more recent DfE publication,
+    "Essential digital skills standards: 2026" (gov.uk/government/publications/essential-digital-skills-standards-2026),
+    exists alongside this framework — it covers Entry Level 1-3 and Level 1-2 qualification
+    standards and states only that they "are aligned with the essential digital skills framework,"
+    not that they replace it, so this framework entry is left `status: current` rather than
+    superseded; re-check both pages if building against this if the relationship changes.
