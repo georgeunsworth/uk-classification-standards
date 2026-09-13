@@ -6,6 +6,17 @@ dated by when the change was caught, not necessarily when the source changed.
 ## Unreleased
 
 ### Added
+- Two automated currency checks. `scripts/check_staleness.py` runs on every push/PR (added to
+  `.github/workflows/validate.yml`) and non-blockingly flags any entry marked `status: current`
+  whose `last_reviewed` is over a year old — pure date arithmetic, no network access. A new
+  monthly `.github/workflows/monthly-audit.yml` (also runnable on demand) runs
+  `scripts/live_verify.py`, which fetches every entry's `source_url` and asks an LLM whether the
+  live page still looks consistent with what's recorded, appending results to the new
+  `data/audit-log.json`. Verdicts are deliberately conservative — `unchanged`, `possible_drift`,
+  or `fetch_failed` — never an assertion that a standard has changed, matching this repo's
+  existing rule (see the GP-practice-registration entry above) that unverified claims must be
+  checked against the live source before being acted on. Results are browsable at the new
+  `audit.html`, linked from both existing views. Neither check ever edits `data/*.yaml`.
 - Initial `mental-health.yaml` domain with 4 entries: ONS long-lasting health conditions
   standard, ONS impairment standard, ONS mental health harmonisation review (archived,
   no preferred standard), NHS MHSDS ICD-10 value sets.

@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Source audit log — UK Classification Standards Tracker</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main>
+  <header>
+    <h1>Source audit log</h1>
+    <p>
+      Two automated checks run against this data: a staleness check on every push (are entries
+      marked "current" actually being re-reviewed?), and a monthly deep check that fetches each
+      entry's live source page and flags anything that looks inconsistent with what's recorded.
+      Flags here are a prompt to re-check a source directly — never a conclusion. Nothing is
+      edited automatically; see <a href="https://github.com/georgeunsworth/uk-classification-standards/blob/main/CONTRIBUTING.md">CONTRIBUTING.md</a>.
+    </p>
+    <p class="repo-link"><a href="https://github.com/georgeunsworth/uk-classification-standards">View the source repo on GitHub</a></p>
+    <nav class="view-nav"><a href="index.html">← Back to the by-standard view</a> · <a href="questions.html">Question-by-question view →</a></nav>
+  </header>
+
+  <section id="summary"></section>
+
+  <div class="controls">
+    <input type="search" id="search" placeholder="Search entry, file, or reasoning…" aria-label="Search audit results">
+    <select id="verdict-filter" aria-label="Filter by verdict">
+      <option value="">All verdicts</option>
+      <option value="unchanged">Unchanged</option>
+      <option value="possible_drift">Possible drift</option>
+      <option value="fetch_failed">Fetch failed</option>
+    </select>
+    <select id="run-filter" aria-label="Filter by run">
+      <option value="">Latest run only</option>
+    </select>
+  </div>
+
+  <p class="count" id="count"></p>
+  <div id="results"></div>
+
+  <footer>
+    Data sourced under the <a href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/">Open Government Licence</a>.
+    This is a practitioner-facing reference, not an official government product.
+  </footer>
+</main>
+
+<script>
+  const VERDICT_LABELS = {
+    unchanged: "Unchanged",
+    possible_drift: "Possible drift",
+    fetch_failed: "Fetch failed",
+  };
+  const VERDICT_BADGE_CLASS = {
+    unchanged: "current",
+    possible_drift: "under-review",
+    fetch_failed: "archived",
+  };
+
+  function escapeHtml(str) {
+    return String(str ?? "").replace(/[&<>"']/g, (c) => ({
+      "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;",
+    }[c]));
+  }
+
+  const summaryEl = document.getElementById("summary");
+  const resultsEl = document.getElementById("results");
+  const countEl = document.getElementById("count");
+  const searchEl = document.getElementById("search");
+  const verdictEl = document.getElementById("verdict-filter");
+  const runEl = document.getElementById("run-filter");
+
+  let runs = [];
+
+  function renderSummary() {
+    if (runs.length === 0) {
+      summaryEl.innerHTML = `<p class="empty">No audit runs yet — the first monthly check will populate this page.</p>`;
+      return;
+    }
+    const latest = runs[runs.length - 1];
+    const counts = { unchanged: 0, possible_drift: 0, fetch_failed: 0 };
+    latest.results.forEach((r) => { counts[r.verdict] = (counts[r.verdict] || 0) + 1; });
+    summaryEl.innerHTML = `
+      <p class="meta">Last run: <strong>${escapeHtml(latest.run_date)}</strong> ·
+        ${latest.results.length} entries checked ·
+        ${counts.unchanged || 0} unchanged ·
+        ${counts.possible_drift || 0} possible drift ·
+        ${counts.fetch_failed || 0} fetch failed</p>
+    `;
+  }
+
+  function renderRunOptions() {
+    const options = runs
+      .slice()
+      .reverse()
+      .map((run) => `<option value="${escapeHtml(run.run_date)}">${escapeHtml(run.run_date)}</option>`)
+      .join("");
+    runEl.insertAdjacentHTML("beforeend", options);
+  }
+
+  function currentResults() {
+    const run = runEl.value ? runs.find((r) => r.run_date === runEl.value) : runs[runs.length - 1];
+    return run ? run.results.map((r) => ({ ...r, run_date: run.run_date })) : [];
+  }
+
+  function applyFilters() {
+    const search = searchEl.value.trim().toLowerCase();
+    const verdict = verdictEl.value;
+
+    const all = currentResults();
+    const filtered = all.filter((r) => {
+      if (verdict && r.verdict !== verdict) return false;
+      if (search) {
+        const haystack = `${r.entry_id} ${r.file} ${r.reasoning}`.toLowerCase();
+        if (!haystack.includes(search)) return false;
+      }
+      return true;
+    });
+
+    countEl.textContent = `${filtered.length} of ${all.length} results`;
+
+    resultsEl.innerHTML = filtered.length
+      ? filtered.map((r) => `
+        <article class="entry">
+          <div class="entry-head">
+            <h2>${escapeHtml(r.entry_id)}</h2>
+            <span class="badge ${VERDICT_BADGE_CLASS[r.verdict] || ""}">${escapeHtml(VERDICT_LABELS[r.verdict] || r.verdict)}</span>
+          </div>
+          <p class="meta">${escapeHtml(r.file)} · checked ${escapeHtml(r.run_date)}</p>
+          <p class="notes">${escapeHtml(r.reasoning)}</p>
+          <div class="entry-foot">
+            <a href="${escapeHtml(r.source_url)}" target="_blank" rel="noopener">View source →</a>
+          </div>
+        </article>
+      `).join("")
+      : `<p class="empty">No results match your filters.</p>`;
+  }
+
+  async function loadAll() {
+    try {
+      const res = await fetch("data/audit-log.json");
+      if (!res.ok) throw new Error(`Failed to load data/audit-log.json: ${res.status}`);
+      runs = await res.json();
+      renderSummary();
+      renderRunOptions();
+      applyFilters();
+    } catch (err) {
+      resultsEl.innerHTML = `<p class="error">Couldn't load the audit log: ${escapeHtml(err.message)}</p>`;
+      countEl.textContent = "";
+    }
+  }
+
+  searchEl.addEventListener("input", applyFilters);
+  verdictEl.addEventListener("change", applyFilters);
+  runEl.addEventListener("change", applyFilters);
+  loadAll();
+</script>
+</body>
+</html>

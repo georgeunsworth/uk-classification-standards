@@ -50,6 +50,14 @@ problem in service or system design work.
    ```
 10. Add a line to `CHANGELOG.md` under `## Unreleased` describing what changed and why.
 
+## Acting on the source audit log
+
+The monthly live-source check (`scripts/live_verify.py`, browsable at `audit.html`) flags
+entries as `possible_drift` when the live page looks inconsistent with what's recorded. That
+flag is a prompt to go re-check the source yourself, not a finding to copy into `notes` or
+act on directly — same discipline as point 3 above. Confirm the specific claim against the
+live page before editing an entry on the strength of an audit flag alone.
+
 ## Adding a new domain
 
 Open an issue first to discuss scope — domains should map to a genuine, recurring

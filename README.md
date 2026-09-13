@@ -38,7 +38,12 @@ data/
   referral-identifiers.yaml            # NHS/safeguarding referral-data standards
   access-and-support-needs.yaml        # accessibility, communication, and vulnerability/support-need standards
   official-classifications.yaml        # ONS/DfE geography, occupational, and deprivation classifications
+  audit-log.json                       # append-only log of monthly source-currency checks
 index.html / questions.html            # the two views, sharing app.js + style.css
+audit.html                              # browsable view of data/audit-log.json
+scripts/validate.py                     # schema validator, run on every push/PR
+scripts/check_staleness.py              # flags `current` entries not re-reviewed in a year
+scripts/live_verify.py                  # monthly: fetches each source_url, flags drift
 CHANGELOG.md                           # dated log of source revisions we've caught
 ```
 
@@ -239,7 +244,28 @@ Grouped below by category (the grouping used for navigation in the site — see
 
 ## Update cadence
 
-v1: manually reviewed against source publications on an bi-monthly basis, logged in `CHANGELOG.md`. No automation yet — see [Roadmap](#roadmap).
+Manually reviewed against source publications on an bi-monthly basis, logged in `CHANGELOG.md`.
+Two automated checks supplement this — see [Currency checks](#currency-checks).
+
+## Currency checks
+
+Two automated checks run alongside the manual review cadence above. Neither ever edits
+`data/*.yaml` directly — both only ever flag something for a human to re-check, in line
+with the discipline in [CONTRIBUTING.md](CONTRIBUTING.md#adding-or-amending-an-entry) that
+unverified claims (including AI-sourced ones) must be checked against the live source before
+being written in.
+
+- **Staleness check** (`scripts/check_staleness.py`, every push/PR) — a fast, local,
+  network-free check: flags any entry marked `status: current` whose `last_reviewed` date is
+  over a year old. It's checking this repo's own bookkeeping, not the source itself — a
+  non-blocking warning, not a failing check.
+- **Live source verification** (`scripts/live_verify.py`, monthly via
+  `.github/workflows/monthly-audit.yml`, also runnable on demand) — fetches every entry's
+  `source_url` and asks an LLM whether the live page still looks consistent with what's
+  recorded. Every result is one of `unchanged`, `possible_drift`, or `fetch_failed` — it never
+  concludes a standard *has* changed, only that it might be worth a direct look. Results are
+  appended to `data/audit-log.json` and browsable at
+  [audit.html](https://georgeunsworth.github.io/uk-classification-standards/audit.html).
 
 ## Sources & licensing
 
@@ -275,7 +301,9 @@ Government content referenced here is published under the [Open Government Licen
   codes, school type, and local authority type
 - [ ] UKAAF accessible-format standards — licensing needs a definitive answer, and this schema's
   `source_type` enum has no clean fit for a charity-run technical format standard yet
-- [ ] Automated change-detection against source publication pages
+- [x] Automated change-detection against source publication pages — see
+  [Currency checks](#currency-checks): a staleness check on every push, plus a monthly
+  live-source-verification check browsable at `audit.html`
 - [ ] Structured diffing between standard revisions
 
 ## Contributing
