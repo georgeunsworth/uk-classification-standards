@@ -1,1 +1,519 @@
-[]
+[
+  {
+    "run_date": "2026-09-13",
+    "results": [
+      {
+        "entry_id": "nhs-accessible-information-standard",
+        "file": "data/access-and-support-needs.yaml",
+        "source_url": "https://www.england.nhs.uk/publication/accessible-information-standard/",
+        "verdict": "unchanged",
+        "reasoning": "The live page confirms the recorded metadata: it identifies the standard as \"Accessible Information Standard (DAPB1605)\" with source_published date of \"30 June 2025\", and it describes the standard's purpose as ensuring people with disability, impairment, or sensory loss can access information and receive communication support for NHS and adult social care services. The page shows \"Page updated: 3 March 2026\", which is within the recorded last_reviewed date of 2026-08-31. No inconsistencies detected between recorded status and live content.",
+        "http_status": 200
+      },
+      {
+        "entry_id": "nhs-reasonable-adjustment-digital-flag",
+        "file": "data/access-and-support-needs.yaml",
+        "source_url": "https://digital.nhs.uk/services/reasonable-adjustment-flag/impairment-and-adjustment-codes",
+        "verdict": "fetch_failed",
+        "reasoning": "Could not fetch source_url: 403 Client Error: Forbidden for url: https://digital.nhs.uk/services/reasonable-adjustment-flag/impairment-and-adjustment-codes",
+        "http_status": null
+      },
+      {
+        "entry_id": "nhs-reasonable-adjustment-flag-need-codes",
+        "file": "data/access-and-support-needs.yaml",
+        "source_url": "https://digital.nhs.uk/services/reasonable-adjustment-flag/impairment-and-adjustment-codes",
+        "verdict": "fetch_failed",
+        "reasoning": "Could not fetch source_url: 403 Client Error: Forbidden for url: https://digital.nhs.uk/services/reasonable-adjustment-flag/impairment-and-adjustment-codes",
+        "http_status": null
+      },
+      {
+        "entry_id": "washington-group-short-set-functioning",
+        "file": "data/access-and-support-needs.yaml",
+        "source_url": "https://www.washingtongroup-disability.com/question-sets/wg-short-set-on-functioning-wg-ss/",
+        "verdict": "unchanged",
+        "reasoning": "The live page confirms the WG-SS is a 6-domain functioning measure developed and maintained by the Washington Group on Disability Statistics for use in censuses and surveys. It describes the six domains (seeing, hearing, mobility, cognition, self-care, communication are implicit in \"six basic, universal actions\") and references the ICF framework. The page also explicitly mentions the WG/UNICEF Child Functioning Module (CFM) as a separate tool for children, consistent with the recorded notes explaining why WG-SS applies to adults only. No contradictions detected with the recorded status, source attribution, or conceptual description.",
+        "http_status": 200
+      },
+      {
+        "entry_id": "govuk-vulnerability-risk-factors-taxonomy",
+        "file": "data/access-and-support-needs.yaml",
+        "source_url": "https://www.gov.uk/government/publications/taxonomy-of-vulnerability-risk-factors/taxonomy-of-risk-factors",
+        "verdict": "unchanged",
+        "reasoning": "The live page confirms all recorded details: publication date 30 June 2026, source attribution to Government Digital Service, DSIT, and DCMS, the 11 top-level categories in the exact order recorded, and the explicit statements that \"Gender or sexual identity\" is \"intentionally not expanded for now\" and \"Ethnicity\" is \"intentionally omitted for now\". The page structure and hierarchy of categories, sub-categories, and risk factors matches the recorded description.",
+        "http_status": 200
+      },
+      {
+        "entry_id": "fca-vulnerability-drivers-fg21-1",
+        "file": "data/access-and-support-needs.yaml",
+        "source_url": "https://www.fca.org.uk/publication/finalised-guidance/fg21-1.pdf",
+        "verdict": "fetch_failed",
+        "reasoning": "The live page text provided is an unprocessed PDF binary stream (truncated raw PDF object data with encryption and compression), not readable or extractable text. This appears to be malformed or improperly decoded PDF content that cannot be verified against the recorded guidance text about the 4 drivers of vulnerability (Health, Life events, Resilience, Capability).",
+        "http_status": 200
+      },
+      {
+        "entry_id": "ofgem-priority-services-register",
+        "file": "data/access-and-support-needs.yaml",
+        "source_url": "https://www.ofgem.gov.uk/energy-advice-households/getting-extra-help-priority-services-register",
+        "verdict": "unchanged",
+        "reasoning": "The live page text reproduces the exact same bulleted categories and items listed in the recorded values, maintaining the same groupings (\"Living with a disability or a long-term medical condition\" and \"Circumstances have recently changed\") and wording. All nine recorded items are present and identically worded: state pension age, pregnant/young children, speaking/reading English, mental health conditions, sight/hearing/sense of smell, medical equipment requiring power, injury/hospital recovery, bereavement, and job loss. No visible changes detected.",
+        "http_status": 200
+      },
+      {
+        "entry_id": "ofwat-priority-services-register",
+        "file": "data/access-and-support-needs.yaml",
+        "source_url": "https://www.ofwat.gov.uk/wp-content/uploads/2024/11/Priority-services-registers-%E2%80%93-standards-for-water-companies-in-England-and-Wales-from-1-April-2025.pdf",
+        "verdict": "fetch_failed",
+        "reasoning": "The live page text provided is a binary PDF stream with only metadata and encoded content visible. No readable human text is present to verify against the recorded status, source_published date, or values list\u2014the content appears to be either corrupt, not decoded, or an unreadable PDF file dump.",
+        "http_status": 200
+      },
+      {
+        "entry_id": "essential-digital-skills-framework",
+        "file": "data/access-and-support-needs.yaml",
+        "source_url": "https://www.gov.uk/government/publications/essential-digital-skills-framework",
+        "verdict": "unchanged",
+        "reasoning": "The live page confirms all key recorded metadata: Department for Education as source, published 12 September 2018, last updated 23 April 2019, and the 5 skill domains listed verbatim (\"communicating\", \"handling information and content\", \"transacting\", \"problem-solving\", \"being safe and legal online\"). The page states this framework is \"for adults to secure their essential digital skills\" and references the separate 2026 national standards as an informed development, consistent with the recorded notes about the frameworks coexisting rather than the earlier one being superseded.",
+        "http_status": 200
+      },
+      {
+        "entry_id": "ons-ethnicity-standard",
+        "file": "data/demographics.yaml",
+        "source_url": "https://analysisfunction.civilservice.gov.uk/policy-store/ethnicity-harmonised-standard/",
+        "verdict": "possible_drift",
+        "reasoning": "The live page now prominently states \"This harmonised standard is under development\" and indicates the standard is \"currently reviewing and updating,\" whereas the recorded status is \"current\" with a note to \"treat as current, not archived.\" The recorded notes mention active review since March 2022 but explicitly instruct to keep using this standard for existing collections until review concludes. The live page's emphasis on \"under development\" warrants verification of whether the status designation should be reconsidered.",
+        "http_status": 200
+      },
+      {
+        "entry_id": "ons-disability-equality-act-2010",
+        "file": "data/demographics.yaml",
+        "source_url": "https://analysisfunction.civilservice.gov.uk/policy-store/measuring-disability-for-the-equality-act-2010/",
+        "verdict": "possible_drift",
+        "reasoning": "The live page states \"This harmonised standard is under development following the Inclusive Data Taskforce recommendations\" and indicates it is \"a priority topic\" for review. The recorded status is \"current\" and notes mention draft revised questions expected by 2025, but the page now explicitly flags the standard as under active development, which may represent a material change in status that should be verified directly.",
+        "http_status": 200
+      },
+      {
+        "entry_id": "ons-sex-standard-gap",
+        "file": "data/demographics.yaml",
+        "source_url": "https://analysisfunction.civilservice.gov.uk/policy-store/sex-harmonisation-guidance/",
+        "verdict": "unchanged",
+        "reasoning": "The live page confirms all key recorded details: it states plainly \"There is not currently a harmonised standard for collecting data on sex,\" references Census 2021/2022 historical categories for context only, describes active work on two distinct approaches (biological sex and certificated sex), confirms cognitive/usability testing is underway, and states new guidance is expected in Summer 2026. The April 2025 Supreme Court ruling on sex under the Equality Act 2010 is also referenced. The source remains ONS/GSS Harmonisation Team with status \"under-review\" accurately reflecting active development work.",
+        "http_status": 200
+      },
+      {
+        "entry_id": "ons-gender-identity-standard-archived",
+        "file": "data/demographics.yaml",
+        "source_url": "https://analysisfunction.civilservice.gov.uk/policy-store/gender-identity/",
+        "verdict": "unchanged",
+        "reasoning": "The live page confirms the archived status with the explicit notice: \"Following the publication of an updated GSS Harmonisation workplan in December 2024, this guidance is outdated and has been archived.\" The publication date of 16 July 2020 and source ownership (GSS Harmonisation Team) match the recorded metadata. The response options shown (\"Yes\", \"No, enter gender identity\", \"Prefer not to say\") match the recorded summary. The age specification (16 and over) with no under-16 provision stated aligns with the recorded notes. No contradictions detected.",
+        "http_status": 200
+      },
+      {
+        "entry_id": "ons-sexual-orientation-standard",
+        "file": "data/demographics.yaml",
+        "source_url": "https://analysisfunction.civilservice.gov.uk/policy-store/sexual-orientation/",
+        "verdict": "unchanged",
+        "reasoning": "The live page confirms all key recorded details: publication date 17 April 2019, owner GSS Harmonisation Team, status as current guidance, and the self-completion mode with the exact five options listed (Heterosexual or Straight, Gay or Lesbian, Bisexual, Other, Prefer not to say). The page explicitly warns against altering wording or option order to maintain comparability with ONS benchmarks, and confirms the standard applies to respondents aged 16 and over, all matching the recorded notes.",
+        "http_status": 200
+      },
+      {
+        "entry_id": "ons-religion-standard",
+        "file": "data/demographics.yaml",
+        "source_url": "https://analysisfunction.civilservice.gov.uk/policy-store/religion/",
+        "verdict": "unchanged",
+        "reasoning": "The live page confirms publication date 10 September 2020, owner GSS Harmonisation Team, and status as current harmonised standard. The England response categories match exactly what's recorded. The page text explicitly notes that harmonised questions are \"UK-country specific\" with separate questions for England, Scotland, Wales, and Northern Ireland, and shows England's response options align with the recorded summary (No religion, Christian, Buddhist, Hindu, Jewish, Muslim, Sikh, Any other religion, please describe).",
+        "http_status": 200
+      },
+      {
+        "entry_id": "ons-national-identity-standard",
+        "file": "data/demographics.yaml",
+        "source_url": "https://analysisfunction.civilservice.gov.uk/policy-store/national-identity-harmonised-standard/",
+        "verdict": "unchanged",
+        "reasoning": "The live page confirms all key recorded details: publication date 28 April 2021, owner GSS Harmonisation Team, status as current harmonisation standard. The England response options match exactly (British, English, Welsh, Scottish, Northern Irish, Other, please describe). The page describes national identity as self-identified nationality/belonging distinct from ethnicity, aligns with multi-select format, and contains no visible indication of changes since the April 2022 review date.",
+        "http_status": 200
+      },
+      {
+        "entry_id": "ons-tenure-standard",
+        "file": "data/demographics.yaml",
+        "source_url": "https://analysisfunction.civilservice.gov.uk/policy-store/tenure/",
+        "verdict": "unchanged",
+        "reasoning": "The live page confirms the standard is owned by GSS Harmonisation Team (matching \"ONS / GSS Harmonisation Team\"), shows it as \"under development\" (consistent with notes), and the downloadable PDF document is present and described as the authoritative source. The recorded status \"current\" aligns with the page's presentation of it as an active harmonised standard, and the underlying 2017 document remains available and unchanged as noted in the recorded notes.",
+        "http_status": 200
+      },
+      {
+        "entry_id": "ons-language-standard-gap",
+        "file": "data/demographics.yaml",
+        "source_url": "https://analysisfunction.civilservice.gov.uk/policy-store/ethnicity-harmonised-standard/",
+        "verdict": "unchanged",
+        "reasoning": "The live page confirms the recorded status and publication date: it states \"Publication date: 1 August 2011\" and \"This harmonised standard is under development\" (consistent with \"under-review\" status). The page is indeed the ethnicity harmonised standard itself, and the recorded notes accurately reflect that language is not a dedicated standard \u2014 this is confirmed by the page's focus on ethnicity questions without a separate language standard section. The source \"ONS / GSS Harmonisation Team\" and contact \"Harmonisation@statistics.gov.uk\" are also visible on the live page.",
+        "http_status": 200
+      },
+      {
+        "entry_id": "ons-economic-activity-status-standard",
+        "file": "data/demographics.yaml",
+        "source_url": "https://analysisfunction.civilservice.gov.uk/policy-store/economic-activity-status-ns-sec-and-employment-related-questions-harmonised-standard/",
+        "verdict": "fetch_failed",
+        "reasoning": "Could not fetch source_url: 404 Client Error: Not Found for url: https://analysisfunction.civilservice.gov.uk/policy-store/economic-activity-status-ns-sec-and-employment-related-questions-harmonised-standard/",
+        "http_status": null
+      },
+      {
+        "entry_id": "ons-nssec-standard",
+        "file": "data/demographics.yaml",
+        "source_url": "https://analysisfunction.civilservice.gov.uk/policy-store/economic-activity-status-ns-sec-and-employment-related-questions-harmonised-standard/",
+        "verdict": "fetch_failed",
+        "reasoning": "Could not fetch source_url: 404 Client Error: Not Found for url: https://analysisfunction.civilservice.gov.uk/policy-store/economic-activity-status-ns-sec-and-employment-related-questions-harmonised-standard/",
+        "http_status": null
+      },
+      {
+        "entry_id": "ons-qualifications-standard",
+        "file": "data/demographics.yaml",
+        "source_url": "https://analysisfunction.civilservice.gov.uk/policy-store/qualifications-harmonised-standard/",
+        "verdict": "unchanged",
+        "reasoning": "The live page confirms all key recorded details: publication date is 31 August 2022, owner is GSS Harmonisation Team, it describes the standard as suitable for online and telephone modes (matching the recorded restriction), mentions the routed battery approach and the 7-category output, and explicitly states \"the questions will undoubtedly need updating in the future when new qualifications become available\" (matching the recorded note about future updates). The page also acknowledges the Educational attainment harmonised standard as a simpler alternative for lighter use cases, consistent with the recorded notes.",
+        "http_status": 200
+      },
+      {
+        "entry_id": "ons-income-standard-gap",
+        "file": "data/demographics.yaml",
+        "source_url": "https://analysisfunction.civilservice.gov.uk/policy-store/income-and-earnings/",
+        "verdict": "unchanged",
+        "reasoning": "The live page confirms the recorded status: it states \"This standard is not currently under development\" and \"It is expected that the income and earnings harmonised standard will be reviewed in the coming years,\" with no committed date. The publication date is confirmed as 1 August 2019, the owner is GSS Harmonisation Team, and the page describes the work being paused after an OSR review\u2014all consistent with the recorded \"under-review\" status and notes about the conceptual/directory nature of the guidance linking to 15 separate official publications rather than publishing a harmonised standard itself.",
+        "http_status": 200
+      },
+      {
+        "entry_id": "ons-marital-civil-partnership-status-standard",
+        "file": "data/demographics.yaml",
+        "source_url": "https://analysisfunction.civilservice.gov.uk/policy-store/marital-or-partnership-status/",
+        "verdict": "unchanged",
+        "reasoning": "The live page confirms all recorded key details: publication date 27 November 2020, owner GSS Harmonisation Team, current status (no deprecation notice), matching response options list, and matching guidance on online/face-to-face modes (tick boxes for online, showcards for face-to-face, single-select format). The page content is consistent with what's recorded.",
+        "http_status": 200
+      },
+      {
+        "entry_id": "ons-household-relationships-standard",
+        "file": "data/demographics.yaml",
+        "source_url": "https://analysisfunction.civilservice.gov.uk/policy-store/household-relationships/",
+        "verdict": "unchanged",
+        "reasoning": "The live page confirms all key recorded details: the standard is titled \"Household relationships harmonised standard,\" is current, published 27 November 2020, owned by GSS Harmonisation Team, and all 16 response options match exactly. The notes about self-complete mode adaptations, \"cohabiting\" being dropped, \"unrelated\" replacing \"other non-relative,\" and comparability to Census 2021/2022 are all corroborated in the live page's description of November 2020 changes.",
+        "http_status": 200
+      },
+      {
+        "entry_id": "ons-unpaid-care-standard",
+        "file": "data/demographics.yaml",
+        "source_url": "https://analysisfunction.civilservice.gov.uk/policy-store/unpaid-care",
+        "verdict": "unchanged",
+        "reasoning": "The live page still displays the same publication date (24 January 2020), owner (GSS Harmonisation Team), status indicators (awaiting update banner), and the identical question text with all six response options exactly as recorded. The key caveats about it being a self-completion only question, the proposed interviewer-led version not yet existing, devolved variations for Northern Ireland and Scotland, and the 2019 review identifying 23 surveys are all still present in the visible text.",
+        "http_status": 200
+      },
+      {
+        "entry_id": "ons-general-health-standard",
+        "file": "data/demographics.yaml",
+        "source_url": "https://analysisfunction.civilservice.gov.uk/policy-store/general-health/",
+        "verdict": "unchanged",
+        "reasoning": "The live page confirms all key recorded details: publication date is 5 June 2020, owner is GSS Harmonisation Team, status appears current with no under-review notice, the five response options (Very good, Good, Fair, Bad, Very bad) match exactly, the EU-SILC harmonisation and Minimum European Health Module equivalence are stated, and the explicit warning \"This question is a subjective measure and should not be asked by proxy\" is present. The suitable data collection methods match the recorded notes. No discrepancies detected.",
+        "http_status": 200
+      },
+      {
+        "entry_id": "ons-personal-wellbeing-standard",
+        "file": "data/demographics.yaml",
+        "source_url": "https://analysisfunction.civilservice.gov.uk/policy-store/personal-well-being/",
+        "verdict": "unchanged",
+        "reasoning": "The live page confirms all key recorded details: publication date 19 May 2020, GSS Harmonisation Team ownership, the four question items with their exact wording, 0-10 numeric response scale for all items, and explicit documentation that the anxiety item has different anchor wording (\"0 is not at all anxious\" vs \"0 is not at all\" for others) and separate severity bands. The page also confirms \"these questions are used together, in the order they are presented\" and references the \"ONS4\" terminology, supporting the recorded modelling notes about why this is kept as a single entry despite the anxiety item's divergent characteristics.",
+        "http_status": 200
+      },
+      {
+        "entry_id": "ons-pregnancy-maternity-standard-gap",
+        "file": "data/demographics.yaml",
+        "source_url": "https://analysisfunction.civilservice.gov.uk/policy-store/pregnancy-and-maternity-harmonisation-guidance/",
+        "verdict": "unchanged",
+        "reasoning": "The live page text confirms the recorded status and purpose. It is explicitly a guidance/directory page (\"This guidance provides information on where to find pregnancy and maternity data\") that documents existing survey questions without presenting a harmonised standard. The page lists the same six differently-worded pregnancy screening questions referenced in the notes (Adult Psychiatric Morbidity Survey, Health Survey for England questionnaire and nurse visit, National Survey for Wales, Scottish Health Survey, Taking Part Survey), confirming the inconsistency the recorded entry describes. The publication date shown (12 June 2020) matches the recorded source_published date. No operative harmonised standard is presented\u2014only a directory of existing approaches.",
+        "http_status": 200
+      },
+      {
+        "entry_id": "ons-migration-country-of-birth-citizenship-standard",
+        "file": "data/demographics.yaml",
+        "source_url": "https://analysisfunction.civilservice.gov.uk/policy-store/migration-country-of-birth-and-citizenship/",
+        "verdict": "possible_drift",
+        "reasoning": "The recorded source_published date is \"2018-02-01\" (February 2018), but the live page shows \"Publication date: 17 April 2019\". The recorded notes reference the document as \"Version 1.0, ONS, February 2018\" and \"unrevised since February 2018\", but the live page indicates April 2019 as the publication date. This discrepancy warrants human verification to determine which date is correct and whether the document or its hosting has actually been updated.",
+        "http_status": 200
+      },
+      {
+        "entry_id": "ons-armed-forces-veteran-standard",
+        "file": "data/demographics.yaml",
+        "source_url": "https://analysisfunction.civilservice.gov.uk/policy-store/harmonised-standard-for-previous-uk-armed-forces-service/",
+        "verdict": "unchanged",
+        "reasoning": "The live page confirms all key recorded details: the standard is still marked \"under development\" (supporting the \"under-review\" status), the publication date remains 16 March 2022, it was developed by ONS and MoD and adopted by GSS, and the Office for Veterans' Affairs concerns about the Reserve armed forces response categories are prominently displayed with the exact same wording. The three response options match the recorded summary. No inconsistencies detected between the recording and the live page.",
+        "http_status": 200
+      },
+      {
+        "entry_id": "ons-socio-economic-background-standard",
+        "file": "data/demographics.yaml",
+        "source_url": "https://analysisfunction.civilservice.gov.uk/policy-store/socio-economic-background-harmonised-standard/",
+        "verdict": "possible_drift",
+        "reasoning": "The live page shows the standard now includes eight recommended questions to measure socio-economic background (School type, Free school meals, Employee/self-employed/not working, Number of employees in two versions, Supervisor status, Parental occupation, Parental qualification), which is substantially different from the recorded notes that focus primarily on just two retrospective questions about parental occupation and qualification. The recorded entry does not mention school type, free school meals, employment status, or supervisor status questions.",
+        "http_status": 200
+      },
+      {
+        "entry_id": "ons-internet-access-standard",
+        "file": "data/demographics.yaml",
+        "source_url": "https://analysisfunction.civilservice.gov.uk/policy-store/internet-access/",
+        "verdict": "unchanged",
+        "reasoning": "The live page confirms all key recorded details: publication date 9 June 2020, owner GSS Harmonisation Team, status statement \"It is expected that the internet access harmonised standard will be reviewed in the coming years\" and \"this standard has not been further developed or updated since\" (2022), mode restriction warning about internet-based self-administered surveys, spontaneous \"Don't know\" responses, no Welsh-language version, and the two primary questions (household internet access: Yes/No with spontaneous Don't know; individual use: Yes/No with spontaneous Don't know). All recorded content remains consistent with the live source.",
+        "http_status": 200
+      },
+      {
+        "entry_id": "ons-loneliness-standard",
+        "file": "data/demographics.yaml",
+        "source_url": "https://analysisfunction.civilservice.gov.uk/policy-store/loneliness-indicators/",
+        "verdict": "possible_drift",
+        "reasoning": "The recorded values_or_items_summary lists five response options (\"Often or Always\", \"Some of the time\", \"Occasionally\", \"Hardly ever\", \"Never\"), but the live page shows the adult measure's fourth question (direct loneliness measure) has these same five options, while the first three adult questions use only three options (\"Hardly ever or never\", \"Some of the time\", \"Often\"). The recorded summary appears to reflect only one subset of the response sets, and the live page reveals a more complex picture with different questions having different response scales that wasn't clearly captured in the recorded summary.",
+        "http_status": 200
+      },
+      {
+        "entry_id": "ons-social-capital-standard",
+        "file": "data/demographics.yaml",
+        "source_url": "https://analysisfunction.civilservice.gov.uk/policy-store/social-capital/",
+        "verdict": "unchanged",
+        "reasoning": "The live page confirms all key recorded details: publication date of 13 July 2021, status as \"under development\" (recorded as under-review), GSS Harmonisation Team ownership, OECD definition of social capital, the four domains (personal relationships, social network support, civic engagement, trust/cooperative norms), and all six component questions with their exact wording and response scales match what was noted in the recorded entry. The note about 2022 priorities shift away from further development is also visible on the live page.",
+        "http_status": 200
+      },
+      {
+        "entry_id": "ons-welsh-language-skills-standard",
+        "file": "data/demographics.yaml",
+        "source_url": "https://analysisfunction.civilservice.gov.uk/policy-store/welsh-language-skills-harmonised-standard/",
+        "verdict": "unchanged",
+        "reasoning": "The live page confirms all recorded details: publication date 11 March 2022, owner GSS Harmonisation Team, status as current harmonisation standard. The self-completion multi-select question wording and five response options (Understand spoken Welsh, Speak Welsh, Read Welsh, Write Welsh, None of these apply) match exactly. The interviewer-led mode is confirmed with four sequential Yes/No questions including the spontaneous-only options noted. The page states the standard is \"suitable for self-completion and interviewer-led modes\" and emphasizes self-assessed ability with no proficiency scale, consistent with all recorded notes.",
+        "http_status": 200
+      },
+      {
+        "entry_id": "ons-cohabitation-standard",
+        "file": "data/demographics.yaml",
+        "source_url": "https://analysisfunction.civilservice.gov.uk/policy-store/cohabitation/",
+        "verdict": "unchanged",
+        "reasoning": "The live page confirms all key recorded details: publication date 27 November 2020, owner is GSS Harmonisation Team, status is current, response options are \"Yes\" and \"No\", and the recorded distinction from marital status (divorced couple living together example) and relationship to the household relationships standard are all present and unchanged in the live text.",
+        "http_status": 200
+      },
+      {
+        "entry_id": "ons-crime-fear-of-crime-standard",
+        "file": "data/demographics.yaml",
+        "source_url": "https://analysisfunction.civilservice.gov.uk/policy-store/crime-and-fear-of-crime/",
+        "verdict": "possible_drift",
+        "reasoning": "The recorded source_published date is \"2018-03-01\" but the live page shows \"Publication date: 1 April 2019\" \u2014 a discrepancy of over a year that warrants human verification of which date is correct and whether the standard was actually updated between these dates.",
+        "http_status": 200
+      },
+      {
+        "entry_id": "ons-long-lasting-health-conditions",
+        "file": "data/mental-health.yaml",
+        "source_url": "https://analysisfunction.civilservice.gov.uk/policy-store/long-lasting-health-conditions-and-illness/",
+        "verdict": "possible_drift",
+        "reasoning": "The recorded source_published date is 2011-01-01, but the live page states \"Publication date: 18 June 2020\". Additionally, the recorded last_reviewed date of 2026-08-30 appears to be a future date, and the live page shows an \"Update: March 2026\" indicating the standard is under review. A human should verify the actual publication and review dates directly.",
+        "http_status": 200
+      },
+      {
+        "entry_id": "ons-impairment-standard",
+        "file": "data/mental-health.yaml",
+        "source_url": "https://analysisfunction.civilservice.gov.uk/policy-store/impairment/",
+        "verdict": "unchanged",
+        "reasoning": "The live page displays the same impairment categories, response options, and structure as recorded. The values list matches exactly (Vision, Hearing, Mobility, Dexterity, Learning or understanding or concentrating, Memory, Mental health, Stamina or breathing or fatigue, Socially or behaviourally, Other). The notes about \"None of the above\" and \"Refusal\" being spontaneous-only categories are confirmed on the live page. The page shows the standard is under active review (as of March 2026), consistent with the recorded note about 2023 phase-2 research and ongoing review.",
+        "http_status": 200
+      },
+      {
+        "entry_id": "ons-mental-health-harmonisation-review",
+        "file": "data/mental-health.yaml",
+        "source_url": "https://analysisfunction.civilservice.gov.uk/policy-store/review-of-mental-health-harmonisation",
+        "verdict": "unchanged",
+        "reasoning": "The live page confirms all key recorded details: status is \"Archived\", publication date matches \"28 March 2023\", it is owned by \"Government Statistical Service (GSS) Harmonisation Team\" at ONS, and the content explicitly states \"there is currently no harmonised standard specifically for mental health\" with no preferred standard recommended. The page also confirms the existing standards (disability, impairment, wellbeing) provide only narrow/fragmented mental health data and were not designed to collect mental health data directly, matching the recorded notes.",
+        "http_status": 200
+      },
+      {
+        "entry_id": "nhs-mhsds-icd10",
+        "file": "data/mental-health.yaml",
+        "source_url": "https://standards.nhs.uk/published-standards/mental-health-services-data-set",
+        "verdict": "unchanged",
+        "reasoning": "The live page confirms the recorded information: status is \"Active\" (consistent with \"current\"), the publisher is \"NHS England / NHS Standards Directory\", it explicitly covers \"children and adults in contact with mental health and wellbeing services\", and the page references SCCI0021 (ICD-10 5th Edition) as a related standard. The description of MHSDS as a \"patient level, output based, secondary uses data set\" aligns with the recorded notes. No inconsistencies detected.",
+        "http_status": 200
+      },
+      {
+        "entry_id": "ons-soc2020-standard",
+        "file": "data/official-classifications.yaml",
+        "source_url": "https://www.ons.gov.uk/methodology/classificationsandstandards/standardoccupationalclassificationsoc/soc2020",
+        "verdict": "unchanged",
+        "reasoning": "The live page confirms \"The current Standard Occupational Classification (SOC) for the UK is published in three volumes\" and describes SOC 2020 as the latest update. The structure (volumes 1-3) and the referenced resources all align with the recorded entry. The page was last updated 5 May 2026, which is after the recorded last_reviewed date of 2026-09-04, and no contradictions to the recorded status, publication date, or notes are apparent in the visible text.",
+        "http_status": 200
+      },
+      {
+        "entry_id": "ons-sic2007-standard",
+        "file": "data/official-classifications.yaml",
+        "source_url": "https://www.ons.gov.uk/methodology/classificationsandstandards/ukstandardindustrialclassificationofeconomicactivities/uksic2007",
+        "verdict": "unchanged",
+        "reasoning": "The live page still describes UK SIC 2007 as \"The current Standard Industrial Classification (SIC)\" with no supersession banner, matching the recorded status as \"current\". The page layout, resources, and description are consistent with what was recorded. The notes correctly flag the existence of SIC 2026 as a forward-looking consideration, and the live page itself includes a link to \"UK SIC: 2026\" and \"UK SIC 2026 revision process\" in the sidebar, confirming this context is accurate. No actual change to the operational status of SIC 2007 is evident on this page.",
+        "http_status": 200
+      },
+      {
+        "entry_id": "mhclg-imd-2025-england",
+        "file": "data/official-classifications.yaml",
+        "source_url": "https://www.gov.uk/government/statistics/english-indices-of-deprivation-2025",
+        "verdict": "unchanged",
+        "reasoning": "The live page confirms all key recorded details: published by MHCLG on 30 October 2025, status is current (stated as \"updates the English indices of deprivation 2019\"), and covers Lower-layer Super Output Areas. The page confirms the 7 weighted domains structure via the \"Domains of deprivation\" file listing and references to income, employment, education, health, crime, housing/services, and living environment dimensions. The notes about IoD2025 being the live current version, the Local Deprivation Explorer tool, supplementary indices, and the rural report all appear consistently supported by the visible page content.",
+        "http_status": 200
+      },
+      {
+        "entry_id": "scotgov-simd-2020",
+        "file": "data/official-classifications.yaml",
+        "source_url": "https://www.gov.scot/collections/scottish-index-of-multiple-deprivation-2020/",
+        "verdict": "unchanged",
+        "reasoning": "The live page confirms SIMD 2020v2 remains the current published version with data for 6,976 data zones across seven domains (income, employment, education, health, access to services, crime, and housing). The page explicitly states the 2020v2 revision affected only income domain ranks and overall SIMD ranks due to a DWP problem, and advises that \"SIMD 2020v2 ranks should now be used when carrying out any analyses.\" No mention of SIMD 2026 appears on this live page, and the status as \"current\" remains accurate as of the review date.",
+        "http_status": 200
+      },
+      {
+        "entry_id": "welshgov-wimd-2025",
+        "file": "data/official-classifications.yaml",
+        "source_url": "https://www.gov.wales/welsh-index-multiple-deprivation-2025-series",
+        "verdict": "unchanged",
+        "reasoning": "The live page confirms WIMD 2025 is current, published 27 November 2025, and maintained by Welsh Government. The page structure, publication date, and status all align with what's recorded. No inconsistencies detected in the visible content.",
+        "http_status": 200
+      },
+      {
+        "entry_id": "nisra-nimdm-2017",
+        "file": "data/official-classifications.yaml",
+        "source_url": "https://www.nisra.gov.uk/statistics/deprivation/northern-ireland-multiple-deprivation-measure-2017-nimdm2017",
+        "verdict": "unchanged",
+        "reasoning": "The live page confirms all key recorded facts: NIMDM 2017 published 23 November 2017 by NISRA, ranks 890 Super Output Areas, covers 7 distinct domains of deprivation, and no newer edition is evident. The page title, source, publication date, and domain count all match the recorded data.",
+        "http_status": 200
+      },
+      {
+        "entry_id": "ons-rural-urban-classification-2021",
+        "file": "data/official-classifications.yaml",
+        "source_url": "https://www.ons.gov.uk/methodology/geography/geographicalproducts/ruralurbanclassifications/2021ruralurbanclassification",
+        "verdict": "possible_drift",
+        "reasoning": "The live page shows a last update of 31 March 2026 (not 6 March 2025 as recorded for source_published), and describes a substantive methodology change: the 2021 RUC now uses only three simplified OA categories (\"Urban\", \"Larger rural settlement\", \"Smaller rural settlement\") rather than six, with \"Relative access\" (not \"Sparsity\") dividing each into \"Nearer\" or \"Further\" classes. The recorded values_or_items_summary lists the correct six items derived from these three \u00d7 two subdivisions, but the methodology description in the notes should be verified against the live page's explicit statement that the 2021 version \"streamlines the taxonomy\" and represents improvements over 2011, including replacing \"Sparsity\" with \"Relative access.\" A human should confirm whether the recorded notes accurately capture these methodology details.",
+        "http_status": 200
+      },
+      {
+        "entry_id": "ons-output-area-classification-2021",
+        "file": "data/official-classifications.yaml",
+        "source_url": "https://data.geods.ac.uk/dataset/output-area-classification-2021",
+        "verdict": "unchanged",
+        "reasoning": "The live page confirms all key details: it is published by GeoDS in partnership with ONS, describes the classification as hierarchical geodemographic across the UK with 8 supergroups, 21 groups, and 52 sub-groups, version 3.2 released January 2025, and covers England, Wales, Scotland, and Northern Ireland. The note about pen portrait name changes (4b1 and 8b3) aligns with the recorded understanding that actual names live in accompanying documents. No discrepancies detected.",
+        "http_status": 200
+      },
+      {
+        "entry_id": "ons-geography-hierarchy-gss-codes",
+        "file": "data/official-classifications.yaml",
+        "source_url": "https://www.ons.gov.uk/methodology/geography/ukgeographies/statisticalgeographies",
+        "verdict": "unchanged",
+        "reasoning": "The live page confirms all key recorded facts: OAs are the lowest level with \"usually resident population between 100 and 625 persons\"; LSOAs are \"made up of groups of Output Areas (OAs)\" with \"usually resident population between 1,000 and 3,000 persons\"; MSOAs are \"made up of groups of Lower layer Super Output Areas (LSOAs)\" with \"usually resident population between 5,000 and 15,000 persons.\" The hierarchical nesting structure and population thresholds match the recorded information. The page also notes Scotland and Northern Ireland have separate census arrangements, consistent with the recorded notes about different naming conventions. No contradictions or material drift detected.",
+        "http_status": 200
+      },
+      {
+        "entry_id": "dfe-gias-school-type-classification",
+        "file": "data/official-classifications.yaml",
+        "source_url": "https://get-information-schools.service.gov.uk/glossary",
+        "verdict": "unchanged",
+        "reasoning": "The live GIAS glossary page text shows consistent definitions for multiple establishment types referenced in the recorded notes: Academy, Academy converter, Academy special, Academy sponsor led, British Schools Overseas, City technology colleges, Community school, and Children's centre terminology all appear with definitions matching the broad categories documented. The page layout and glossary structure remain consistent with what was recorded\u2014no evidence of material changes to the source material or its organization.",
+        "http_status": 200
+      },
+      {
+        "entry_id": "ons-local-authority-type-classification",
+        "file": "data/official-classifications.yaml",
+        "source_url": "https://www.ons.gov.uk/methodology/geography/ukgeographies/administrativegeography/england",
+        "verdict": "unchanged",
+        "reasoning": "The live page confirms all recorded classification categories with their GSS entity-type codes: Regions (E12), Counties (E10), Metropolitan Counties (E11), Non-Metropolitan Districts (E07), Metropolitan Districts (E08), Unitary Authorities (E06), and London Boroughs (E09). The page structure and content align with the recorded summary and notes about England's two-tier and single-tier local government arrangements.",
+        "http_status": 200
+      },
+      {
+        "entry_id": "nhs-number",
+        "file": "data/referral-identifiers.yaml",
+        "source_url": "https://www.datadictionary.nhs.uk/data_elements/nhs_number.html",
+        "verdict": "unchanged",
+        "reasoning": "The live page confirms the recorded definition: \"The NHS NUMBER, the primary identifier of a PERSON, is a unique identifier for a PATIENT within the NHS in England and Wales\" with format n10. The page remains current and active, with extensive cross-references to birth episodes, delivery episodes, and other care record types (including Type 120, 140, 150, 180 for birth/delivery records) that are consistent with the recorded inference that NHS NUMBER applies across all ages including newborns. No material changes detected.",
+        "http_status": 200
+      },
+      {
+        "entry_id": "nhs-gp-practice-patient-registration",
+        "file": "data/referral-identifiers.yaml",
+        "source_url": "https://www.datadictionary.nhs.uk/data_elements/general_medical_practice__patient_registration_.html",
+        "verdict": "possible_drift",
+        "reasoning": "The live page now includes a new statement that was not mentioned in the recorded notes: \"GENERAL MEDICAL PRACTICE CODE (PATIENT REGISTRATION) will be replaced with GENERAL MEDICAL PRACTICE (PATIENT REGISTRATION), which is the most recent approved national information standard to describe the required definition.\" This clarifies the relationship between the two similarly-named elements and states that one will supersede the other\u2014contradicting the recorded note that neither page states that one supersedes the other. Additionally, the live page now documents a third default code V81999 (\"GP Practice Code not known\") which was not captured in the original notes, though the recorded summary did mention it in passing.",
+        "http_status": 200
+      },
+      {
+        "entry_id": "nhs-safeguarding-concern-snomed",
+        "file": "data/referral-identifiers.yaml",
+        "source_url": "https://www.datadictionary.nhs.uk/data_elements/safeguarding_concern__snomed_ct_.html",
+        "verdict": "unchanged",
+        "reasoning": "The live page text confirms all key recorded details: the definition explicitly states it is used \"to identify an unresolved issue or concern regarding adult and child safeguarding that requires communication to another ORGANISATION or care agency\" (matching the recorded source definition); the SNOMED CT Refset ID 999002381000000108 is present; and the Refset FSN \"Safeguarding issues simple reference set (foundation metadata concept)\" is confirmed. The status as a current NHS Data Model and Dictionary entry remains consistent with what is recorded.",
+        "http_status": 200
+      },
+      {
+        "entry_id": "nhs-safeguarding-vulnerability-indicator",
+        "file": "data/referral-identifiers.yaml",
+        "source_url": "https://www.datadictionary.nhs.uk/data_elements/safeguarding_vulnerability_factors_indicator.html",
+        "verdict": "unchanged",
+        "reasoning": "The live page confirms all recorded details: the indicator is scoped to child safeguarding, the two national codes are Y and N with the exact descriptions recorded (\"Yes - Child Safeguarding vulnerability factors present\" and \"No - Child Safeguarding vulnerability factors not present\"), and it is used within the Community Services Data Set. No inconsistencies detected.",
+        "http_status": 200
+      },
+      {
+        "entry_id": "nhs-consent-gap",
+        "file": "data/referral-identifiers.yaml",
+        "source_url": "https://www.england.nhs.uk/long-read/consent-to-using-and-sharing-patient-information/",
+        "verdict": "unchanged",
+        "reasoning": "The live page remains a policy guidance document on consent to using and sharing patient information, dated 28 March 2023 (last updated 14 March 2025), published by NHS England. It covers legal/policy requirements for informed consent under UK data protection law but is not a coded classification standard. This aligns exactly with the recorded notes that describe it as \"policy guidance, not a coded classification standard.\" No contradiction is evident between the recorded status and what the live page displays.",
+        "http_status": 200
+      },
+      {
+        "entry_id": "phq-9",
+        "file": "data/screening-tools.yaml",
+        "source_url": "https://www.phqscreeners.com/images/sites/g/files/g10060481/f/201412/PHQ9_English%20for%20New%20Zealand.pdf",
+        "verdict": "fetch_failed",
+        "reasoning": "The page text provided is raw PDF binary/encoded content with no readable text. The content shown is PDF metadata and stream objects containing compressed data, making it impossible to verify whether the live page still contains the PHQ-9 content, source attribution, publication date, or other details recorded in the repository.",
+        "http_status": 200
+      },
+      {
+        "entry_id": "gad-7",
+        "file": "data/screening-tools.yaml",
+        "source_url": "https://www.phqscreeners.com/select-screener",
+        "verdict": "unchanged",
+        "reasoning": "The live page confirms the GAD-7 developers as \"Drs. Spitzer, Williams and Kroenke\" with \"support of an educational grant from Pfizer Inc.\", matching the recorded source attribution. The page describes GAD-7 as \"a brief scale for anxiety\" that \"scores 7 common anxiety symptoms,\" consistent with the recorded summary and item count. The recorded date of 2006 aligns with the page's statement that these tools were developed \"in the mid-1990s\" (PRIME-MD) with GAD-7 developed subsequently as a derived screener.",
+        "http_status": 200
+      },
+      {
+        "entry_id": "sdq",
+        "file": "data/screening-tools.yaml",
+        "source_url": "https://youthinmind.com/copyright/",
+        "verdict": "unchanged",
+        "reasoning": "The live page confirms the SDQ is published by Youthinmind and maintained by Dr. Goodman's organisation. The copyright and licensing information visible on the page aligns with the recorded restriction note about electronic-reproduction restrictions and the instruction to see the source URL for current versions and licensing information. No indicators of substantive change to the standard's status or publication date.",
+        "http_status": 200
+      },
+      {
+        "entry_id": "ors",
+        "file": "data/screening-tools.yaml",
+        "source_url": "https://www.scottdmiller.com/downloadmeasures.html",
+        "verdict": "unchanged",
+        "reasoning": "The live page confirms the ORS is a 4-item measure designed to assess areas of life functioning in therapy, authored by Scott D. Miller (and Duncan), and describes it as a brief outcome-tracking tool, consistent with the recorded status as \"current\" and source publication date of 2003. The page confirms licensing and use restrictions but does not indicate any substantive change to the measure itself or its foundational publication status.",
+        "http_status": 200
+      },
+      {
+        "entry_id": "srs",
+        "file": "data/screening-tools.yaml",
+        "source_url": "https://www.scottdmiller.com/downloadmeasures.html",
+        "verdict": "unchanged",
+        "reasoning": "The live page confirms the SRS is a brief 4-item measure designed to assess therapeutic alliance, consistent with the recorded description of \"brief 4-item visual-analog therapeutic-alliance measure.\" The source attribution to Scott D. Miller is confirmed on the page, and the status as current is consistent with an active licensing and download system still in operation.",
+        "http_status": 200
+      },
+      {
+        "entry_id": "wemwbs",
+        "file": "data/screening-tools.yaml",
+        "source_url": "https://warwick.ac.uk/services/innovations/wemwbs",
+        "verdict": "possible_drift",
+        "reasoning": "The live page presents WEMWBS as actively managed and commercially available through a licensing portal with distinct NHS, Commercial, and Non-Commercial licence options, whereas the recorded entry indicates \"current\" status with a note that \"Not reproduced here because current licensing requires obtaining the appropriate tier through the official portal first.\" The live page now emphasizes commercial availability and profit-based fee structures (\"If the incorrect license is selected, standard fees will apply\"), which differs from the 2007 origin date and may indicate a significant shift in how the scale is now positioned and governed.",
+        "http_status": 200
+      },
+      {
+        "entry_id": "rcads",
+        "file": "data/screening-tools.yaml",
+        "source_url": "https://rcads.ucla.edu/permissions",
+        "verdict": "unchanged",
+        "reasoning": "The live page confirms the RCADS is owned by Bruce F. Chorpita and Susan H. Spence, and states it is \"available at no cost to end users.\" The permissions language clearly requires written permission for \"reuse of individual items,\" which aligns with the recorded note that \"digital incorporation and reuse of items requires written permission.\" No status changes or date discrepancies are apparent.",
+        "http_status": 200
+      }
+    ]
+  }
+]
