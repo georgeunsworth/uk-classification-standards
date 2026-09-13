@@ -9,11 +9,12 @@ ever produces `possible_drift`, meaning "a human should re-check this," never a
 final verdict. Nothing in data/*.yaml is touched here; the only output is an
 append to data/audit-log.json.
 
-Requires: pyyaml, requests, beautifulsoup4, anthropic
+Requires: pyyaml, requests, beautifulsoup4, pypdf, anthropic
 Requires env var: ANTHROPIC_API_KEY
 """
 import datetime
 import glob
+import io
 import json
 import os
 import sys
@@ -22,6 +23,7 @@ import time
 import requests
 import yaml
 from bs4 import BeautifulSoup
+from pypdf import PdfReader
 from anthropic import Anthropic
 
 MODEL = os.environ.get("LIVE_VERIFY_MODEL", "claude-haiku-4-5-20251001")
@@ -72,13 +74,33 @@ def load_entries():
     return entries
 
 
+def is_pdf(url, resp):
+    return "pdf" in resp.headers.get("Content-Type", "").lower() or url.lower().endswith(".pdf")
+
+
+def extract_pdf_text(content):
+    reader = PdfReader(io.BytesIO(content))
+    parts = []
+    total_chars = 0
+    for page in reader.pages:
+        text = page.extract_text() or ""
+        parts.append(text)
+        total_chars += len(text)
+        if total_chars >= MAX_PAGE_CHARS:
+            break
+    return " ".join(parts)
+
+
 def fetch_page_text(url):
     resp = requests.get(url, headers={"User-Agent": USER_AGENT}, timeout=REQUEST_TIMEOUT)
     resp.raise_for_status()
-    soup = BeautifulSoup(resp.text, "html.parser")
-    for tag in soup(["script", "style", "nav", "footer"]):
-        tag.decompose()
-    text = " ".join(soup.get_text(separator=" ").split())
+    if is_pdf(url, resp):
+        text = " ".join(extract_pdf_text(resp.content).split())
+    else:
+        soup = BeautifulSoup(resp.text, "html.parser")
+        for tag in soup(["script", "style", "nav", "footer"]):
+            tag.decompose()
+        text = " ".join(soup.get_text(separator=" ").split())
     return text[:MAX_PAGE_CHARS], resp.status_code
 
 
@@ -108,6 +130,27 @@ def verify_entry(client, entry):
             "verdict": "fetch_failed",
             "reasoning": f"Could not fetch source_url: {exc}",
             "http_status": None,
+        }
+    except Exception as exc:
+        # Malformed/encrypted PDFs and other unexpected parsing failures shouldn't
+        # abort the whole run — flag this one entry and move on.
+        return {
+            "entry_id": entry_id,
+            "file": entry["_file"],
+            "source_url": source_url,
+            "verdict": "fetch_failed",
+            "reasoning": f"Could not extract readable text from source_url: {exc}",
+            "http_status": None,
+        }
+
+    if not page_text.strip():
+        return {
+            "entry_id": entry_id,
+            "file": entry["_file"],
+            "source_url": source_url,
+            "verdict": "fetch_failed",
+            "reasoning": "Fetched the page but extracted no readable text.",
+            "http_status": http_status,
         }
 
     prompt = (
