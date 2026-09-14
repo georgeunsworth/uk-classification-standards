@@ -57,14 +57,76 @@ header p {
   margin: 0 0 0.5rem;
   max-width: 60ch;
 }
-header .repo-link,
-header .view-nav {
-  font-size: 0.9rem;
-}
-header .view-nav {
-  margin: 0.6rem 0 0;
-}
 a { color: var(--link); }
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  padding-bottom: 1.1rem;
+  margin-bottom: 1.25rem;
+  border-bottom: 1px solid var(--border);
+}
+.topbar-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+.topbar-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.topbar-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.85rem;
+  padding: 0.4rem 0.85rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--text);
+  text-decoration: none;
+  white-space: nowrap;
+}
+.topbar-link:hover {
+  border-color: var(--accent);
+}
+.topbar-link.is-current {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--surface);
+  font-weight: 600;
+}
+.topbar-link--github svg {
+  width: 0.95em;
+  height: 0.95em;
+  fill: currentColor;
+}
+@media (max-width: 600px) {
+  .topbar {
+    align-items: flex-start;
+  }
+  .topbar-nav {
+    width: 100%;
+  }
+  .topbar-link {
+    flex: 1 1 auto;
+    justify-content: center;
+  }
+}
 .controls {
   display: flex;
   gap: 0.6rem;
