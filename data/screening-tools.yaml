@@ -86,14 +86,12 @@
       people?", 4 options from "Not difficult at all" to "Extremely difficult") is part of the
       standard form but isn't included in the total score.
   notes: >
-    Validated in two large primary-care studies (~6,000 patients total: general internal
-    medicine/family practice and obstetrics-gynaecology clinics) — both adult populations.
-    A separately modified variant, PHQ-9 for Adolescents (PHQ-A), exists with its own
-    diagnostic scoring for use with under-18s (Johnson JG et al., J Adolescent Health
-    2002;30:196-204) but is not reproduced here — don't assume this standard PHQ-9 is
-    validated for that population; that's why applies_to only lists adults. This is the
-    first entry in this repo that isn't UK-government/OGL content — see licence_status
-    above for why it's still safe to reproduce.
+    Validated in two large primary care studies of adults (about 6,000 patients in total, in
+    general internal medicine/family practice and obstetrics-gynaecology clinics), so only
+    adults are tagged. Don't assume the standard PHQ-9 is validated for under-18s. A separately
+    modified version, PHQ-9 for Adolescents (PHQ-A), has its own diagnostic scoring for use
+    with under-18s (Johnson JG et al., J Adolescent Health 2002;30:196-204). It isn't
+    reproduced here.
 
 - id: gad-7
   label: Generalized Anxiety Disorder 7-item scale (GAD-7)
@@ -156,11 +154,10 @@
       characteristics as a screener for panic disorder, social anxiety disorder, and PTSD —
       not just generalized anxiety disorder specifically.
   notes: >
-    Validated in 2,740 primary care patients (adult population). Uses the same 0-3 response
-    scale and shares its development team with PHQ-9. No adolescent-specific variant was
-    found in the sources checked for this entry (unlike PHQ-9, which has the separate PHQ-A) —
-    treat applies_to as adults-only until/unless that's confirmed, rather than assuming
-    parity with PHQ-9's situation.
+    Validated in 2,740 primary care patients (an adult population). Uses the same 0-3 response
+    scale as PHQ-9 and was developed by the same team. Unlike PHQ-9, which has the separate
+    PHQ-A, no adolescent-specific version was found in the sources checked for this entry. Treat
+    it as adults-only unless that's confirmed.
 
 - id: sdq
   label: Strengths and Difficulties Questionnaire (SDQ)
@@ -189,11 +186,11 @@
   response_scale: null
   scoring: null
   notes: >
-    The SDQ is a brief behavioural screening questionnaire for children and young people
-    (parent-, teacher-, and self-report versions exist for different age bands, roughly
-    2-17). Full items, response scale, and scoring bands are not reproduced here because of
-    the electronic-reproduction restriction above — see source_url for the current paper
-    versions, permitted uses, and how to request a licence for electronic use.
+    A brief behavioural screening questionnaire for children and young people, with parent-,
+    teacher- and self-report versions for different age bands (roughly ages 2-17). The items,
+    response scale and scoring bands aren't reproduced here because the publisher restricts
+    electronic reproduction. See the primary source for the current paper versions, permitted
+    uses and how to request a licence for electronic use.
 
 - id: ors
   label: Outcome Rating Scale (ORS)
@@ -221,10 +218,10 @@
   response_scale: null
   scoring: null
   notes: >
-    The ORS is a brief 4-item visual-analog outcome-tracking measure used session-to-session
-    in therapy, for adults (child variants CORS/Child ORS exist separately and aren't covered
-    by this entry). Not reproduced here because of the digital-reproduction and organisational
-    licensing restrictions above — see source_url for licensing terms and authorised
+    A brief 4-item visual-analogue measure for tracking outcomes session to session in therapy,
+    for adults. Child versions (CORS/Child ORS) exist separately and aren't covered by this
+    entry. Not reproduced here because of restrictions on digital reproduction and
+    organisational licensing. See the primary source for licensing terms and authorised
     electronic systems.
 
 - id: srs
@@ -250,10 +247,10 @@
   response_scale: null
   scoring: null
   notes: >
-    The SRS is a brief 4-item visual-analog therapeutic-alliance measure completed at the end
-    of a session, for adults (a child variant, Child SRS, exists separately and isn't covered
-    by this entry). Not reproduced here for the same digital-reproduction and organisational
-    licensing restrictions as ORS — see source_url.
+    A brief 4-item visual-analogue measure of therapeutic alliance, completed at the end of a
+    session, for adults. A child version (Child SRS) exists separately and isn't covered by
+    this entry. Not reproduced here because of the same digital-reproduction and organisational
+    licensing restrictions as the Outcome Rating Scale (ORS) entry. See the primary source.
 
 - id: wemwbs
   label: Warwick-Edinburgh Mental Well-being Scale (WEMWBS)
@@ -283,10 +280,10 @@
   response_scale: null
   scoring: null
   notes: >
-    WEMWBS is a 14-item positively-worded mental well-being scale for adults; a shorter
-    7-item version (SWEMWBS) and versions for younger populations also exist separately and
-    aren't covered by this entry. Not reproduced here because current licensing requires
-    obtaining the appropriate tier through the official portal first — see source_url.
+    A 14-item, positively worded mental well-being scale for adults. A shorter 7-item version
+    (SWEMWBS) and versions for younger populations exist separately and aren't covered by this
+    entry. Not reproduced here because you must first get the appropriate licence tier through
+    the official portal. See the primary source.
 
 - id: rcads
   label: Revised Children's Anxiety and Depression Scale (RCADS)
@@ -315,8 +312,8 @@
   response_scale: null
   scoring: null
   notes: >
-    RCADS is a self-report (and parent-report) anxiety/depression scale for children and
-    young people, typically used around ages 8-18; a shorter form (RCADS-25) also exists
-    separately and isn't covered by this entry. Not reproduced here because digital
-    incorporation and reuse of items requires written permission per the terms above — see
-    source_url for the current permissions process.
+    A self-report and parent-report anxiety and depression scale for children and young
+    people, typically used around ages 8-18. A shorter form (RCADS-25) exists separately and
+    isn't covered by this entry. Not reproduced here because digital incorporation and reuse
+    of items need written permission from the publisher. See the primary source for the
+    current permissions process.

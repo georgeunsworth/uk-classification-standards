@@ -5,6 +5,16 @@ dated by when the change was caught, not necessarily when the source changed.
 
 ## Unreleased
 
+### Changed
+- Copy-edited `notes` on all 64 entries for clarity, length and tone (about 12,200 words
+  down to about 8,000). Notes now lead with what a practitioner needs, name related entries
+  by label instead of "above"/"below", and drop research narration, repo-internal remarks
+  and schema field names. Editorial only: no other field changed, every retained quotation is
+  verbatim from the previous note, and caveats, population evidence and staleness warnings
+  are kept. Issues found along the way (stale dates, status/note mismatches, inconsistent
+  counts) were not fixed in this pass and are listed for separate verification against
+  the live sources.
+
 ### Added
 - Two automated currency checks. `scripts/check_staleness.py` runs on every push/PR (added to
   `.github/workflows/validate.yml`) and non-blockingly flags any entry marked `status: current`

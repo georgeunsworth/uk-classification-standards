@@ -25,54 +25,12 @@
     <p>The same tracked standards, organised by question. Only standards that publish an actual question or item (including multi-item screening instruments like PHQ-9) appear here.</p>
   </header>
 
-  <div class="controls">
-    <input type="search" id="search" placeholder="Search question, label, source, or notes…" aria-label="Search entries">
-    <select id="category-filter" aria-label="Filter by category">
-      <option value="">All categories</option>
-    </select>
-    <select id="status-filter" aria-label="Filter by status">
-      <option value="">All statuses</option>
-      <option value="current">Current</option>
-      <option value="under-review">Under review</option>
-      <option value="archived">Archived</option>
-      <option value="superseded">Superseded</option>
-    </select>
-    <select id="population-filter" aria-label="Filter by population">
-      <option value="">Who it's for: anyone</option>
-      <option value="adults">Confirmed for adults</option>
-      <option value="children-young-people">Confirmed for children/young people</option>
-      <option value="unspecified">Population not confirmed (gap)</option>
-    </select>
-    <select id="use-case-filter" aria-label="Filter by use case">
-      <option value="">Any use case</option>
-      <option value="demographic-survey">Demographic survey</option>
-      <option value="screening-instrument">Screening instrument</option>
-      <option value="support-needs-identification">Support needs identification</option>
-      <option value="no-standard-gap">No standard exists (gap)</option>
-    </select>
-    <!-- "Clinical record" and "Official classification" are deliberately omitted here:
-         those entries are identifiers/coded flags/derived classifications with no
-         `question` or `items`, and none are tagged no-standard-gap, so these filters
-         could never match anything on this page. Both are still offered on index.html,
-         where they're meaningful. -->
-    <select id="source-type-filter" aria-label="Filter by source type">
-      <option value="">Any source type</option>
-      <option value="harmonised-standard">Harmonised standard</option>
-      <option value="survey-instrument">Survey instrument</option>
-      <option value="cross-government-taxonomy">Cross-government taxonomy</option>
-      <option value="regulatory-framework">Regulatory framework</option>
-      <option value="sector-eligibility-framework">Sector eligibility framework</option>
-      <option value="international-standard">International standard</option>
-    </select>
-    <select id="licence-filter" aria-label="Filter by licence">
-      <option value="">Any licence</option>
-      <option value="ogl">OGL</option>
-      <option value="public-domain">Public domain</option>
-      <option value="restricted">Restricted — reference only</option>
-    </select>
-  </div>
+  <div class="filter-bar" id="controls"></div>
 
-  <p class="count" id="count"></p>
+  <div class="results-bar">
+    <p class="count" id="count" aria-live="polite"></p>
+    <button type="button" class="toggle-all" id="toggle-all" hidden>Expand all</button>
+  </div>
   <div id="entries"></div>
 
   <footer>
@@ -86,15 +44,21 @@
 <script>
   const entriesEl = document.getElementById("entries");
   const countEl = document.getElementById("count");
-  const searchEl = document.getElementById("search");
-  const categoryEl = document.getElementById("category-filter");
-  const statusEl = document.getElementById("status-filter");
-  const populationEl = document.getElementById("population-filter");
-  const useCaseEl = document.getElementById("use-case-filter");
-  const sourceTypeEl = document.getElementById("source-type-filter");
-  const licenceEl = document.getElementById("licence-filter");
-
-  categoryEl.insertAdjacentHTML("beforeend", CATEGORIES.map((c) => `<option value="${escapeHtml(c)}">${escapeHtml(c)}</option>`).join(""));
+  const syncDisclosures = wireDisclosures(entriesEl, document.getElementById("toggle-all"));
+  const filterBar = createFilterBar({
+    containerEl: document.getElementById("controls"),
+    searchPlaceholder: "e.g. ethnicity, PHQ-9, disability",
+    // The clinical-record/official-classification use cases and the clinical-dataset/
+    // official-classification source types are deliberately omitted here: those entries are
+    // identifiers/coded flags/derived classifications with no `question` or `items`, and none
+    // are tagged no-standard-gap, so these filters could never match anything on this page.
+    // They're still offered on index.html, where they're meaningful.
+    omit: {
+      useCase: ["clinical-record", "official-classification"],
+      sourceType: ["clinical-dataset", "official-classification"],
+    },
+    onChange: applyFilters,
+  });
 
   let allEntries = [];
 
@@ -171,27 +135,23 @@
   }
 
   function applyFilters() {
-    const filters = {
-      search: searchEl.value.trim().toLowerCase(),
-      category: categoryEl.value,
-      status: statusEl.value,
-      population: populationEl.value,
-      useCase: useCaseEl.value,
-      sourceType: sourceTypeEl.value,
-      licence: licenceEl.value,
-    };
-
-    const filtered = allEntries.filter((e) => matchesFilters(e, filters));
+    if (!allEntries.length) return;
+    const filters = filterBar.getFilters();
 
     const isEligible = (e) =>
       isQuestionLike(e) || (e.use_case || []).includes("no-standard-gap") || isLicensedReferenceOnly(e);
+    const eligibleAll = allEntries.filter(isEligible);
+    filterBar.updateCounts(eligibleAll);
+
+    const filtered = allEntries.filter((e) => matchesFilters(e, filters));
     const eligible = filtered.filter(isEligible);
-    countEl.textContent = `${eligible.length} of ${allEntries.filter(isEligible).length} questions, gaps & licensed instruments`;
+    countEl.textContent = `${eligible.length} of ${eligibleAll.length} questions, gaps & licensed instruments`;
 
     const sections = CATEGORIES.map((category) => renderCategorySection(category, filtered)).join("");
     entriesEl.innerHTML = sections.trim()
       ? sections
       : '<p class="empty">No questions, gaps, or licensed instruments match your filters.</p>';
+    syncDisclosures();
   }
 
   async function loadAll() {
@@ -205,14 +165,6 @@
   }
 
   wireCopyButtons(entriesEl, () => allEntries);
-
-  searchEl.addEventListener("input", applyFilters);
-  categoryEl.addEventListener("change", applyFilters);
-  statusEl.addEventListener("change", applyFilters);
-  populationEl.addEventListener("change", applyFilters);
-  useCaseEl.addEventListener("change", applyFilters);
-  sourceTypeEl.addEventListener("change", applyFilters);
-  licenceEl.addEventListener("change", applyFilters);
   loadAll();
 </script>
 </body>

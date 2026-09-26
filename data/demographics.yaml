@@ -42,18 +42,19 @@
   response_scale: null
   scoring: null
   notes: >
-    18 England response categories, grouped in the source under White / Mixed-Multiple /
-    Asian-Asian British / Black-African-Caribbean-Black British / Other ethnic group — this
-    tracker lists them flat; see source_url for the grouping and the separate Scotland/Wales/NI
-    variants. Under active review since March 2022 (Inclusive Data Taskforce-driven) but the
-    source explicitly says to keep using this standard for existing collections until the review
-    concludes — treat as current, not archived. Source states the question was "tested and
-    designed for use with adult respondents aged 16 and over"; for younger children it says
-    "guidance from parents/guardians may be needed" — looser wording than the formal proxy-response
-    rule used by some other standards, worth re-checking against source_url if the exact mechanism
-    matters for your form. The same page also states, of language as a related concept: "currently
-    a GSS wide harmonised standard is not offered due to a lack of user need" — see the
-    ons-language-standard-gap entry below.
+    The 18 England categories are shown as a flat list. See the primary source for how they are
+    grouped (White; Mixed/Multiple; Asian/Asian British; Black/African/Caribbean/Black British;
+    Other ethnic group) and for the Scotland, Wales and Northern Ireland variants.
+
+    The standard has been under review since March 2022, driven by the Inclusive Data Taskforce. The
+    source says to keep using it for existing collections until the review concludes.
+
+    The question was "tested and designed for use with adult respondents aged 16 and over". For
+    younger children, "guidance from parents/guardians may be needed", which is looser than a formal
+    proxy-response rule. Check the source if the exact mechanism matters for your form.
+
+    The same page says a GSS-wide language standard "is not offered due to a lack of user need". See
+    the Main/preferred language (no GSS-wide harmonised standard) entry.
 
 - id: ons-disability-equality-act-2010
   label: Measuring disability for the Equality Act 2010 (harmonisation guidance)
@@ -79,16 +80,19 @@
   response_scale: null
   scoring: null
   notes: >
-    This is the second half of the official Equality Act 2010 "disabled person" test — a
-    respondent only qualifies as disabled under the Act if they answer affirmatively to BOTH this
-    question AND the long-lasting-conditions question already tracked as the
-    ons-long-lasting-health-conditions entry in the mental-health domain. Only the two affirmative
-    categories were confirmed from the source; a "No"/negative category presumably also exists but
-    wasn't confirmed verbatim here — check source_url for the complete option set before using this
-    in a live eligibility check. Updated 26 Apr 2023 as part of a 5-yearly Inclusive Data Taskforce
-    review (draft revised questions were expected by 2025 — re-check currency). Source confirms
-    direct response for respondents aged 16 and over, proxy response permitted for under-16s and for
-    respondents too ill to self-respond, and translator assistance for non-English speakers.
+    This is the second half of the Equality Act 2010 disabled person test. A respondent counts as
+    disabled under the Act only if they answer yes to both this question and the one in the
+    Long-lasting health conditions and illness harmonised standard entry.
+
+    Only the two yes options are confirmed from the source. A no option presumably exists but is
+    unconfirmed, so check the primary source for the full set before using this in a live
+    eligibility check.
+
+    Respondents aged 16 and over answer for themselves. Proxy response is permitted for under-16s
+    and for respondents too ill to answer, and translators can help non-English speakers.
+
+    Updated 26 April 2023 in a 5-yearly Inclusive Data Taskforce review. Draft revised questions
+    were expected by 2025; check whether they have been published.
 
 - id: ons-sex-standard-gap
   label: Sex harmonisation guidance (no current standard)
@@ -110,16 +114,17 @@
   response_scale: null
   scoring: null
   notes: >
-    IMPORTANT: the source states plainly "There is not currently a harmonised standard for
-    collecting data on sex." Historical census categories ("Female"/"Male") are referenced on the
-    page for context only, not as a current recommendation. The GSS Harmonisation team is
-    conducting cognitive/usability testing and expects to publish new guidance and standards for
-    two distinct approaches — biological sex (sex at birth) and certificated sex (sex at birth or as
-    modified by a Gender Recognition Certificate) — in Summer 2026; this work was accelerated
-    following the UK Supreme Court's April 2025 ruling on sex under the Equality Act 2010. Anyone
-    needing a legally defensible sex field on a form right now should treat this as an acknowledged,
-    active gap, not an oversight on this repo's part, and check source_url directly given how live
-    this is.
+    There is no harmonised standard for sex: "There is not currently a harmonised standard for
+    collecting data on sex." The historical census categories on the page (Female, Male) are context
+    only, not a recommendation.
+
+    The GSS Harmonisation team is testing guidance and standards for two approaches: biological sex
+    (sex at birth) and certificated sex (sex at birth or as modified by a Gender Recognition
+    Certificate). Publication was expected in Summer 2026. The work was accelerated after the UK
+    Supreme Court's April 2025 ruling on sex under the Equality Act 2010.
+
+    If you need a legally defensible sex field now, treat this as an active gap and check the
+    primary source for the latest position.
 
 - id: ons-gender-identity-standard-archived
   label: Gender identity data harmonised standard (archived)
@@ -144,14 +149,14 @@
   response_scale: null
   scoring: null
   notes: >
-    IMPORTANT: the source carries an explicit archival notice: "Following the publication of an
-    updated GSS Harmonisation workplan in December 2024, this guidance is outdated and has been
-    archived." Nothing has yet superseded it, so this entry is tagged both as a demographic-survey
-    question (what the standard said while live, in case that's still useful context) AND as a
-    no-standard-gap (there is currently no endorsed gender identity standard to rely on). Confirmed
-    for respondents aged 16 and over; no under-16 provision was stated, so children-young-people is
-    left unconfirmed rather than assumed. See also the ons-sex-standard-gap entry — both sex and
-    gender identity data collection are unsettled at the same time as of this review.
+    This guidance is archived: "Following the publication of an updated GSS Harmonisation workplan
+    in December 2024, this guidance is outdated and has been archived." Nothing has replaced it, so
+    there is no endorsed gender identity standard. The question and options are kept as a record of
+    what it said.
+
+    It covered respondents aged 16 and over, with no under-16 provision, so the children and young
+    people tag is not applied. See also the Sex harmonisation guidance (no current standard) entry:
+    both topics are unsettled.
 
 - id: ons-sexual-orientation-standard
   label: Sexual orientation harmonised standard
@@ -178,15 +183,16 @@
   response_scale: null
   scoring: null
   notes: >
-    This is the self-completion mode wording and option set; face-to-face and telephone interview
-    modes differ and mark some categories (e.g. don't know/refusal) as spontaneous-only rather than
-    offered — check source_url for the mode you're actually replicating before copying this into a
-    self-completion web form vs. an interview script. Confirmed "to be asked to all respondents aged
-    16 and over"; no under-16 provision was stated, so children-young-people is left unconfirmed. The
-    source itself warns against altering wording or option order, since that affects comparability
-    with ONS benchmarks. A review was flagged as starting in early 2023; no confirmation was found
-    that it concluded — treat as current but due for review, the same pattern as this repo's
-    impairment-standard entry.
+    This is the self-completion wording. Face-to-face and telephone versions differ and make some
+    categories, such as don't know and refusal, spontaneous-only. Check the primary source for the
+    mode you are replicating.
+
+    The question is "to be asked to all respondents aged 16 and over", with no under-16 provision,
+    so the children and young people tag is not applied. Don't change the wording or option order:
+    the source warns this affects comparability with ONS benchmarks.
+
+    A review was flagged as starting in early 2023, with no confirmation that it has concluded.
+    Treat it as current but due for review.
 
 - id: ons-religion-standard
   label: Religion harmonised standard
@@ -216,13 +222,13 @@
   response_scale: null
   scoring: null
   notes: >
-    England response categories shown; Scotland lists specific Christian denominations separately
-    (Church of Scotland, Roman Catholic, Other Christian) rather than grouping them, and Northern
-    Ireland breaks Christian denominations down further still (Catholic, Presbyterian, Church of
-    Ireland, Methodist, Baptist, Free Presbyterian, Brethren) — check source_url for the nation you
-    need. The source does not state any age scope for this question. It recommends asking this
-    alongside ethnicity and national identity, in that order, for comparability — worth flagging if
-    a form only includes one of the three.
+    England categories are shown. Scotland lists Christian denominations separately (Church of
+    Scotland, Roman Catholic, Other Christian); Northern Ireland breaks them down further (Catholic,
+    Presbyterian, Church of Ireland, Methodist, Baptist, Free Presbyterian, Brethren). Check the
+    primary source for the nation you need.
+
+    For comparability, the source recommends asking this alongside ethnicity and national identity,
+    in that order. It does not state an age scope.
 
 - id: ons-national-identity-standard
   label: National identity harmonised standard
@@ -250,10 +256,10 @@
   response_scale: null
   scoring: null
   notes: >
-    England response categories shown (multi-select). Distinct from ethnicity — this captures
-    self-identified nationality/belonging, not ethnic background. Reviewed and updated 4 April 2022
-    to align with the 2021/2022 censuses, including an adjustment to response option order for
-    England and Scotland. The source does not state any age scope for this question.
+    England categories are shown; respondents can choose more than one. This captures
+    self-identified national identity or belonging, not ethnic background. Updated on 4 April 2022
+    to align with the 2021 and 2022 censuses, including a change to the option order for England and
+    Scotland. The source does not state an age scope.
 
 - id: ons-tenure-standard
   label: Tenure harmonised standard
@@ -281,15 +287,14 @@
   response_scale: null
   scoring: null
   notes: >
-    Version 5.6 (June 2017), ONS, Crown Copyright — confirmed directly from the underlying PDF
-    linked at source_url. Asked of the whole household (of the "Household Reference Person"), not
-    age-scoped to an individual respondent, which is why applies_to is left empty rather than
-    guessing adults/children. Several follow-up questions exist in the full standard (an ownership
-    check, job-based-accommodation flag, and landlord-type question) not reproduced here — see
-    source_url for the complete question set. The policy-store page itself is marked "under
-    development" (a stakeholder consultation on updating it), though the underlying document is
-    unchanged since 2017 — relevant to homelessness/housing-related referral forms needing standard
-    tenure categories rather than ad hoc ones.
+    Useful for housing and homelessness referral forms that need standard tenure categories. The
+    question is asked about the whole household (of the "Household Reference Person"), not an
+    individual, so no age group is tagged. The full standard has follow-up questions not reproduced
+    here: an ownership check, whether the accommodation comes with a job, and landlord type. See the
+    primary source.
+
+    The current document is version 5.6 (June 2017). The policy-store page is marked "under
+    development" while ONS consults stakeholders on updating it.
 
 - id: ons-language-standard-gap
   label: Main/preferred language (no GSS-wide harmonised standard)
@@ -311,13 +316,11 @@
   response_scale: null
   scoring: null
   notes: >
-    IMPORTANT: this isn't a dedicated standard with its own page — it's a confirmed gap stated
-    within the ethnicity harmonised standard's own page: "Language is another concept that is often
-    associated with ethnicity, religion and national identity...currently a GSS wide harmonised
-    standard is not offered due to a lack of user need." Recorded here as its own entry (rather than
-    only as a footnote on ethnicity) because "what's the preferred/main language field" is a common,
-    separate need on referral forms — this tracker flags it as an open gap rather than silently
-    having no entry for it at all.
+    There is no GSS-wide harmonised standard for main or preferred language. The gap is stated on
+    the ethnicity standard's page, which says language is often associated with ethnicity, religion
+    and national identity, but "currently a GSS wide harmonised standard is not offered due to a
+    lack of user need." It has its own entry because a language field is a common, separate need on
+    referral forms. See also the Ethnicity harmonised standard entry.
 
 - id: ons-economic-activity-status-standard
   label: Economic activity status harmonised standard
@@ -344,23 +347,21 @@
   response_scale: null
   scoring: null
   notes: >
-    IMPORTANT: there is no single "what is your economic activity status?" question — the classification
-    above is derived from a battery of roughly 15 questions, so question is left null rather than picking
-    one and implying it's the whole picture. The gateway question, asked IF AGE >= 16, is verbatim: "Did
-    you do any paid work in the seven days ending Sunday the (n), either as an employee or as
-    self-employed?" (Yes/No), followed by further questions on government training schemes (asked only if
-    age 16-64, since the source notes "men and women aged over 64 are not on government schemes, by
-    definition"), being away from a job, unpaid work for a family business, job-seeking, and full-time
-    education — see source_url for the complete question set and routing. Economically inactive is
-    everything not captured above ("all others"), not a category respondents are asked to self-select.
-    This is the same source document as the ons-nssec-standard entry below (Version 3.5, April 2018),
-    which also derives from this question battery. The source itself notes these harmonised outputs
-    "differ in minor respects from the International Labour Office (ILO) standards followed in the Labour
-    Force Survey," that the government-training-scheme category "is not separately identified because the
-    harmonised question does not identify all such persons," and that unpaid family workers "are not shown
-    separately" due to sample size. A review was flagged as due in "2018/2019" in the source text itself;
-    no newer version has been published since — current but stale, the same pattern as this repo's
-    ons-tenure-standard entry. Use of these questions is explicitly stated as optional for survey teams.
+    There is no single economic activity question: the classification is derived from a battery of
+    roughly 15 questions. The gateway question, asked only of those aged 16 or over, is "Did you do
+    any paid work in the seven days ending Sunday the (n), either as an employee or as
+    self-employed?" (Yes/No). Follow-ups cover government training schemes (ages 16 to 64 only),
+    being away from a job, unpaid work for a family business, job-seeking and full-time education.
+    See the primary source for the full set and routing. Economically inactive means everyone else;
+    respondents do not select it.
+
+    Use of the questions is optional. The outputs "differ in minor respects from the International
+    Labour Office (ILO) standards followed in the Labour Force Survey". Government training schemes
+    and unpaid family workers are not identified as separate categories.
+
+    This is the same document (version 3.5, April 2018) as the National Statistics Socio-economic
+    Classification (NS-SEC) harmonised standard entry. A review was due in 2018/2019, but no newer
+    version has been published. Treat it as current but stale.
 
 - id: ons-nssec-standard
   label: National Statistics Socio-economic Classification (NS-SEC) harmonised standard
@@ -393,26 +394,26 @@
   response_scale: null
   scoring: null
   notes: >
-    IMPORTANT: NS-SEC is not asked directly — question is left null because deriving it needs 8 further
-    questions from the same source document: three on occupation ("What did the firm/organisation you
-    worked for mainly make or do (at the place where you worked)?"; "What was your (main) job (in the week
-    ending Sunday the xx)?"; "What did you mainly do in your job?") and five on employment status/
-    organisation size ("Were you working as an employee or were you self-employed?"; a supervisory-
-    responsibility question; organisation-size bands of "1-24", "25-499", "500 or more"; and, for the
-    self-employed branch, whether working alone or with employees). The 8-class list above is the source's
-    primary "analytic version" (its first class, 1, can be subdivided into 1.1/1.2 as shown); 5-class and
-    3-class versions also exist in the same document for coarser analysis — see source_url for both.
-    Priority order for full adult population coverage is: full-time students, long-term unemployed, never
-    worked, NS-SEC from current/last main job, then "not classified" for anyone whose occupation is
-    inadequately described. IMPORTANT STALENESS FLAG: this document (last dated 2018) derives NS-SEC using
-    the SOC2010 occupational classification; ONS has since rebased NS-SEC onto SOC2020 (see SOC 2020 Volume
-    3, cited in the ons-soc2020-standard entry in official-classifications.yaml), a rebase not reflected in
-    this GSS harmonisation-standard text — check ONS's occupational classification guidance directly if
-    SOC2020 alignment matters for a live service. Distinct from, but related to, the newer
-    "Socio-economic background harmonised standard" (published 2023, source_url
-    https://analysisfunction.civilservice.gov.uk/policy-store/socio-economic-background-harmonised-standard/),
-    which asks retrospectively about parental/childhood circumstances at age ~14 rather than the
-    respondent's own current/last occupation — a "see also," not a substitute for this entry.
+    NS-SEC is derived, not asked directly. It needs 8 questions from the same document. Three cover
+    occupation: "What did the firm/organisation you worked for mainly make or do (at the place where
+    you worked)?", "What was your (main) job (in the week ending Sunday the xx)?" and "What did you
+    mainly do in your job?". Five cover employment status and organisation size: "Were you working
+    as an employee or were you self-employed?", a supervisory responsibility question, organisation
+    size bands (1-24, 25-499, 500 or more) and, for the self-employed, whether they work alone or
+    with employees. See the primary source for the full wording and routing.
+
+    The options shown are the 8-class analytic version, with class 1 split into 1.1 and 1.2. The
+    document also has 5-class and 3-class versions. For full adult coverage, classify in this order:
+    full-time students, long-term unemployed, never worked, current or last main job, then not
+    classified where the occupation is inadequately described.
+
+    The document (2018) derives NS-SEC from SOC2010. ONS has since rebased NS-SEC onto SOC2020 (see
+    SOC 2020 Volume 3, cited in the Standard Occupational Classification 2020 (SOC 2020) entry), and
+    this text does not reflect that. If SOC2020 alignment matters, check ONS's occupational
+    classification guidance.
+
+    The Socio-economic background harmonised standard entry is related but not a substitute: it asks
+    about parental circumstances at about age 14, not the respondent's own occupation.
 
 - id: ons-qualifications-standard
   label: Qualifications harmonised standard
@@ -441,25 +442,21 @@
   response_scale: null
   scoring: null
   notes: >
-    IMPORTANT: "highest qualification" isn't asked as one question — question is left null because the
-    7-category output above is derived from a routed battery of roughly 100 variables: a country-of-
-    qualification gate ("In the past, in which of these places did you gain your qualifications?") leading
-    to separate question blocks for England/Wales/Northern Ireland school qualifications, Scotland school
-    qualifications (from age 14), non-UK school qualifications (from age 14), current apprenticeships, and
-    further college/professional/university qualifications, each mapped to a level via detailed lookup
-    tables — see source_url for the complete question set and routing logic. IMPORTANT MODE RESTRICTION:
-    the source states plainly this standard "is suitable for online self-completion modes. It is not
-    suitable for paper self-completion because of the complicated routing," and directs anyone needing a
-    telephone version to contact the Harmonisation team directly rather than adapt it unsupervised. Welsh-
-    language versions of the questions exist, since the underlying survey (the Transformed Labour Force
-    Survey) has a Welsh questionnaire. The source acknowledges the question set "will undoubtedly need
-    updating in the future when new qualifications become available." A simpler, older alternative — the
-    "Educational attainment harmonised standard" (published 2020, 3 questions, designed for interviewer-led
-    rather than self-completion modes, source_url
-    https://analysisfunction.civilservice.gov.uk/policy-store/educational-attainment/) — exists for
-    lightweight/interviewer-led use, but its own page states development "has not been further developed
-    or updated since" the Harmonisation team's priorities shifted in 2022, so it's noted here rather than
-    added as its own entry: treat it as a paused fallback, not a current alternative standard.
+    Highest qualification is derived, not asked as one question. The 7 output categories come from a
+    routed battery of roughly 100 variables. A gate question ("In the past, in which of these places
+    did you gain your qualifications?") routes to blocks for England, Wales and Northern Ireland
+    school qualifications, Scotland and non-UK school qualifications (both from age 14), current
+    apprenticeships, and college, professional and university qualifications. See the primary source
+    for the questions, routing and lookup tables.
+
+    It "is suitable for online self-completion modes. It is not suitable for paper self-completion
+    because of the complicated routing". For a telephone version, contact the Harmonisation team
+    rather than adapting it yourself. Welsh-language versions exist. The source expects the
+    questions to need updating as new qualifications appear.
+
+    The older Educational attainment harmonised standard (2020, 3 questions, interviewer-led) is a
+    paused fallback, not a current alternative: it "has not been further developed or updated since"
+    priorities shifted in 2022. It has no entry of its own.
 
 - id: ons-income-standard-gap
   label: Income and earnings harmonisation guidance (no current standard)
@@ -481,19 +478,16 @@
   response_scale: null
   scoring: null
   notes: >
-    IMPORTANT: there is no GSS harmonised question or set of income bands to reproduce here. The
-    source_url page is conceptual/directory guidance only — it defines "earnings" vs "income" and links out
-    to 15 separate official income/earnings publications (Annual Survey of Hours and Earnings, Average
-    Weekly Earnings, the Labour Force Survey, Family Resources Survey, Households Below Average Income,
-    Pensioners' Incomes, Living Costs and Food Survey, Effects of Taxes and Benefits, Wealth and Assets
-    Survey, Survey of Personal Incomes, benefits data, Small Area Income Estimates, UK National Accounts,
-    EU-SILC, and Pension Trends) rather than publishing one itself. The page states this work was paused
-    following an Office for Statistics Regulation review that recommended improving coherence across these
-    sources: "this work was paused following a review of the team's priorities," with a review "expected...
-    in the coming years" and no committed date — recorded here as under-review rather than current, since
-    there's nothing current to point to. A DWP Freedom of Information response containing gross household
-    income bands is findable online, but it answers a one-off specific data request rather than being a
-    published GSS harmonised standard — deliberately not reproduced here so it isn't mistaken for one.
+    There is no GSS harmonised question or set of income bands. The source page defines earnings and
+    income and links to 15 official publications, including the Annual Survey of Hours and Earnings,
+    the Family Resources Survey and Households Below Average Income.
+
+    The page says this work was paused after an Office for Statistics Regulation review recommended
+    improving coherence across these sources. A review is expected in the coming years, with no
+    committed date.
+
+    A DWP Freedom of Information response with gross household income bands can be found online. It
+    answered a one-off request and is not a GSS harmonised standard, so it is not reproduced here.
 
 - id: ons-marital-civil-partnership-status-standard
   label: Marital and civil partnership status harmonised standard
@@ -524,17 +518,15 @@
   response_scale: null
   scoring: null
   notes: >
-    The source discusses the Marriage and Civil Partnership (Minimum Age) Act 2022, which raised the legal
-    minimum age to marry or register a civil partnership to 18 in England and Wales, and recommends "soft
-    checks, such as interviewer prompt" where a respondent under 18 selects a married/partnered category,
-    to catch likely data-entry errors rather than block a response outright. Mode guidance: "For online
-    surveys, response options should be tick boxes, and respondents should only select one answer," and for
-    face-to-face interviews, "using showcards... to help the respondent remember the possible response
-    options." The standard explicitly states it "will not provide insight into persons who are: living
-    together, or 'cohabiting'... in casual, dating or long-term relationships... engaged to be married;
-    engaged to enter a civil partnership" — a separate "Cohabitation harmonised standard" exists at
-    https://analysisfunction.civilservice.gov.uk/policy-store/cohabitation for that gap, not reproduced as
-    its own entry here.
+    The Marriage and Civil Partnership (Minimum Age) Act 2022 raised the minimum age to marry or
+    form a civil partnership to 18 in England and Wales. If a respondent under 18 picks a married or
+    partnered option, the source recommends "soft checks, such as interviewer prompt" to catch
+    likely data-entry errors rather than blocking the answer.
+
+    Online, use tick boxes and allow one answer. Face to face, use showcards.
+
+    The standard does not capture people who are cohabiting, dating, in long-term relationships or
+    engaged. For cohabitation, see the Cohabitation harmonised standard entry.
 
 - id: ons-household-relationships-standard
   label: Household relationships harmonised standard
@@ -572,19 +564,17 @@
   response_scale: null
   scoring: null
   notes: >
-    "These questions can be used in both self-complete (such as online or paper) and interviewer-led (such
-    as telephone or face-to-face) surveys" — a question stem was added specifically so the standard works
-    in self-complete modes, and "unrelated" replaces the interview-mode wording "other non-relative" in
-    self-complete mode since, per the source, it "makes more grammatical sense." "Cohabiting" was tested and
-    dropped from the option list as "poorly understood," leaving "Partner" to cover that relationship
-    instead. The source ties this standard's comparability to Census 2021 (England & Wales; Northern
-    Ireland) and Census 2022 (Scotland), and states it "is designed to collect basic information, for use
-    in the majority of surveys. It is not designed to replace questions used in specialist surveys where
-    more detailed analysis is required." A related but distinct "Household reference person harmonised
-    standard" exists at
-    https://analysisfunction.civilservice.gov.uk/policy-store/household-reference-person/ for identifying
-    which household member's characteristics a survey uses as the reference point — not reproduced as its
-    own entry here.
+    The questions work in both self-complete and interviewer-led surveys; a question stem was added
+    for self-complete modes. In those modes the Unrelated option replaces the interview wording
+    other non-relative. Cohabiting was tested and dropped as poorly understood, so Partner covers
+    that relationship.
+
+    Comparable with Census 2021 (England and Wales; Northern Ireland) and Census 2022 (Scotland).
+    The standard "is designed to collect basic information, for use in the majority of surveys", not
+    to replace questions in specialist surveys.
+
+    A separate Household reference person harmonised standard identifies whose characteristics a
+    survey uses as the reference point. It has no entry of its own.
 
 - id: ons-unpaid-care-standard
   label: Unpaid care harmonised standard
@@ -615,19 +605,19 @@
   response_scale: null
   scoring: null
   notes: >
-    IMPORTANT: the source page carries an explicit "this page is awaiting an update" banner, pointing to a
-    Census 2021 output article in the meantime, and states plainly: "No consistent question on unpaid care
-    is currently used across the UK. A 2019 review identified 23 surveys collecting information on unpaid
-    care." The question/values above are the source's own recommended wording from the 2019 Census Dress
-    Rehearsal, explicitly flagged as self-completion only: "This is for self-completion surveys. The GSS
-    harmonisation team are proposing to develop an equivalent question for interviewer-led data collection"
-    — that interviewer-led version does not yet exist. Devolved variation: Northern Ireland's proposed
-    question merges the first two England & Wales bands into a single "Yes, 19 hours a week or less"
-    category; Scotland's question "will not change from the 2011 Census." The source itself caveats the
-    recommended question as combining whether-a-person-cares and hours-of-care into one question, not
-    specifying who is being cared for or residency requirements, and not offering a "varying hours" option
-    — listed factors affecting comparability across the 23 identified surveys, not fully resolved by this
-    standard.
+    The source page is marked as "awaiting an update" and points to a Census 2021 article in the
+    meantime. It states: "No consistent question on unpaid care is currently used across the UK." A
+    2019 review found 23 surveys collecting it.
+
+    The question shown is the recommended wording from the 2019 Census Dress Rehearsal, for
+    self-completion only. The team proposes to develop an interviewer-led version, which does not
+    yet exist.
+
+    Northern Ireland's proposed version merges the first two bands into "Yes, 19 hours a week or
+    less". Scotland's question "will not change from the 2011 Census."
+
+    Known limits: the question combines whether someone cares with their hours of care, does not ask
+    who is cared for or cover residency, and has no varying-hours option.
 
 - id: ons-general-health-standard
   label: General health harmonised standard
@@ -654,16 +644,15 @@
   response_scale: null
   scoring: null
   notes: >
-    The source states this is "harmonised with the European Union Survey on Income and Living Conditions
-    (EU-SILC)" and "identical to the self-perceived health question of the Minimum European Health Module" —
-    outputs are comparable with other EU-SILC-aligned surveys but not recommended for comparison against
-    surveys using a different general-health measure. It also states plainly "This question is a subjective
-    measure and should not be asked by proxy," and is described as suitable for "interviewer led
-    questionnaires, Computer Assisted Personal Interviewing (CAPI), Computer Assisted Telephone Interviewing
-    (CATI), paper based and online self-completion forms." No age scope is stated on the page either way, so
-    applies_to is left empty rather than assumed. No review-due date or under-review notice was found on the
-    page — treated as current, though (as with several entries in this file) worth re-checking against
-    source_url given how long this standard has been in use unchanged.
+    Harmonised with EU-SILC and "identical to the self-perceived health question of the Minimum
+    European Health Module". Outputs are comparable with other EU-SILC-aligned surveys, but not with
+    surveys using a different general health measure.
+
+    Do not ask it by proxy: it is a subjective measure. It suits interviewer-led (CAPI and CATI),
+    paper and online self-completion modes.
+
+    The source does not state an age scope, so no age group is tagged. There is no review date or
+    notice, so it is treated as current, though it has been in use unchanged for a long time.
 
 - id: ons-personal-wellbeing-standard
   label: Personal wellbeing harmonised standard (ONS4)
@@ -729,18 +718,15 @@
       is the less favourable outcome, the opposite direction to the other three. Always check which item a
       score belongs to before applying a band from this list.
   notes: >
-    IMPORTANT MODELLING NOTE: this repo normally uses items/response_scale/scoring only for instruments that
-    share one uniform scale and sum to one total (like PHQ-9). ONS4 doesn't fit that shape exactly — its 4
-    items share the same 0-10 numeric response range and are recommended to always be asked together, but (a)
-    the anxiety item's own anchor wording differs from the other three (see response_scale.instruction) and
-    (b) ONS's own severity bands are not uniform across all 4 items and the 4 scores are never summed into one
-    total (see scoring.clinical_note). Rather than force a false uniformity or omit the bands ONS does
-    publish, this entry keeps the items/response_scale/scoring shape (all 4 questions are individually
-    addressable and genuinely share one 0-10 response scale) but documents the anxiety item's divergent
-    anchors and bands explicitly rather than silently dropping them — a 4-separate-entries split was
-    considered but rejected since these questions are officially "used together, in the order they are
-    presented" as a named policy instrument (the "ONS4"), not 4 independent, unrelated harmonised standards.
-    No age scope is stated on the source page. No review-status statement was found — treated as current.
+    The four ONS4 questions share a 0 to 10 scale and "should be used together, in the order they
+    are presented". Each item is scored and read on its own; the four scores are never added up.
+
+    The anxiety item differs from the other three in two ways. Its scale is anchored at "not at all
+    anxious" and "completely anxious". Its thresholds are also reversed: a higher score is the less
+    favourable outcome. Check which item a score belongs to before applying a band.
+
+    The source does not state an age scope. It has no review-status statement, so it is treated as
+    current.
 
 - id: ons-pregnancy-maternity-standard-gap
   label: Pregnancy and maternity (no GSS harmonised standard)
@@ -762,18 +748,15 @@
   response_scale: null
   scoring: null
   notes: >
-    IMPORTANT: this is a directory/guidance page, not an operative question-and-answer standard — it states
-    plainly its own purpose is that "This guidance provides information on where to find pregnancy and
-    maternity data. It also provides information on legislation related to pregnancy and maternity," and
-    lists six differently-worded pregnancy-screening questions already in use across separate UK surveys
-    (including the Adult Psychiatric Morbidity Survey, the Health Survey for England, and the National Survey
-    for Wales) as evidence of the inconsistency this repo exists to surface. On future development, the page
-    states: "The team are keen to hear if you would be interested in us developing harmonised questions on
-    pregnancy and maternity" — i.e. no harmonised question yet exists, only an open invitation for user
-    demand to be registered. It also references the Inclusive Data Taskforce's September 2021 recommendations
-    for "review, refinement and updating of harmonised standards," with "further information on this work...
-    made available in due course" — recorded here as under-review rather than current, since (like the
-    ons-income-standard-gap and ons-sex-standard-gap entries above) there is nothing operative to point to yet.
+    There is no harmonised question on pregnancy and maternity. The source is a guidance page on
+    where to find pregnancy and maternity data and on related legislation. It lists six differently
+    worded pregnancy screening questions used in UK surveys, including the Adult Psychiatric
+    Morbidity Survey, the Health Survey for England and the National Survey for Wales.
+
+    The team invites anyone "interested in us developing harmonised questions on pregnancy and
+    maternity" to get in touch. The page also refers to the Inclusive Data Taskforce's September
+    2021 recommendations to review harmonised standards, with more information promised "in due
+    course".
 
 - id: ons-migration-country-of-birth-citizenship-standard
   label: Migration, country of birth and citizenship harmonised standard
@@ -796,29 +779,23 @@
   response_scale: null
   scoring: null
   notes: >
-    IMPORTANT: unlike most entries in this file, this standard doesn't publish one fixed survey question at
-    all — question and values are both left null because the underlying document ("GSS Harmonised Principle:
-    Migration, Country of Birth and Citizenship," Version 1.0, ONS, February 2018) is a glossary of 26 target
-    concepts and their approved definitions (address of usual residence, country of usual residence, country
-    of birth, long/short-term international migrant, year and month of arrival in the UK, ever lived abroad,
-    visitor/migrant switchers, returning migrants, national identity, nationality, citizenship/country of
-    citizenship, citizenship at birth, passports held, length of stay, reason for visit, internal/cross-border
-    migrant, address one year ago, asylum applicant, refugee, population turnover, migration movement, and
-    migration transitions) rather than a single question-and-answer pair — individual surveys (the Census, the
-    Annual Population Survey, the International Passenger Survey, etc.) each implement their own question
-    wording aligned to these shared definitions, which this repo hasn't independently verified survey-by-survey.
-    The one concrete survey question quoted directly within the source document itself is for the "Nationality"
-    concept: "The Annual Population Survey, which underlies the population estimates by nationality, simply
-    asks people 'what is your nationality?'" — reproduced here as the one verifiable example, not as this
-    repo's confirmed universal recommended wording for the whole topic area. Country of birth responses are
-    coded against the external National Statistics Country Classification (2011 Census Variable and
-    Classification Information, Part 3), not reproduced here — no compact response list is published in this
-    document itself. Kept as a single entry (rather than split into separate country-of-birth/nationality/
-    citizenship entries) because the source itself structures all 26 concepts under one harmonised principle
-    document. No age scope is stated. No explicit review/currency banner was found, though the document itself
-    is unrevised since February 2018 and the page notes the linked PDF "does not meet the current accessibility
-    standards" and will be reformatted "when we update this harmonised principle" — treated as current but
-    worth re-checking directly given its age, the same pattern as this file's ons-tenure-standard entry.
+    There is no fixed survey question. The underlying document (GSS Harmonised Principle: Migration,
+    Country of Birth and Citizenship, version 1.0, February 2018) is a glossary of 26 concepts and
+    their approved definitions, including country of birth, country of usual residence,
+    long/short-term international migrant, nationality, citizenship, passports held, asylum
+    applicant and refugee. See the primary source for the full list. Surveys such as the Census, the
+    Annual Population Survey and the International Passenger Survey use their own wording aligned to
+    these definitions; that wording has not been checked survey by survey.
+
+    The only question the document quotes is the Annual Population Survey's "what is your
+    nationality?", as an example rather than a recommended wording.
+
+    Country of birth is coded against the National Statistics Country Classification (2011 Census
+    Variable and Classification Information, Part 3). The document has no compact response list.
+
+    No age scope is stated. There is no review banner, but the document is unrevised since February
+    2018, and the page says the PDF will be reformatted "when we update this harmonised principle".
+    Check the source given its age.
 
 - id: ons-armed-forces-veteran-standard
   label: Previous UK armed forces service (veteran status) harmonised standard
@@ -843,22 +820,19 @@
   response_scale: null
   scoring: null
   notes: >
-    IMPORTANT: the source states plainly "This harmonised standard is under development" — recorded here as
-    under-review rather than current, unlike the similarly-worded but content-stable ons-tenure-standard entry
-    in this file. Developed jointly by ONS and the Ministry of Defence and "adopted by the Government
-    Statistical Service (GSS) Harmonisation team as the harmonised standard," it "is based on the previous UK
-    armed forces service question for Census 2021 in England and Wales, so the data collected will be broadly
-    comparable" (Scotland's 2022 census used the same question with a modified response-option order, per
-    earlier research not independently re-verified in this session). Confirmed for respondents "aged 16 and
-    over"; no under-16/proxy provision was stated, so children-young-people is left off applies_to. The
-    Office for Veterans' Affairs has flagged a specific, live concern with the response categories themselves:
-    "The Office for Veterans' Affairs (OVA) are aware of some concerns about the services listed under
-    'Reserve' armed forces, particularly from those who served in the Women's Royal Naval Service... We have
-    also had concerns raised from those who have served in the Queen Alexandra's Royal Naval Nursing Service.
-    Based on these concerns we recognise that the lists require a full review to ensure that they are complete
-    and that they are an accurate reflection of all types of service in the UK armed forces" — the reserve-
-    forces sub-list behind "Yes, previously served in reserve armed forces" may therefore change; re-check
-    source_url before treating the current 3-option set as final.
+    The source states "This harmonised standard is under development". Developed by ONS and the
+    Ministry of Defence, it is based on the Census 2021 question for England and Wales, so the data
+    "will be broadly comparable". Scotland's 2022 census is reported to have used the same question
+    with a different option order; this has not been re-checked against the source.
+
+    It is for respondents "aged 16 and over", with no under-16 or proxy provision, so the children
+    and young people tag is not applied.
+
+    The Office for Veterans' Affairs is "aware of some concerns about the services listed under
+    'Reserve' armed forces", particularly from those who served in the Women's Royal Naval Service
+    and the Queen Alexandra's Royal Naval Nursing Service. It says the lists "require a full
+    review". The list of reserve services may change, so check the source before treating the three
+    options as final.
 
 - id: ons-socio-economic-background-standard
   label: Socio-economic background harmonised standard
@@ -886,28 +860,30 @@
   response_scale: null
   scoring: null
   notes: >
-    IMPORTANT: question is left null because, like NS-SEC itself, socio-economic background is derived rather
-    than asked directly — but the input here is much shorter than NS-SEC's own battery: just two retrospective
-    questions about the respondent's circumstances "when you were aged about 14." The occupation question is
-    "When you were aged about 14, what was the occupation of the main or highest income earner?" with response
-    options "Professional occupations," "Managers, including senior, middle, or junior," "Clerical and
-    intermediate occupations," "Routine, semi-routine manual or service occupations," "Technical and craft
-    occupations," plus "I don't know" and "Prefer not to say." The qualification question is "When you were
-    aged about 14, what was the highest level of qualification achieved by either of your parents or
-    guardians?" with response options "Degree level or degree equivalent or above," "Qualifications below
-    degree level," "No qualifications," "I don't know or cannot remember," "Prefer not to say," and "Not
-    applicable." Neither question asks which specific parent/guardian, or confirms the respondent lived with
-    parents/guardians at 14, before being asked. The source states "This standard has based its employment-
-    based questions on NS-SEC self-coded method," and outputs to the same NS-SEC classification as the main
-    ons-nssec-standard entry above: the 6-category 5-class version reproduced in values above, plus a 3-class
-    version ("Managerial, administrative, and professional occupations," "Intermediate occupations," "Routine
-    and manual occupations," "Never worked and long-term unemployed") for coarser analysis — see source_url
-    for both in full. Confirmed for adult respondents answering retrospectively about age ~14; the standard
-    itself doesn't apply an age scope beyond that recall point, so applies_to is set to match the
-    ons-nssec-standard precedent above rather than left empty. The source states "The Harmonisation Team will
-    review how and where the questions are being used and the implementation of these questions in around 5
-    years' time" — no under-development banner was found, so this is recorded as current rather than
-    under-review, unlike the ons-armed-forces-veteran-standard entry above.
+    Socio-economic background is derived from two questions about the respondent's circumstances
+    "when you were aged about 14".
+
+    "When you were aged about 14, what was the occupation of the main or highest income earner?"
+    Options: "Professional occupations", "Managers, including senior, middle, or junior", "Clerical
+    and intermediate occupations", "Routine, semi-routine manual or service occupations",
+    "Technical and craft occupations", "I don't know", "Prefer not to say".
+
+    "When you were aged about 14, what was the highest level of qualification achieved by either of
+    your parents or guardians?" Options: "Degree level or degree equivalent or above",
+    "Qualifications below degree level", "No qualifications", "I don't know or cannot remember",
+    "Prefer not to say", "Not applicable".
+
+    Neither question first asks which parent or guardian, or whether the respondent lived with them
+    at 14.
+
+    The employment questions follow the NS-SEC self-coded method. Outputs use NS-SEC classes (see
+    the National Statistics Socio-economic Classification (NS-SEC) harmonised standard entry): the
+    5-class version (6 categories) shown in the response options, and a 3-class version for coarser
+    analysis.
+
+    It is for adults recalling age 14; there is no other age scope. The team will review use of the
+    questions "in around 5 years' time". There is no under-development banner, so it is treated as
+    current.
 
 - id: ons-internet-access-standard
   label: Internet access harmonised standard
@@ -931,22 +907,16 @@
   response_scale: null
   scoring: null
   notes: >
-    IMPORTANT: a "Don't know" option is offered alongside Yes/No but marked spontaneous (recorded if
-    volunteered, not offered as a choice) — excluded from values per this repo's usual discipline. A closely
-    related companion question in the same standard, not this entry's primary question, asks individual-level
-    use rather than household-level access: "Do you personally use the internet?" (same Yes/No/spontaneous
-    "Don't know" response set) — not reproduced as a separate entry since both questions are published
-    together under one "Internet access harmonised standard" page. IMPORTANT MODE RESTRICTION: the source
-    warns "the use of these questions in an internet-based self-administered survey may lead to a biased
-    sample and therefore non-comparable data" — this standard was tested for and designed around
-    interviewer-led face-to-face collection, the opposite mode restriction to several other GSS standards in
-    this file that are designed for online self-completion. No Welsh-language version exists; the page directs
-    interested users to contact the Harmonisation team. Currency: the page states "In 2022, following the
-    publication of this webpage, the Harmonisation team's priorities shifted to concentrate on standards which
-    were identified as most needing review. As a result, this standard has not been further developed or
-    updated since," and "It is expected that the internet access harmonised standard will be reviewed in the
-    coming years" — recorded as under-review, the same pattern as ons-unpaid-care-standard above. No age scope
-    is stated on the page either way.
+    A don't know option is spontaneous-only (recorded if volunteered, not offered), so it is left
+    out. A companion question, "Do you personally use the internet?", asks about individual rather
+    than household use, with the same options. It has no separate entry.
+
+    The standard was designed for interviewer-led face-to-face collection. The source warns that
+    using it in an online self-completion survey "may lead to a biased sample and therefore
+    non-comparable data". There is no Welsh-language version.
+
+    It "has not been further developed or updated since" 2022, when priorities shifted, and a review
+    is expected "in the coming years". No age scope is stated.
 
 - id: ons-loneliness-standard
   label: Loneliness harmonised standard
@@ -973,20 +943,19 @@
   response_scale: null
   scoring: null
   notes: >
-    Loneliness is defined by the source as "a subjective, unwelcome feeling of lack or loss of companionship.
-    It happens when we have a mismatch between the quantity and quality of social relationships that we have,
-    and those that we want." Confirmed for respondents "16 years and over"; ONS separately developed "an
-    adapted measure for children and young people aged 10 to 15 years based on the adult measure, with words
-    like 'companionship' and 'isolation' replaced with 'no one to talk to' and 'alone' respectively" in
-    supporting indirect-measure questions — that CYP-adapted wording is a related but distinct measure, not
-    reproduced as its own entry here, so applies_to lists adults only for this entry (the same treatment as
-    PHQ-9/PHQ-A in the screening-tools domain). Tested for "self-completion (paper and online) and
-    interviewer-led telephone interviews," with cognitive interviewing suggesting respondents "may be more
-    likely to answer openly in self-completion formats" than interviewer-led ones. The source states this and
-    similar 2020-era standards were "published in 2020, whilst under development, so that users could begin
-    collecting and using data from it and share feedback," that priorities shifted away from further
-    development in 2022, and that a review is "expected... in the coming years" — recorded as under-review,
-    the same pattern as ons-unpaid-care-standard and ons-internet-access-standard above.
+    The source defines loneliness as "a subjective, unwelcome feeling of lack or loss of
+    companionship."
+
+    It is for respondents "16 years and over". ONS separately adapted the measure for children and
+    young people aged 10 to 15, replacing words such as companionship and isolation with no one to
+    talk to and alone. That adapted measure is distinct and has no entry here, so only the adults
+    tag is applied.
+
+    Tested for self-completion (paper and online) and telephone interviews. Respondents "may be more
+    likely to answer openly in self-completion formats" than in interviewer-led ones.
+
+    Published in 2020 "whilst under development"; priorities moved away from further development in
+    2022. A review is expected "in the coming years".
 
 - id: ons-social-capital-standard
   label: Social capital harmonised standard
@@ -1008,27 +977,20 @@
   response_scale: null
   scoring: null
   notes: >
-    IMPORTANT: question and values are both left null because social capital isn't one question — it's a
-    composite battery spanning four separate domains (personal relationships, social network support, civic
-    engagement, and trust/cooperative norms), each with its own distinct response scale, so it doesn't share
-    one response_scale the way a scored instrument like PHQ-9 or this file's ons-personal-wellbeing-standard
-    entry does. The source uses the OECD definition: social capital is "networks together with shared norms,
-    values and understandings that facilitates cooperation within or among groups." The six component
-    questions found are: generalised trust ("On a scale of 0-10, where 0 is not at all, and 10 is completely,
-    in general how much do you trust most people?"); neighbourhood belonging ("To what extent do you agree or
-    disagree with the statement 'I feel like I belong to this neighbourhood'?"); social support ("...'I can
-    rely on the people in my life if I have a serious problem'?"); civic engagement ("...'I don't have any say
-    in what the government does'?"); volunteering participation ("Over the last 12 months, have you given any
-    unpaid help to clubs, groups, charities or organisations?"); and volunteering frequency ("Thinking about
-    all the unpaid help you provide to groups, clubs or organisations, how often have you done this over the
-    last 12 months?") — see source_url for the full six-question set, exact response option wording for each,
-    and further guidance. The source itself warns of overlap with the ons-crime-fear-of-crime-standard entry
-    below: "there are overlaps between questions in the Crime and Fear of Crime section and the Social Capital
-    section. If both sections are to be included in a survey, please check to remove any overlaps between
-    questions." No age scope is stated. Currency: published in 2021 "whilst under development, so that users
-    may benefit from the research that has been completed," with priorities shifting away from further
-    development in 2022 — recorded as under-review, the same pattern as the other 2020/2021-era standards in
-    this file.
+    There is no single question. Social capital, as defined by the OECD, is covered by a battery
+    across four domains (personal relationships, social network support, civic engagement, and trust
+    and cooperative norms), each with its own response scale. The six questions cover generalised
+    trust ("On a scale of 0-10, where 0 is not at all, and 10 is completely, in general how much do
+    you trust most people?"); neighbourhood belonging, social support and civic engagement (agree or
+    disagree statements such as "I feel like I belong to this neighbourhood"); and volunteering and
+    its frequency over the last 12 months. See the primary source for exact wording and response
+    options.
+
+    If you also use the Crime and fear of crime harmonised standard, the source asks you to "check
+    to remove any overlaps between questions".
+
+    No age scope is stated. Published in 2021 "whilst under development"; priorities moved away from
+    further development in 2022.
 
 - id: ons-welsh-language-skills-standard
   label: Welsh language skills harmonised standard
@@ -1055,15 +1017,15 @@
   response_scale: null
   scoring: null
   notes: >
-    This is the self-completion mode version (a single multi-select question). The source separately gives an
-    interviewer-led mode version as four sequential single questions instead — "Can you understand spoken
-    Welsh?", "Can you speak Welsh?", "Can you read Welsh?", "Can you write Welsh?" — each answered Yes/No, with
-    a "Don't know" option marked spontaneous-only on all four and, for the speaking question specifically, an
-    extra spontaneous-only option "No, but have some Welsh speaking ability" — both kinds of spontaneous-only
-    options are excluded from values here per this repo's usual discipline; see source_url for the interviewer
-    -led wording in full. The source states this is "the first Welsh Language Skills harmonised standard" and
-    that it is "suitable for self-completion and interviewer-led modes." Self-assessed ability only — no
-    proficiency scale or formal assessment is involved. No age scope is stated either way.
+    This is the self-completion version: one multi-select question. The interviewer-led version asks
+    four Yes/No questions (understand spoken Welsh, speak, read, write). Each has a spontaneous-only
+    don't know option, and the speaking question also has a spontaneous-only "No, but have some
+    Welsh speaking ability". These are left out of the response options. See the primary source for
+    the interviewer-led wording.
+
+    The source calls this "the first Welsh Language Skills harmonised standard", "suitable for
+    self-completion and interviewer-led modes". Ability is self-assessed, with no proficiency scale.
+    No age scope is stated.
 
 - id: ons-cohabitation-standard
   label: Cohabitation harmonised standard
@@ -1087,21 +1049,19 @@
   response_scale: null
   scoring: null
   notes: >
-    IMPORTANT — supersedes a caveat elsewhere in this file: the ons-marital-civil-partnership-status-standard
-    entry above (added in an earlier batch) noted that "a separate 'Cohabitation harmonised standard' exists
-    at .../policy-store/cohabitation for that gap, not reproduced as its own entry here," on the basis that it
-    was a related concept rather than confirmed to be its own standalone standard. Re-checked directly against
-    the live page for this batch: cohabitation IS its own standalone GSS harmonised standard, published 27
-    November 2020, with its own recommended question and response set as shown above — not merely guidance or
-    a placeholder. Confirmed for respondents "aged 16 and over." The source distinguishes this from marital
-    status by living-arrangement rather than legal status: "a divorced couple living together would still be
-    classed as cohabiting despite not being in a legally registered partnership." It also distinguishes this
-    from the household relationships standard: use this standard when a direct cohabiting-couple flag is
-    needed, and the household relationships standard (already tracked in this file) when the fuller
-    relationship-to-every-other-household-member detail is needed instead — the two aren't a straight
-    substitute for each other. No review/currency statement was found on the page — treated as current. The
-    existing ons-marital-civil-partnership-status-standard entry's notes are left unedited per this batch's
-    scope (append-only), but should be read alongside this entry now that cohabitation has its own standard.
+    Cohabitation has its own GSS harmonised standard, published 27 November 2020. Read it alongside
+    the Marital and civil partnership status harmonised standard entry, which does not cover people
+    living together.
+
+    It is for respondents "aged 16 and over". It turns on living arrangement rather than legal
+    status: "a divorced couple living together would still be classed as cohabiting despite not
+    being in a legally registered partnership."
+
+    Use this standard when you need a direct cohabiting-couple flag. Use the Household relationships
+    harmonised standard when you need each member's relationship to every other household member.
+    The two are not interchangeable.
+
+    The page has no review or currency statement, so it is treated as current.
 
 - id: ons-crime-fear-of-crime-standard
   label: Crime and fear of crime harmonised standard
@@ -1124,33 +1084,22 @@
   response_scale: null
   scoring: null
   notes: >
-    IMPORTANT: question and values are both left null because there is no single harmonised question here —
-    the source states "The lead survey for questions on crime and fear of crime is the British Crime Survey
-    (BCS). The questions are structured into four main blocks: Feeling Safe, Worries about Crime, Crime Rate
-    in Area, and Problem in Area. However, users who wish to use questions on crime and fear of crime are not
-    obliged to use all four blocks on their surveys, but only those that are applicable for their survey
-    needs" — a pick-and-choose battery, not one fixed question, of roughly 20 individual items across the four
-    blocks. Representative examples verified directly against the underlying PDF: Feeling Safe — "How safe do
-    you feel walking alone in this area after dark?" (Very safe / Fairly safe / A bit unsafe / Very unsafe);
-    Worries about Crime — "How worried are you about... having your home broken into and something stolen?"
-    (Very worried / Fairly worried / Not very worried / Not at all worried), repeated for mugging, car theft,
-    rape, physical attack by strangers, street harassment, and racially/religiously motivated attack; Crime
-    Rate in Area — "How much would you say the crime rate here has changed since two years ago?" (a
-    lot/little more crime / about the same / a little/lot less crime); Problem in Area — "How much of a
-    problem are... noisy neighbours or loud parties?" (Very big problem / Fairly big problem / Not a very big
-    problem / Not a problem at all), repeated for teenagers hanging around, rough sleeping, litter, vandalism,
-    racial harassment, drug use, and public drunkenness — see source_url for the complete ~20-item set and
-    routing. "This Area" is defined throughout as "within fifteen minutes of walking distance from the
-    respondent's home." The questions are confirmed "directed towards adults (age 16+)"; the same source page
-    points to the separate Crime and Criminal Justice Survey (CCJS) and the 1998 Youth Lifestyle Survey
-    (age 10+) for children, not reproduced here. The source also flags the same cross-topic overlap noted in
-    the ons-social-capital-standard entry above, in the other direction. IMPORTANT STALENESS FLAG: the
-    document's own version history (Version 3.4, March 2018) shows every revision since Version 1.0 (June
-    2004) has been a formatting or contact-details change only — "There has been no change to the harmonised
-    questions" since 2004 — and it still names its lead survey "the British Crime Survey (BCS)," a name
-    retired in 2012 when the survey was renamed the Crime Survey for England and Wales (CSEW); this rename
-    was not found reflected anywhere on the live page or in the PDF during this session. No archived,
-    superseded, or under-review banner was found on the live page itself, so this is recorded as current
-    (matching this file's ons-tenure-standard/ons-economic-activity-status-standard precedent for stale-but-
-    not-formally-reviewed standards) — but the BCS/CSEW naming mismatch above should prompt direct
-    re-verification before relying on this as an up-to-date reflection of ONS's current crime-survey wording.
+    There is no single question. The lead survey is the British Crime Survey, and the battery has
+    roughly 20 items in four blocks: Feeling Safe, Worries about Crime, Crime Rate in Area, and
+    Problem in Area. Users "are not obliged to use all four blocks on their surveys, but only those
+    that are applicable for their survey needs".
+
+    Examples include "How safe do you feel walking alone in this area after dark?" and "How worried
+    are you about... having your home broken into and something stolen?", repeated for other crimes.
+    See the primary source for the full set, response options and routing. The area means "within
+    fifteen minutes of walking distance from the respondent's home."
+
+    The questions are "directed towards adults (age 16+)". For children, the source points to the
+    Crime and Criminal Justice Survey and the 1998 Youth Lifestyle Survey (age 10+). It also notes
+    overlap with the Social capital harmonised standard entry.
+
+    The questions are unchanged since version 1.0 (June 2004); later versions, up to 3.4 (March
+    2018), changed only formatting and contact details. The document still names the British Crime
+    Survey, renamed the Crime Survey for England and Wales in 2012, and neither the page nor the PDF
+    reflects this. There is no archived or under-review banner, so it is recorded as current. Check
+    it against ONS's current crime survey wording before relying on it.
