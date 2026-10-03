@@ -1,11 +1,10 @@
-# UK Classification Standards Tracker
+# Classification Standards Tracker
 
-*A versioned, maintained reference of current UK official classification standards used in service and system design, grouped by domain, with source, currency, and licence shown for each; and a browsable list of their  published questions or items.*
+*A versioned reference of official classification standards used in service and system design, grouped by domain, with source, currency, and licence shown for each; and a browsable list of their  published questions or items.*
 
 Maintained by George Unsworth ([@georgeunsworth](https://github.com/georgeunsworth)) at [Mortar Works](https://mortar.works).
 
 **Browsable by standard:** https://georgeunsworth.github.io/uk-classification-standards/
-
 **Browsable by question:** https://georgeunsworth.github.io/uk-classification-standards/questions.html 
 
 ## The problem
